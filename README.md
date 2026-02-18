@@ -1,6 +1,6 @@
 # 🚀 Krishna Devashish - Premium Portfolio
 
-A state-of-the-art, high-performance portfolio website designed for a **Senior Frontend Engineer**. Built with a focus on modern aesthetics, accessibility, and seamless user experience using **Next.js 15**, **TypeScript**, and **Tailwind CSS v4**.
+A state-of-the-art, high-performance portfolio website designed for a **Senior Frontend Engineer**. Built with a focus on modern aesthetics, accessibility, and seamless user experience using **Next.js 16**, **TypeScript**, and **Tailwind CSS v4**.
 
 ![Portfolio Overview](public/assets/hero-mockup.png) *(Note: Add your actual mockup here later)*
 
@@ -9,51 +9,49 @@ A state-of-the-art, high-performance portfolio website designed for a **Senior F
 ## ✨ Features & Highlights
 
 ### 🎨 Modern UI/UX
-- **Glassmorphism & Aesthetics**: Premium design using backdrop blurs, subtle micro-animations, and a curated color palette (Vibrant Orange & Sleek Zinc).
-- **Responsive Design**: Fully optimized for all screen sizes, from mobile-first navigation to wide-screen container constraints.
+- **Aesthetic Excellence**: Premium design using backdrop blurs, glassmorphism, and subtle micro-animations.
 - **Theme Intelligence**: Automatically respects system theme preferences (Dark/Light) with a persistent manual override toggle.
+- **Scroll-Spy Interaction**: Smooth navigation with an active section tracker.
 
-### 🏠 Hero & Technical Expertise
-- **Dynamic Tags**: Technical skills (React, TS, AWS, etc.) presented as modern, interactive tags with Lucide icons.
-- **Glass-Card Hero**: Premium background effects with smooth fade-in animations.
+### 🏠 Hero & Technical expertise
+- **Expertise Tags**: Technical skills (React, TS, Node.js, etc.) presented as modern, interactive tags with Lucide icons.
+- **Premium Animations**: Staggered fade-in effects for a high-end initial load experience.
 
-### 📂 Advanced Projects Showcase
-- **Category Filtering**: Seamlessly filter projects by type (All, Frontend, Backend, Full Stack).
-- **Smooth Modal Gallery**: 
+### 📂 Projects & Gallery
+- **Dynamic Content**: High-quality project visuals powered by Unsplash.
+- **Smart Filtering**: Seamlessly filter projects by category (Web Apps, Mobile, Backend).
+- **Pro Modal Gallery**: 
   - Fixed-height modal to prevent layout jumping.
-  - Directional slide transitions for image navigation.
-  - Video support and detailed project breakdowns.
-- **Interactive Thumbnails**: Quick-access dots for multi-image projects.
+  - Directional slide transitions and video support.
+  - Detailed project breakdowns and tech stack badges.
 
-### 👤 Detailed About & Experience
-- **Tag-Based Navigation**: Modern expertise switching (Architecture, Frontend, Design Systems).
-- **Chronological Timeline**: Sleek experience and education tracking with brand icons.
+### 💬 Directional Testimonials
+- **Fluid Carousel**: Directional "Slide-in" animations (Left-to-Right/Right-to-Left) for an intuitive navigation feel.
+- **Adaptive Centering**: Perfectly centers single testimonials on smaller screens for balanced layouts.
 
-### 📩 Integrated Contact System
-- **Multi-Channel Connection**: Direct Mail (mailto), WhatsApp integration, and Quick Call features.
-- **Modern Form**: Validated contact form with beautiful focus states and success feedback.
-
-### � Mobile-First Optimization
-- **Auto-Hide Menu**: Bottom navigation that gracefully slides out of view when the footer appears to provide a clean reading experience.
-- **Touch-Friendly**: Large interactive targets and smooth touch-swipe feel.
+### 📩 Full-Stack Contact System (Resend)
+- **Server Actions**: Secure server-side email processing using **Resend**.
+- **Formatted Templates**: Professional, React-rendered HTML emails using **React Email**.
+- **Real-time Feedback**: Interactive form with loading spinners and success/error alerts.
+- **Instant Connect**: Integration for WhatsApp and direct calling.
 
 ---
 
 ## 🛠️ Tech Stack & Architecture
 
 ### Core
-- **Next.js 15 (App Router)**: Utilizing server components and optimized routing.
+- **Next.js 16 (App Router)**: Leveraging Server Components and Server Actions.
 - **TypeScript**: Strict typing for robust code and better developer experience.
 - **Tailwind CSS v4**: Next-generation utility classes with modern CSS-first configuration.
+
+### Email & Communication
+- **Resend**: Email delivery for developers.
+- **React Email**: Building and rendering professional email templates.
 
 ### UI & Animation
 - **shadcn/ui**: High-quality, accessible base components.
 - **Lucide React**: Consistent and lightweight iconography.
-- **Intersection Observer API**: Powering scroll-spy and auto-hiding navigations.
-
-### State & Utilities
-- **Next Themes**: Reliable theme switching and persistence.
-- **Scroll Utils**: Custom handlers for anchor-link smooth scrolling.
+- **Intersection Observer**: Powering scroll-spy and scroll-triggered animations.
 
 ---
 
@@ -61,24 +59,25 @@ A state-of-the-art, high-performance portfolio website designed for a **Senior F
 
 ```bash
 krishna_portfolio/
-├── app/                  # Next.js App Router (Layouts, Pages, Global Styles)
+├── app/                  # Next.js App Router
+│   ├── actions/         # Server Actions (Email, etc.)
+│   ├── globals.css      # Core styles & Tailwind v4 config
+│   └── page.tsx         # Main Portfolio Page
 ├── components/           # React Components
-│   ├── layout/          # Header, Footer, Navigation
-│   ├── sections/        # Main page sections (Hero, About, Projects, etc.)
-│   └── ui/              # shadcn/ui and custom reusable elements
-├── hooks/                # Custom React hooks (useScrollSpy, etc.)
-├── lib/                  # Constants, Utils, and Data Configurations
-├── public/               # Static assets (Images, Lottie, JSON)
-└── types/                # Core TypeScript definitions
+│   ├── sections/        # Page sections (Hero, About, Projects, etc.)
+│   ├── ui/              # Base UI components
+│   └── email-template.tsx # React Email Template
+├── lib/                  # Constants, Utils, and Data
+└── public/               # Static assets & images
 ```
 
 ---
 
-## � Development & Setup
+## ⚙️ Development & Setup
 
 ### Prerequisites
 - Node.js 18.17+
-- npm (standard)
+- A [Resend](https://resend.com) Account & API Key
 
 ### Quick Start
 1. **Clone & Install**
@@ -88,35 +87,30 @@ krishna_portfolio/
    npm install
    ```
 
-2. **Run Dev Server**
+2. **Environment Configuration**
+   Create a `.env` file in the root and add your Resend API key:
+   ```env
+   RESEND_API_KEY=your_resend_api_key_here
+   ```
+
+3. **Run Dev Server**
    ```bash
    npm run dev
    ```
 
-3. **Build Profile**
-   ```bash
-   npm run build
-   ```
-
 ---
 
-## 📐 Design Philosophy & Flows
+## 📐 Design Philosophy
 
-1. **User Flow**: The site follows a logical professional journey:
-   - *Discovery*: Immediate value proposition in the Hero.
-   - *Proof*: Detailed Projects and Skills sections.
-   - *Story*: Educational and professional background.
-   - *Action*: Strong CTAs in the Contact section and Footer.
-
-2. **Performance First**: 
+1. **Performance First**: 
    - Image optimization using `next/image`.
-   - Minimal client-side JavaScript by leveraging Server Components.
-   - Smooth local font loading (Geist).
+   - Minimal client-side JavaScript via Server Components.
+   - Built for speed and high Lighthouse scores.
 
-3. **Accessibility (a11y)**:
-   - High contrast ratios for text.
-   - Semantic HTML (main, section, nav, etc.).
-   - Keyboard-navigable modals and buttons.
+2. **Accessibility (a11y)**:
+   - High contrast ratios for readability.
+   - Semantic HTML and ARIA labels where appropriate.
+   - Fully keyboard-navigable interface.
 
 ---
 
