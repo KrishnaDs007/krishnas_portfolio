@@ -156,7 +156,8 @@ export const skills: SkillCategory[] = [
     },
     {
         category: 'Tools & Others',
-        skills: ['Git', 'Docker', 'AWS', 'Figma', 'Storybook', 'Jest']
+        // skills: ['Git', 'Docker', 'AWS', 'Figma', 'Storybook', 'Jest']
+        skills: ['Git', 'Docker', 'Figma', 'Storybook', 'Jest']
     },
     {
         category: 'Design',
@@ -370,16 +371,16 @@ export const skillsData: SkillItem[] = [
         description: 'Containerization of microservices for consistent development across teams.',
         iconKey: 'docker'
     },
-    {
-        id: 'skill-13',
-        name: 'AWS / Cloud',
-        category: 'DevOps',
-        proficiencyLevel: 'Advanced',
-        proficiencyPercentage: 85,
-        yearsOfExperience: '4+ Years',
-        description: 'Deploying and managing serverless functions, S3, and EC2 instances.',
-        iconKey: 'aws'
-    },
+    // {
+    //     id: 'skill-13',
+    //     name: 'AWS / Cloud',
+    //     category: 'DevOps',
+    //     proficiencyLevel: 'Advanced',
+    //     proficiencyPercentage: 85,
+    //     yearsOfExperience: '4+ Years',
+    //     description: 'Deploying and managing serverless functions, S3, and EC2 instances.',
+    //     iconKey: 'aws'
+    // },
     {
         id: 'skill-14',
         name: 'CI/CD Pipelines',

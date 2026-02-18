@@ -160,10 +160,10 @@ export function Hero() {
                   Node.js
                 </span>
               </div>
-              <div className="group flex items-center gap-2 px-4 py-2.5 bg-card border border-border rounded-lg hover:border-primary/50 hover:bg-accent transition-all">
+              {/* <div className="group flex items-center gap-2 px-4 py-2.5 bg-card border border-border rounded-lg hover:border-primary/50 hover:bg-accent transition-all">
                 <Cloud className="h-5 w-5 text-primary" />
                 <span className="text-sm font-medium text-foreground">AWS</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
