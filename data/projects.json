@@ -1,0 +1,189 @@
+[
+  {
+    "id": "proj-1",
+    "title": "FinTech Dashboard",
+    "category": "Web Apps",
+    "shortDescription": "A comprehensive financial analytics dashboard featuring real-time data visualization using Recharts and secure authentication.",
+    "fullDescription": "Built a scalable financial analytics platform handling 10k+ daily users. Implemented real-time data visualization with interactive charts, secure user authentication with JWT, and a comprehensive admin dashboard for managing transactions and user accounts. The application features responsive design, dark mode support, and optimized performance with code splitting and lazy loading.",
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "Recharts",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "JWT"
+    ],
+    "features": [
+      "Real-time data visualization with interactive charts",
+      "Secure user authentication and authorization",
+      "Admin dashboard for transaction management",
+      "Responsive design with dark mode support",
+      "Performance optimization with code splitting"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1551288049-bbda38a10ad5?q=80&w=1200",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200"
+    ],
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "liveUrl": "https://fintech-demo.example.com",
+    "githubUrl": "https://github.com/username/fintech-dashboard",
+    "featured": true,
+    "year": "2024"
+  },
+  {
+    "id": "proj-2",
+    "title": "Social Scheduler App",
+    "category": "Mobile Apps",
+    "shortDescription": "Cross-platform mobile app for scheduling social media posts. Built with Expo, Redux Toolkit, and Firebase backend.",
+    "fullDescription": "Developed a cross-platform mobile application for scheduling and managing social media posts across multiple platforms. Features include post scheduling, analytics dashboard, multi-account management, and push notifications. Built with React Native and Expo for seamless deployment to iOS and Android. Integrated with Firebase for real-time data sync and cloud storage.",
+    "technologies": [
+      "React Native",
+      "Expo",
+      "Redux Toolkit",
+      "Firebase",
+      "TypeScript"
+    ],
+    "features": [
+      "Multi-platform social media post scheduling",
+      "Real-time analytics and engagement tracking",
+      "Push notifications for scheduled posts",
+      "Multi-account management",
+      "Cloud storage for media assets"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1200",
+      "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c20e?q=80&w=1200"
+    ],
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "liveUrl": "https://apps.apple.com/app/social-scheduler",
+    "githubUrl": "https://github.com/username/social-scheduler",
+    "featured": true,
+    "year": "2023"
+  },
+  {
+    "id": "proj-3",
+    "title": "E-Commerce Platform",
+    "category": "Web Apps",
+    "shortDescription": "A fully functional online store with Stripe integration, headless CMS content management, and SSR for SEO optimization.",
+    "fullDescription": "Created a full-featured e-commerce platform with product catalog, shopping cart, checkout flow, and order management. Integrated Stripe for secure payment processing and implemented headless CMS for easy content management. Features include product search and filtering, user reviews, wishlist functionality, and email notifications. Optimized for SEO with server-side rendering and dynamic meta tags.",
+    "technologies": [
+      "Next.js",
+      "Stripe",
+      "Sanity CMS",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "Vercel"
+    ],
+    "features": [
+      "Product catalog with search and filtering",
+      "Secure payment processing with Stripe",
+      "Headless CMS for content management",
+      "User reviews and ratings",
+      "Email notifications for orders",
+      "SEO optimization with SSR"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=1200",
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200"
+    ],
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "liveUrl": "https://ecommerce-demo.example.com",
+    "githubUrl": "https://github.com/username/ecommerce-platform",
+    "featured": false,
+    "year": "2023"
+  },
+  {
+    "id": "proj-4",
+    "title": "Design System Library",
+    "category": "Web Apps",
+    "shortDescription": "Comprehensive React component library with 50+ components, Storybook documentation, and accessibility features.",
+    "fullDescription": "Built a comprehensive design system and component library used across multiple products. Includes 50+ reusable components with full TypeScript support, accessibility features, and theming capabilities. Documented with Storybook for easy component discovery and testing. Published as an npm package for easy integration into projects.",
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Storybook",
+      "Radix UI",
+      "CSS Modules"
+    ],
+    "features": [
+      "50+ reusable React components",
+      "Full TypeScript support",
+      "Accessibility features (WCAG 2.1)",
+      "Theming and customization",
+      "Storybook documentation",
+      "Published as npm package"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=1200",
+      "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?q=80&w=1200"
+    ],
+    "videoUrl": null,
+    "liveUrl": "https://design-system.example.com",
+    "githubUrl": "https://github.com/username/design-system",
+    "featured": false,
+    "year": "2024"
+  },
+  {
+    "id": "proj-5",
+    "title": "Task Management API",
+    "category": "Backend",
+    "shortDescription": "RESTful API for task management with JWT authentication, role-based access control, and comprehensive testing.",
+    "fullDescription": "Developed a robust RESTful API for task management with user authentication, role-based access control, and real-time notifications. Implemented with Node.js and Express, using PostgreSQL for data storage and Redis for caching. Features include task creation, assignment, status tracking, and team collaboration. Comprehensive test coverage with Jest and Supertest.",
+    "technologies": [
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Redis",
+      "JWT",
+      "Jest"
+    ],
+    "features": [
+      "RESTful API with comprehensive endpoints",
+      "JWT authentication and authorization",
+      "Role-based access control",
+      "Real-time notifications with WebSockets",
+      "Redis caching for performance",
+      "95% test coverage"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=1200",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200"
+    ],
+    "videoUrl": null,
+    "liveUrl": null,
+    "githubUrl": "https://github.com/username/task-api",
+    "featured": false,
+    "year": "2023"
+  },
+  {
+    "id": "proj-6",
+    "title": "Fitness Tracker Mobile",
+    "category": "Mobile Apps",
+    "shortDescription": "Health and fitness tracking app with workout plans, calorie tracking, and progress visualization.",
+    "fullDescription": "Created a comprehensive fitness tracking mobile application with workout planning, calorie tracking, and progress visualization. Features include custom workout creation, exercise library with video demonstrations, meal planning, and integration with health APIs. Built with React Native for cross-platform compatibility.",
+    "technologies": [
+      "React Native",
+      "Expo",
+      "Firebase",
+      "HealthKit",
+      "Google Fit"
+    ],
+    "features": [
+      "Custom workout planning",
+      "Exercise library with videos",
+      "Calorie and nutrition tracking",
+      "Progress visualization with charts",
+      "Integration with HealthKit and Google Fit",
+      "Social features for sharing progress"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200",
+      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1200"
+    ],
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "liveUrl": "https://apps.apple.com/app/fitness-tracker",
+    "githubUrl": "https://github.com/username/fitness-tracker",
+    "featured": false,
+    "year": "2024"
+  }
+]
