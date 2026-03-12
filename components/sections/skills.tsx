@@ -29,7 +29,7 @@ const getProficiencyColor = (level: string) => {
 };
 
 export function Skills() {
-  const [activeTab, setActiveTab] = useState<TabCategory>("All");
+  const [activeTab, setActiveTab] = useState<TabCategory>("Frontend");
 
   const filteredSkills =
     activeTab === "All"

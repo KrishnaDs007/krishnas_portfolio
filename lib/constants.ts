@@ -238,7 +238,7 @@ export interface SkillItem {
     id: string;
     name: string;
     category: 'All' | 'Frontend' | 'Backend' | 'Tools' | 'DevOps';
-    proficiencyLevel: 'Expert' | 'Advanced' | 'Intermediate';
+    proficiencyLevel: 'Expert' | 'Advanced' | 'Intermediate' | 'Beginner';
     proficiencyPercentage: number;
     yearsOfExperience: string;
     description: string;
@@ -323,7 +323,7 @@ export const skillsData: SkillItem[] = [
         id: 'skill-8',
         name: 'PostgreSQL',
         category: 'Backend',
-        proficiencyLevel: 'Advanced',
+        proficiencyLevel: 'Beginner',
         proficiencyPercentage: 30,
         yearsOfExperience: '1+ Years',
         description: 'Optimized database schema design and high-speed caching strategies.',
@@ -365,7 +365,7 @@ export const skillsData: SkillItem[] = [
         id: 'skill-12',
         name: 'Docker',
         category: 'DevOps',
-        proficiencyLevel: 'Advanced',
+        proficiencyLevel: 'Beginner',
         proficiencyPercentage: 30,
         yearsOfExperience: '1+ Years',
         description: 'Containerization of microservices for consistent development across teams.',
@@ -385,7 +385,7 @@ export const skillsData: SkillItem[] = [
         id: 'skill-14',
         name: 'CI/CD Pipelines',
         category: 'DevOps',
-        proficiencyLevel: 'Advanced',
+        proficiencyLevel: 'Intermediate',
         proficiencyPercentage: 60,
         yearsOfExperience: '2+ Years',
         description: 'Automated testing and deployment pipelines for continuous integration.',
@@ -426,12 +426,12 @@ export const favoriteTools: FavoriteToolItem[] = [
         description: 'Command-line productivity with Oh My Zsh',
         iconKey: 'terminal'
     },
-    {
-        id: 'tool-5',
-        name: 'Docker',
-        description: 'Containerization and orchestration',
-        iconKey: 'docker'
-    },
+    // {
+    //     id: 'tool-5',
+    //     name: 'Docker',
+    //     description: 'Containerization and orchestration',
+    //     iconKey: 'docker'
+    // },
     {
         id: 'tool-6',
         name: 'Figma',

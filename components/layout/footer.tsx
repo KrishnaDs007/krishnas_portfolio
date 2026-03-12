@@ -29,25 +29,25 @@ export function Footer() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
             {/* Logo & Description */}
-            <div className="lg:col-span-1">
+            <div className="lg:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
               <Link href="#home" className="flex items-center gap-2 mb-4">
                 <div className="p-2 bg-primary rounded-lg">
                   <Code2 className="h-6 w-6 text-primary-foreground" />
                 </div>
                 <span className="text-xl font-bold">Krishna's Portfolio</span>
               </Link>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="text-muted-foreground text-sm leading-relaxed max-w-xs md:max-w-none">
                 Building pixel-perfect, engaging, and accessible digital
                 experiences.
               </p>
             </div>
 
             {/* Navigation Links */}
-            <div className="lg:col-span-1">
+            <div className="lg:col-span-1 flex flex-col items-center md:items-start">
               <h3 className="text-sm font-semibold uppercase text-foreground mb-4">
                 Navigation
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2 text-center md:text-left">
                 {navigationLinks.map((link) => (
                   <li key={link.name}>
                     <a
@@ -62,11 +62,11 @@ export function Footer() {
             </div>
 
             {/* Social Links */}
-            <div className="lg:col-span-1">
+            <div className="lg:col-span-1 flex flex-col items-center md:items-start">
               <h3 className="text-sm font-semibold uppercase text-foreground mb-4">
                 Connect
               </h3>
-              <div className="flex gap-3">
+              <div className="flex gap-3 justify-center md:justify-start">
                 {socialLinks.map((social) => {
                   const Icon =
                     socialIcons[social.platform as keyof typeof socialIcons];
