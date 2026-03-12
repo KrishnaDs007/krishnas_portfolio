@@ -64,12 +64,6 @@ export const metadata: Metadata = {
     },
   },
 
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
-
   openGraph: {
     title: "Krishna Devashish | Senior React & Micro Frontend Engineer",
     description:
@@ -102,11 +96,17 @@ export const metadata: Metadata = {
     shortcut: "/favicon.svg",
     apple: "/apple-touch-icon.png",
   },
+};
 
-  other: {
-    "theme-color": "#FF5722",
-    "color-scheme": "dark light",
-  },
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+  colorScheme: "dark light",
 };
 
 export default function RootLayout({
@@ -116,6 +116,32 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Krishna Devashish",
+              jobTitle: "Senior React & Micro Frontend Engineer",
+              url: "https://krishnasportfolio-rho.vercel.app",
+              image: "https://krishnasportfolio-rho.vercel.app/og-image.png",
+              sameAs: [
+                "https://www.linkedin.com/in/mrkd007",
+                "https://x.com/itskd_17",
+              ],
+              knowsAbout: [
+                "React",
+                "Micro Frontends",
+                "LLM Integration",
+                "TypeScript",
+                "Web Performance",
+              ],
+            }),
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

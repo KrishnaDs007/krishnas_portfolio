@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Github, Linkedin, Twitter, Mail, MapPin } from "lucide-react";
 import { socialLinks, contactInfo } from "@/lib/constants";
+import { scrollToSection } from "@/lib/scroll-utils";
 
 const expertiseAreas = [
   { id: "overview", label: "Overview" },
@@ -107,7 +108,7 @@ export function About() {
                 </div>
 
                 {/* Core Expertise */}
-                <div className="mt-6">
+                {/* <div className="mt-6">
                   <p className="text-sm text-muted-foreground uppercase tracking-wider mb-4">
                     Core Expertise
                   </p>
@@ -121,7 +122,7 @@ export function About() {
                       </span>
                     ))}
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -133,10 +134,10 @@ export function About() {
                   <button
                     key={area.id}
                     onClick={() => setActiveArea(area.id)}
-                    className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                    className={`px-4 py-2.5 border rounded-lg text-sm font-medium transition-all ${
                       activeArea === area.id
-                        ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
-                        : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-primary/50 hover:bg-accent"
+                        ? "border-transparent bg-primary text-primary-foreground shadow-lg shadow-primary/30"
+                        : "border-border bg-card text-muted-foreground hover:text-foreground hover:border-primary/50 hover:bg-accent"
                     }`}
                   >
                     {area.label}
@@ -149,63 +150,63 @@ export function About() {
                 {activeArea === "overview" && (
                   <div className="space-y-4 animate-fade-in-up">
                     <h3 className="text-2xl font-bold">
-                      Senior Frontend Engineer & Architect
+                      Senior React & Micro Frontend Engineer
                     </h3>
+
                     <p className="text-muted-foreground leading-relaxed">
-                      I’m a Senior Frontend Engineer with over 7 years of
-                      experience building scalable, high-performance web
-                      applications using React, TypeScript, and modern
-                      JavaScript. My focus is on creating fast, reliable, and
-                      user-friendly interfaces that work at scale across
-                      enterprise products.
+                      I am a Senior Frontend Engineer with 7+ years of experience. I build fast, scalable, and user-friendly web apps using React, TypeScript, and modern JavaScript. My goal is always clean code that performs well at scale.
                     </p>
+
                     <p className="text-muted-foreground leading-relaxed">
-                      At EnterpriseBot, I’ve led the adoption of micro frontend
-                      architecture, built shared component libraries, and
-                      improved performance scores across major dashboards. My
-                      work has helped reduce release cycles, improve load times,
-                      and standardize UI across multiple products.
+                      At EnterpriseBot, I led major improvements:
                     </p>
+                    <ul className="list-disc list-inside text-muted-foreground space-y-2">
+                      <li>
+                        Led Micro Frontend architecture with React + Webpack → reduced release cycles by 30%
+                      </li>
+                      <li>
+                        Built shared React component library with Design Tokens → cut duplicate work by 40%
+                      </li>
+                      <li>
+                        Improved Lighthouse scores from 55–60 to 90+ across dashboards
+                      </li>
+                      <li>
+                        Integrated Azure, OpenAI, and Gemini LLMs → created dynamic model-switching dashboard
+                      </li>
+                      <li>Mentored juniors and boosted team speed by 20%</li>
+                    </ul>
+
                     <p className="text-muted-foreground leading-relaxed">
-                      I enjoy solving complex frontend problems, mentoring
-                      developers, and building systems that are easy to scale,
-                      maintain, and extend over time.
+                      I love solving tough frontend challenges, mentoring teams, and building systems that grow easily with the product.
                     </p>
                   </div>
                 )}
 
                 {activeArea === "frontend" && (
                   <div className="space-y-4 animate-fade-in-up">
-                    <h3 className="text-2xl font-bold">
-                      Frontend Development Excellence
-                    </h3>
+                    <h3 className="text-2xl font-bold">Frontend Development</h3>
+
                     <p className="text-muted-foreground leading-relaxed">
-                      I specialize in building responsive, high-performance user
-                      interfaces using React, TypeScript, and modern JavaScript.
-                      My experience ranges from enterprise dashboards to
-                      analytics platforms and chatbot interfaces used by global
-                      clients.
+                      I specialize in creating responsive, high-performance UIs with React, TypeScript, and modern JavaScript. I have worked on enterprise dashboards, analytics tools, and AI chatbot interfaces for global users.
                     </p>
-                    <div className="text-muted-foreground leading-relaxed">
-                      I focus on:
-                      <ul className="list-disc list-inside mt-2">
-                        <li>Building reusable, scalable components</li>
-                        <li>
-                          Managing complex state with modern React patterns and
-                          Redux
-                        </li>
-                        <li>Integrating REST APIs and real-time data</li>
-                        <li>
-                          Ensuring accessibility, responsiveness, and
-                          cross-browser compatibility
-                        </li>
-                      </ul>
-                    </div>
+
                     <p className="text-muted-foreground leading-relaxed">
-                      I’ve worked in Agile teams, collaborated closely with
-                      designers and backend engineers, and delivered
-                      production-ready interfaces that balance performance with
-                      great user experience.
+                      Key things I focus on:
+                    </p>
+                    <ul className="list-disc list-inside text-muted-foreground space-y-2">
+                      <li>Reusable components and scalable code</li>
+                      <li>State management with Redux and React patterns</li>
+                      <li>REST API integration and real-time data handling</li>
+                      <li>
+                        Accessibility (a11y), responsiveness, and cross-browser support
+                      </li>
+                      <li>
+                        Agile teamwork with designers and backend engineers
+                      </li>
+                    </ul>
+
+                    <p className="text-muted-foreground leading-relaxed">
+                      I deliver clean, production-ready interfaces that give users a smooth and fast experience.
                     </p>
                   </div>
                 )}
@@ -215,42 +216,33 @@ export function About() {
                     <h3 className="text-2xl font-bold">
                       Architecture & Performance
                     </h3>
+
                     <p className="text-muted-foreground leading-relaxed">
-                      I design frontend systems with scalability,
-                      maintainability, and performance in mind. One of my key
-                      contributions has been leading the adoption of micro
-                      frontend architecture, breaking large applications into
-                      modular, independently deployable units.
+                      I design frontend systems that are easy to scale, maintain, and perform well. I led the move to Micro Frontends at EnterpriseBot, splitting big apps into independent parts.
                     </p>
-                    <div className="text-muted-foreground leading-relaxed">
-                      My work includes:
-                      <ul className="list-disc list-inside mt-2">
-                        <li>
-                          Designing micro frontend systems using React and
-                          Webpack
-                        </li>
-                        <li>
-                          Optimizing bundles with code splitting and lazy
-                          loading
-                        </li>
-                        <li>
-                          Improving Lighthouse and Web Vitals scores across
-                          enterprise dashboards
-                        </li>
-                        <li>
-                          Reducing feature release cycles through modular
-                          architecture
-                        </li>
-                        <li>
-                          Modernizing build systems and improving developer
-                          workflows
-                        </li>
-                      </ul>
-                    </div>
+
                     <p className="text-muted-foreground leading-relaxed">
-                      I focus on building architectures that scale with product
-                      growth while keeping performance and maintainability at
-                      the core.
+                      My key achievements:
+                    </p>
+                    <ul className="list-disc list-inside text-muted-foreground space-y-2">
+                      <li>Built Micro Frontend setup with React + Webpack</li>
+                      <li>
+                        Used code splitting, lazy loading, and bundle optimization
+                      </li>
+                      <li>
+                        Boosted Lighthouse scores to 90+ and improved Web Vitals
+                      </li>
+                      <li>Reduced release time by 30% with modular design</li>
+                      <li>
+                        Integrated multi-LLM (Azure, OpenAI, Gemini) with configurable dashboard
+                      </li>
+                      <li>
+                        Upgraded build tools (Webpack v3 → v5) for faster workflows
+                      </li>
+                    </ul>
+
+                    <p className="text-muted-foreground leading-relaxed">
+                      I build strong foundations so teams can add features quickly without breaking things.
                     </p>
                   </div>
                 )}
@@ -260,51 +252,45 @@ export function About() {
                     <h3 className="text-2xl font-bold">
                       Design Systems & Component Libraries
                     </h3>
+
                     <p className="text-muted-foreground leading-relaxed">
-                      Building and maintaining design systems is one of my core
-                      strengths. I create reusable component libraries that
-                      ensure consistency across products while enabling teams to
-                      move faster.
+                      I love building design systems that make teams faster and UI consistent. At EnterpriseBot, I created a shared React component library used across products.
                     </p>
-                    <div className="text-muted-foreground leading-relaxed">
-                      My design system work includes:
-                      <ul className="list-disc list-inside mt-2">
-                        <li>Developing shared React component libraries</li>
-                        <li>
-                          Implementing design tokens and standardized UI
-                          patterns
-                        </li>
-                        <li>
-                          Creating accessible, responsive, and theme-ready
-                          components
-                        </li>
-                        <li>
-                          Collaborating with designers to maintain a consistent
-                          visual language
-                        </li>
-                        <li>
-                          Using tools like Storybook for documentation and
-                          collaboration
-                        </li>
-                      </ul>
-                    </div>
+
                     <p className="text-muted-foreground leading-relaxed">
-                      The goal is to build systems that reduce duplication,
-                      improve developer productivity, and deliver a consistent
-                      user experience across all products.
+                      What I have done:
+                    </p>
+                    <ul className="list-disc list-inside text-muted-foreground space-y-2">
+                      <li>
+                        Developed reusable React components with Design Tokens
+                      </li>
+                      <li>
+                        Added accessibility, dark/light themes, and responsive styles
+                      </li>
+                      <li>
+                        Worked with designers for consistent look and feel
+                      </li>
+                      <li>Used tools like Storybook for easy documentation</li>
+                      <li>
+                        Reduced duplicate code by 40% and sped up development
+                      </li>
+                    </ul>
+
+                    <p className="text-muted-foreground leading-relaxed">
+                      The result: cleaner code, faster delivery, and better user experience everywhere.
                     </p>
                   </div>
                 )}
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                  <a
-                    href={`mailto:${contactInfo.email}`}
+                  <button
+                    onClick={() => scrollToSection("contact")}
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
                   >
                     <Mail className="h-4 w-4" />
                     Contact Me
-                  </a>
+                  </button>
                   <a
                     href="/assets/KRISHNA-DEVASHISH.pdf"
                     download

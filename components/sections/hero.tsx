@@ -22,7 +22,7 @@ export function Hero() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left side - Text content */}
-            <div className="space-y-6 order-1 lg:order-1">
+            <div className="space-y-6 order-1 lg:order-1 text-center lg:text-left">
               {/* Experience Badge */}
               {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
               <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
@@ -45,14 +45,14 @@ export function Hero() {
               </div>
 
               {/* Brief Intro */}
-              <p className="text-lg text-muted-foreground max-w-xl leading-relaxed animate-fade-in-up animation-delay-600">
+              <p className="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed animate-fade-in-up animation-delay-600">
                 Building scalable, high-performance web applications with a
                 focus on performance, design systems, and clean frontend
                 architecture.
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up animation-delay-800">
+              <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 animate-fade-in-up animation-delay-800">
                 <button
                   onClick={() => scrollToSection("projects")}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
@@ -90,7 +90,7 @@ export function Hero() {
             </div>
 
             {/* Right side - Profile Image */}
-            <div className="order-2 lg:order-2 flex justify-center lg:justify-end animate-fade-in-up animation-delay-400">
+            <div className="order-2 lg:order-2 hidden lg:flex justify-center lg:justify-end animate-fade-in-up animation-delay-400">
               <div className="relative">
                 {/* Decorative elements */}
                 <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-primary/5 rounded-3xl blur-2xl" />

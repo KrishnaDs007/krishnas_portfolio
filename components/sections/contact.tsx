@@ -16,13 +16,23 @@ export function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "General Inquiry",
+    subject: "Project Discussion",
     message: "",
   });
   const [customSubject, setCustomSubject] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [quickMessage, setQuickMessage] = useState("");
+
+  const handleQuickMail = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!quickMessage.trim()) return;
+    const subject = encodeURIComponent("Quick Collaboration / Inquiry");
+    const body = encodeURIComponent(quickMessage);
+    window.location.href = `mailto:${contactInfo.email}?subject=${subject}&body=${body}`;
+    setQuickMessage("");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,7 +58,7 @@ export function Contact() {
         setFormData({
           name: "",
           email: "",
-          subject: "General Inquiry",
+          subject: "Project Discussion",
           message: "",
         });
         setCustomSubject("");
@@ -94,6 +104,57 @@ export function Contact() {
     >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
+          {/* Quick Action Section */}
+          <div className="mb-20 pt-20 border-t border-border/50">
+            <div className="relative group">
+              {/* Background Glow */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-pink-500 rounded-2xl blur opacity-10 group-hover:opacity-20 transition duration-1000 group-hover:duration-200"></div>
+
+              <div className="relative bg-card/60 backdrop-blur-md border border-border rounded-2xl p-8 md:p-12 overflow-hidden">
+                {/* Decorative Orbs */}
+                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+
+                <div className="relative grid md:grid-cols-[1fr_auto] gap-8 items-center">
+                  <div>
+                    <h3 className="text-3xl md:text-4xl font-bold mb-4">
+                      Have a bold idea?{" "}
+                      <span className="text-primary">Let's build it.</span>
+                    </h3>
+                    <p className="text-lg text-muted-foreground max-w-xl">
+                      Whether you want to collaborate on a game changing project
+                      or just have an impressive project idea drop it below. I
+                      will make it a reality for you.
+                    </p>
+                  </div>
+
+                  <form
+                    onSubmit={handleQuickMail}
+                    className="w-full max-w-md space-y-4"
+                  >
+                    <div className="relative">
+                      <textarea
+                        value={quickMessage}
+                        onChange={(e) => setQuickMessage(e.target.value)}
+                        placeholder="What should we create together?..."
+                        required
+                        rows={3}
+                        className="w-full px-5 py-4 bg-background/80 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none pr-14 text-foreground text-lg"
+                      />
+                      <button
+                        type="submit"
+                        className="absolute bottom-4 right-4 p-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20"
+                        title="Send via Email"
+                      >
+                        <Send className="h-5 w-5" />
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Section Header */}
           <div className="text-center mb-16">
             <p className="text-sm text-primary font-semibold uppercase tracking-[0.2em] mb-3">

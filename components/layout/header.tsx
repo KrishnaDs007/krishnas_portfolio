@@ -35,8 +35,8 @@ export function Header() {
             className="flex items-center gap-2 font-semibold text-lg"
           >
             <Code2 className="h-6 w-6 text-primary" />
-            <span className="hidden sm:inline">Krishna's Portfolio</span>
-            <span className="sm:hidden">Krishna</span>
+            <span className="hidden lg:inline">Krishna's Portfolio</span>
+            <span className="lg:hidden">Krishna</span>
           </Link>
 
           {/* Desktop Navigation - Hidden on mobile */}
