@@ -14,27 +14,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  // metadataBase: new URL("https://krishnadevashish.com"), // Placeholder - update with your actual domain
+  metadataBase: new URL("https://krishnasportfolio-rho.vercel.app"),
 
   title: {
-    default: "Krishna Devashish | Senior Frontend Engineer",
+    default: "Krishna Devashish | Senior React & Micro Frontend Engineer",
     template: "%s | Krishna Devashish",
   },
 
   description:
-    "Senior Frontend Engineer with 8+ years of experience specializing in React, TypeScript, Next.js, and high-performance UI systems. Building scalable and accessible web applications.",
+    "Senior Frontend Engineer (7+ years) specializing in React, Micro Frontends, Design Systems, and LLM-powered dashboards. Ex-EnterpriseBot. Built scalable architectures that improved Lighthouse scores to 90+, reduced release cycles by 30%, and integrated Azure/OpenAI/Gemini.",
 
   keywords: [
     "Krishna Devashish",
-    "Senior Frontend Engineer",
-    "React Developer",
+    "Senior React Engineer",
+    "Micro Frontend Architect",
+    "LLM Dashboard",
+    "Design Systems",
+    "Performance Optimization",
     "TypeScript Expert",
     "Next.js Developer",
-    "JavaScript Developer",
-    "UI/UX Architect",
-    "Frontend Performance",
-    "Software Engineer Portfolio",
-    "Bengaluru Frontend Developer",
+    "Web Accessibility",
+    "Enterprise Frontend",
+    "Bengaluru React Developer",
+    "React Component Library",
+    "Webpack Micro Frontend",
+    "Azure OpenAI Gemini Integration",
   ],
 
   authors: [{ name: "Krishna Devashish" }],
@@ -60,18 +64,24 @@ export const metadata: Metadata = {
     },
   },
 
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
+
   openGraph: {
-    title: "Krishna Devashish | Senior Frontend Engineer",
+    title: "Krishna Devashish | Senior React & Micro Frontend Engineer",
     description:
-      "Explore the portfolio of Krishna Devashish, a Senior Frontend Engineer focused on building exceptional digital experiences with React and TypeScript.",
-    url: "https://krishnadevashish.dev",
+      "Senior Frontend Engineer specializing in React, Micro Frontends, Design Systems & LLM-powered dashboards. Ex-EnterpriseBot | Bangalore",
+    url: "https://krishnasportfolio-rho.vercel.app",
     siteName: "Krishna Devashish Portfolio",
     images: [
       {
-        url: "/og-image.png", // Ensure you add this image to public/
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Krishna Devashish Portfolio",
+        alt: "Krishna Devashish - Senior React & Micro Frontend Engineer",
       },
     ],
     locale: "en_US",
@@ -80,25 +90,21 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Krishna Devashish | Senior Frontend Engineer",
+    title: "Krishna Devashish | Senior React & Micro Frontend Engineer",
     description:
-      "Senior Frontend Engineer building scalable, high-performance web applications with React and Next.js.",
+      "Senior Frontend Engineer (7+ years) • React • Micro Frontends • LLM Dashboards • Lighthouse 90+ • Bangalore",
     images: ["/og-image.png"],
-    creator: "@krishnadevashish",
+    creator: "@itskd_17",
   },
 
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
-    apple: "/favicon.svg", // Using the SVG as primary icon
-  },
-
-  verification: {
-    google: "your-google-site-verification-code",
+    apple: "/apple-touch-icon.png",
   },
 
   other: {
-    "theme-color": "#FF5722", // Matches the portfolio primary orange
+    "theme-color": "#FF5722",
     "color-scheme": "dark light",
   },
 };
