@@ -48,9 +48,9 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
   // Combine images and video into media array
   const mediaItems = [
-    // ...(project.videoUrl
-    //   ? [{ type: "video" as const, url: project.videoUrl }]
-    //   : []),
+    ...(project.videoUrl
+      ? [{ type: "video" as const, url: project.videoUrl }]
+      : []),
     ...project.images.map((img) => ({ type: "image" as const, url: img })),
   ];
 
@@ -106,7 +106,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         <div className="relative flex-1 bg-gradient-to-b from-accent/20 to-accent/40 overflow-hidden">
           {/* Media Display with Slide Animation */}
           <div className="h-full flex items-center justify-center p-4 md:p-8">
-            {currentMedia?.type === "video" ? (
+            {currentMedia.type === "video" ? (
               <div
                 key={currentMediaIndex}
                 className="w-full aspect-video max-h-full animate-slide-in"

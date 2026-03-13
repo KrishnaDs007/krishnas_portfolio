@@ -5,13 +5,7 @@
     "category": "Web Apps",
     "shortDescription": "A modern, responsive financial services bridge connecting users with loans, insurance, and interactive EMI planning tools.",
     "fullDescription": "Developed a comprehensive financial help platform that streamlines access to Personal, Home, and Business loans. The application features a custom-built, interactive EMI calculator for financial planning and a seamless lead-generation system integrated with EmailJS. Built with React and SASS, it focuses on high-performance animations and a mobile-first user experience to simplify complex financial inquiries.",
-    "technologies": [
-      "React 18",
-      "Redux",
-      "SASS/SCSS",
-      "Swiper.js",
-      "EmailJS"
-    ],
+    "technologies": ["React 18", "Redux", "SASS/SCSS", "Swiper.js", "EmailJS"],
     "features": [
       "Interactive Loan EMI Calculator for real-time planning",
       "Comprehensive Financial Service modules (Personal, Home, Business Loans)",
@@ -29,10 +23,11 @@
       "/images/projects/minifincorp/minifincorp7.webp",
       "/images/projects/minifincorp/minifincorp8.webp"
     ],
-    "videoUrl": "https://www.youtube.com/embed/your-video-id",
+    "videoUrl": "",
     "liveUrl": "https://minifincorp.in",
     "githubUrl": "https://github.com/KrishnaDs007/MiniFinCorp",
     "featured": true,
     "year": "2025"
   }
 ]
+// https://www.youtube.com/embed/your-video-id
