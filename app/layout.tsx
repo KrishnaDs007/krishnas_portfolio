@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     siteName: "Krishna Devashish Portfolio",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpeg",
         width: 1200,
         height: 630,
         alt: "Krishna Devashish - Senior React & Micro Frontend Engineer",
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     title: "Krishna Devashish | Senior React & Micro Frontend Engineer",
     description:
       "Senior Frontend Engineer (7+ years) • React • Micro Frontends • LLM Dashboards • Lighthouse 90+ • Bangalore",
-    images: ["/og-image.png"],
+    images: ["/og-image.jpeg"],
     creator: "@itskd_17",
   },
 
@@ -126,7 +126,7 @@ export default function RootLayout({
               name: "Krishna Devashish",
               jobTitle: "Senior React & Micro Frontend Engineer",
               url: "https://krishnasportfolio-rho.vercel.app",
-              image: "https://krishnasportfolio-rho.vercel.app/og-image.png",
+              image: "https://krishnasportfolio-rho.vercel.app/og-image.jpeg",
               sameAs: [
                 "https://www.linkedin.com/in/mrkd007",
                 "https://x.com/itskd_17",
