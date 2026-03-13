@@ -117,10 +117,10 @@ export function Contact() {
 
                 <div className="relative grid md:grid-cols-[1fr_auto] gap-8 items-center">
                   <div>
-                    <h3 className="text-3xl md:text-4xl font-bold mb-4">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4">
                       Have a bold idea?{" "}
                       <span className="text-primary">Let's build it.</span>
-                    </h3>
+                    </h2>
                     <p className="text-lg text-muted-foreground max-w-xl">
                       Whether you want to collaborate on a game changing project
                       or just have an impressive project idea drop it below. I

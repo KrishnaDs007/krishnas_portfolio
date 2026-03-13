@@ -13,9 +13,9 @@ export function Experience() {
             <p className="text-sm text-primary font-medium uppercase tracking-wider mb-2">
               My Journey
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <div className="text-3xl md:text-4xl font-bold mb-4">
               Experience & <span className="text-primary">Education</span>
-            </h2>
+            </div>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               A timeline of my professional career and academic background as a
               Senior Frontend Developer.
@@ -56,7 +56,7 @@ export function Experience() {
                 <div className="p-2 rounded-lg bg-primary/10">
                   <Briefcase className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold">Work Experience</h3>
+                <h2 className="text-xl font-bold">Work Experience</h2>
               </div>
 
               <div className="space-y-8 relative">
@@ -75,9 +75,9 @@ export function Experience() {
                       {/* Header */}
                       <div className="flex items-start justify-between mb-3">
                         <div>
-                          <h4 className="text-lg font-semibold text-foreground mb-1">
+                          <h3 className="text-lg font-semibold text-foreground mb-1">
                             {exp.title}
-                          </h4>
+                          </h3>
                           <p className="text-primary font-medium">
                             {exp.company}
                           </p>
@@ -135,7 +135,7 @@ export function Experience() {
                 <div className="p-2 rounded-lg bg-primary/10">
                   <GraduationCap className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold">Education</h3>
+                <h2 className="text-xl font-bold">Education</h2>
               </div>
 
               <div className="space-y-8 relative">
@@ -154,9 +154,9 @@ export function Experience() {
                       {/* Header */}
                       <div className="flex items-start justify-between mb-3">
                         <div>
-                          <h4 className="text-lg font-semibold text-foreground mb-1">
+                          <h3 className="text-lg font-semibold text-foreground mb-1">
                             {edu.degree} {edu.field}
-                          </h4>
+                          </h3>
                           <p className="text-primary font-medium">
                             {edu.institution}
                           </p>
