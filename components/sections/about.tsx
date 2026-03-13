@@ -98,7 +98,7 @@ export function About() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="p-3 rounded-lg bg-card border border-border border-color-primary hover:border-primary hover:bg-primary/10 transition-colors bg-transparent"
-                          aria-label={social.platform}
+                          aria-label={`${social.platform} Profile`}
                         >
                           <Icon className="h-5 w-5" />
                         </a>

@@ -34,6 +34,7 @@ export function Hero() {
               {/* Animated Title */}
               <div className="space-y-2">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                  <span className="sr-only">Krishna Devashish | Senior React & Micro Frontend Engineer</span>
                   <span className="block text-foreground">Senior</span>
                   <span className="block text-primary animate-fade-in-up animation-delay-200">
                     Frontend Engineer
@@ -56,6 +57,7 @@ export function Hero() {
                 <button
                   onClick={() => scrollToSection("projects")}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
+                   aria-label="View My Projects"
                 >
                   View My Work
                   <ArrowRight className="h-4 w-4" />
@@ -64,6 +66,7 @@ export function Hero() {
                   href="/assets/KRISHNA-DEVASHISH.pdf"
                   download
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-border bg-background font-medium hover:bg-accent transition-colors"
+                  aria-label="Download CV (PDF)"
                 >
                   <Download className="h-4 w-4" />
                   Download CV
@@ -115,9 +118,9 @@ export function Hero() {
                         <h3 className="font-semibold text-foreground">
                           Krishna Devashish
                         </h3>
-                        <p className="text-sm text-primary">
+                        {/* <p className="text-sm text-primary">
                           Senior Frontend Engineer
-                        </p>
+                        </p> */}
                       </div>
                       <div className="flex gap-1">
                         <div className="h-2 w-2 rounded-full bg-green-500" />
@@ -131,7 +134,7 @@ export function Hero() {
           </div>
 
           {/* Technical Expertise */}
-          <div className="mt-16 pt-8 border-t border-border/50 animate-fade-in-up animation-delay-1000">
+          <div className="mt-16 mb-8 pt-8 border-t border-border/50 animate-fade-in-up animation-delay-1000">
             <p className="text-sm text-muted-foreground uppercase tracking-wider mb-6 text-center">
               Technical Expertise
             </p>

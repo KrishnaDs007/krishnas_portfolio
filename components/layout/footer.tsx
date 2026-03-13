@@ -79,7 +79,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 bg-accent hover:bg-primary hover:text-primary-foreground rounded-lg transition-all"
-                      aria-label={social.platform}
+                      aria-label={`${social.platform} Profile`}
                     >
                       <Icon className="h-5 w-5" />
                     </a>

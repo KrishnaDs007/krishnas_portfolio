@@ -167,6 +167,7 @@ export function Projects() {
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
                         className="flex items-center justify-center gap-2 px-4 py-2.5 border-2 border-border hover:border-primary/50 hover:bg-accent text-foreground text-sm rounded-lg transition-all font-medium"
+                        aria-label="View on GitHub"
                       >
                         <Github className="h-4 w-4" />
                       </a>
