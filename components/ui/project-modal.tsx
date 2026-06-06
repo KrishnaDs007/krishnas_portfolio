@@ -36,12 +36,34 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   // Reset media index when modal opens
   useEffect(() => {
-    if (isOpen) {
+    if (!isOpen) return;
+
+    const timeoutId = window.setTimeout(() => {
       setCurrentMediaIndex(0);
       setShowDetails(false);
-    }
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
   }, [isOpen, project]);
 
   if (!isOpen) return null;
@@ -81,12 +103,18 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 animate-fade-in"
       onClick={handleBackdropClick}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-modal-title"
     >
       <div className="relative w-full max-w-7xl h-[90vh] bg-card rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-scale-in">
         {/* Header */}
         <div className="flex items-center justify-between p-4 md:p-6 border-b border-border bg-card/95 backdrop-blur-sm">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+            <h2
+              id="project-modal-title"
+              className="text-2xl md:text-3xl font-bold text-foreground"
+            >
               {project.title}
             </h2>
             <p className="text-sm text-muted-foreground mt-1">
@@ -191,7 +219,10 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
           {/* Details Overlay */}
           {showDetails && (
-            <div className="absolute inset-0 bg-black/95 backdrop-blur-sm p-4 md:p-8 overflow-y-auto animate-fade-in">
+            <div
+              id="project-details"
+              className="absolute inset-0 bg-black/95 backdrop-blur-sm p-4 md:p-8 overflow-y-auto animate-fade-in"
+            >
               <div className="max-w-3xl mx-auto">
                 <h3 className="text-2xl font-bold mb-6">Project Details</h3>
 
@@ -252,6 +283,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             {/* Toggle Details Button */}
             <button
               onClick={() => setShowDetails(!showDetails)}
+              aria-expanded={showDetails}
               className="flex items-center gap-2 px-5 py-2.5 bg-accent hover:bg-accent/80 text-foreground rounded-lg transition-all font-medium"
             >
               <Info className="h-4 w-4" />

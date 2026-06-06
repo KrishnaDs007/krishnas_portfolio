@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Code2, Github, Linkedin, Twitter, Mail } from "lucide-react";
 import { socialLinks } from "@/lib/constants";
@@ -25,16 +23,16 @@ export function Footer() {
 
   return (
     <footer className="bg-card border-t border-border">
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-8 md:py-10 lg:py-12">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+          <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:mb-8 lg:grid-cols-3">
             {/* Logo & Description */}
             <div className="lg:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
-              <Link href="#home" className="flex items-center gap-2 mb-4">
+              <Link href="#home" className="mb-3 flex items-center gap-2 md:mb-4">
                 <div className="p-2 bg-primary rounded-lg">
                   <Code2 className="h-6 w-6 text-primary-foreground" />
                 </div>
-                <span className="text-xl font-bold">Krishna's Portfolio</span>
+                <span className="text-xl font-bold">Krishna&apos;s Portfolio</span>
               </Link>
               <p className="text-muted-foreground text-sm leading-relaxed max-w-xs md:max-w-none">
                 Building pixel-perfect, engaging, and accessible digital
@@ -44,7 +42,7 @@ export function Footer() {
 
             {/* Navigation Links */}
             <div className="lg:col-span-1 flex flex-col items-center md:items-start">
-              <h3 className="text-sm font-semibold uppercase text-foreground mb-4">
+              <h3 className="mb-3 text-sm font-semibold uppercase text-foreground md:mb-4">
                 Navigation
               </h3>
               <ul className="space-y-2 text-center md:text-left">
@@ -63,7 +61,7 @@ export function Footer() {
 
             {/* Social Links */}
             <div className="lg:col-span-1 flex flex-col items-center md:items-start">
-              <h3 className="text-sm font-semibold uppercase text-foreground mb-4">
+              <h3 className="mb-3 text-sm font-semibold uppercase text-foreground md:mb-4">
                 Connect
               </h3>
               <div className="flex gap-3 justify-center md:justify-start">
@@ -90,7 +88,7 @@ export function Footer() {
           </div>
 
           {/* Copyright */}
-          <div className="pt-8 border-t border-border">
+          <div className="border-t border-border pt-6 lg:pt-8">
             <p className="text-center text-sm text-muted-foreground">
               © {currentYear} Krishna Devashish. All rights reserved.
             </p>

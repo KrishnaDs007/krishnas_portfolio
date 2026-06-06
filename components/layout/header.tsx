@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Moon, Sun, Code2 } from "lucide-react";
+import type { ComponentType } from "react";
 import { useTheme } from "next-themes";
 import { NAV_ITEMS } from "@/lib/navigation-config";
 import { scrollToSection } from "@/lib/scroll-utils";
@@ -21,7 +22,10 @@ export function Header() {
   };
 
   const getIcon = (iconName: string) => {
-    const Icon = (LucideIcons as any)[iconName];
+    const Icon = (LucideIcons as unknown as Record<
+      string,
+      ComponentType<{ className?: string }>
+    >)[iconName];
     return Icon ? <Icon className="h-4 w-4" /> : null;
   };
 
@@ -35,7 +39,7 @@ export function Header() {
             className="flex items-center gap-2 font-semibold text-lg"
           >
             <Code2 className="h-6 w-6 text-primary" />
-            <span className="hidden lg:inline">Krishna's Portfolio</span>
+            <span className="hidden lg:inline">Krishna&apos;s Portfolio</span>
             <span className="lg:hidden">Krishna</span>
           </Link>
 
@@ -46,6 +50,7 @@ export function Header() {
                 key={item.id}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.id)}
+                aria-current={activeSection === item.id ? "page" : undefined}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   activeSection === item.id
                     ? "bg-primary text-primary-foreground"

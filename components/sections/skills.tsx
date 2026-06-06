@@ -18,11 +18,11 @@ const tabs: { id: TabCategory; label: string }[] = [
 const getProficiencyColor = (level: string) => {
   switch (level) {
     case "Expert":
-      return "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20";
+      return "bg-green-50 text-green-800 border-green-700/30 dark:bg-green-950 dark:text-green-200 dark:border-green-400/40";
     case "Advanced":
       return "bg-primary/10 text-primary border-primary/20";
     case "Intermediate":
-      return "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20";
+      return "bg-blue-50 text-blue-800 border-blue-700/30 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-400/40";
     default:
       return "bg-accent text-foreground border-border";
   }
@@ -39,16 +39,16 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="min-h-screen flex items-center py-20 bg-accent/30"
+      className="flex items-center bg-accent/30 py-12 sm:py-14 lg:min-h-screen lg:py-20"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-12">
+          <div className="mb-8 text-center sm:mb-10 lg:mb-12">
             <p className="text-sm text-primary font-medium uppercase tracking-wider mb-2">
               Expertise
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="mb-3 text-3xl font-bold md:mb-4 md:text-4xl">
               Technical <span className="text-primary">Skills</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -58,12 +58,13 @@ export function Skills() {
           </div>
 
           {/* Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
+          <div className="mb-8 flex flex-wrap justify-center gap-2 sm:mb-10 lg:mb-12">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                aria-pressed={activeTab === tab.id}
+                className={`rounded-lg px-4 py-2 text-sm font-medium transition-all sm:px-6 sm:py-2.5 ${
                   activeTab === tab.id
                     ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
                     : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-primary/50"
@@ -75,13 +76,13 @@ export function Skills() {
           </div>
 
           {/* Skills Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
+          <div className="mb-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:mb-16 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
             {filteredSkills.map((skill) => {
               const IconComponent = getSkillIcon(skill.iconKey);
               return (
                 <div
                   key={skill.id}
-                  className="bg-card border border-border rounded-xl p-6 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group"
+                  className="group rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 sm:p-6"
                 >
                   {/* Icon & Badge */}
                   <div className="flex items-start justify-between mb-4">
@@ -119,7 +120,14 @@ export function Skills() {
                       </span>
                     </div>
                     {/* Progress Bar */}
-                    <div className="h-1.5 bg-accent rounded-full overflow-hidden">
+                    <div
+                      className="h-1.5 bg-accent rounded-full overflow-hidden"
+                      role="progressbar"
+                      aria-label={`${skill.name} proficiency`}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                      aria-valuenow={skill.proficiencyPercentage}
+                    >
                       <div
                         className="h-full bg-gradient-to-r from-primary to-primary/70 rounded-full transition-all duration-500"
                         style={{ width: `${skill.proficiencyPercentage}%` }}
@@ -132,9 +140,9 @@ export function Skills() {
           </div>
 
           {/* Favorite Tools & Workflow Section */}
-          <div className="mt-16">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold mb-2">
+          <div className="mt-10 lg:mt-16">
+            <div className="mb-6 text-center sm:mb-8">
+              <h3 className="mb-2 text-xl font-bold sm:text-2xl">
                 Tools & <span className="text-primary">Workflow</span>
                 {/* Favorite Tools & <span className="text-primary">Workflow</span> */}
               </h3>
@@ -145,13 +153,13 @@ export function Skills() {
             </div>
 
             {/* Tools Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6 lg:gap-4">
               {favoriteTools.map((tool) => {
                 const IconComponent = getToolIcon(tool.iconKey);
                 return (
                   <div
                     key={tool.id}
-                    className="bg-card border border-border rounded-xl p-6 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all text-center group"
+                    className="group rounded-xl border border-border bg-card p-4 text-center transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 sm:p-6"
                   >
                     <div className="inline-flex p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors mb-3">
                       <IconComponent className="h-6 w-6 text-primary" />

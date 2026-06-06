@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import type { ComponentType } from "react";
 import { NAV_ITEMS } from "@/lib/navigation-config";
 import { scrollToSection } from "@/lib/scroll-utils";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
@@ -47,12 +48,16 @@ export function MobileNav() {
   };
 
   const getIcon = (iconName: string) => {
-    const Icon = (LucideIcons as any)[iconName];
+    const Icon = (LucideIcons as unknown as Record<
+      string,
+      ComponentType<{ className?: string }>
+    >)[iconName];
     return Icon ? <Icon className="h-5 w-5" /> : null;
   };
 
   return (
     <nav
+      aria-label="Mobile section navigation"
       className={`fixed bottom-0 left-0 right-0 z-50 md:hidden border-t border-border/40 bg-background/95 backdrop-blur-lg supports-[backdrop-filter]:bg-background/80 transition-transform duration-300 ease-in-out ${
         isVisible ? "translate-y-0" : "translate-y-full"
       }`}
@@ -62,6 +67,7 @@ export function MobileNav() {
           <button
             key={item.id}
             onClick={(e) => handleNavClick(e, item.id)}
+            aria-current={activeSection === item.id ? "page" : undefined}
             className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg text-xs font-medium transition-colors min-w-[60px] ${
               activeSection === item.id
                 ? "text-primary"

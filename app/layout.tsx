@@ -17,12 +17,12 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://krishnasportfolio-rho.vercel.app"),
 
   title: {
-    default: "Krishna Devashish | Senior React & Micro Frontend Engineer",
+    default: "Krishna Devashish | Senior Frontend Engineer",
     template: "%s | Krishna Devashish",
   },
 
   description:
-    "Senior Frontend Engineer (7+ years) specializing in React, Micro Frontends, Design Systems, and LLM-powered dashboards. Ex-EnterpriseBot. Built scalable architectures that improved Lighthouse scores to 90+, reduced release cycles by 30%, and integrated Azure/OpenAI/Gemini.",
+    "Senior Frontend Engineer with 8+ years in React, TypeScript, Micro Frontends, design systems, performance, and LLM-powered dashboards.",
 
   keywords: [
     "Krishna Devashish",
@@ -45,9 +45,15 @@ export const metadata: Metadata = {
   creator: "Krishna Devashish",
   publisher: "Krishna Devashish",
   category: "technology",
+  applicationName: "Krishna Devashish Portfolio",
+  generator: "Next.js",
+  referrer: "origin-when-cross-origin",
 
   alternates: {
     canonical: "/",
+    languages: {
+      "en-US": "/",
+    },
   },
 
   robots: {
@@ -65,9 +71,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Krishna Devashish | Senior React & Micro Frontend Engineer",
+    title: "Krishna Devashish | Senior Frontend Engineer",
     description:
-      "Senior Frontend Engineer specializing in React, Micro Frontends, Design Systems & LLM-powered dashboards. Ex-EnterpriseBot | Bangalore",
+      "Senior Frontend Engineer specializing in React, TypeScript, Micro Frontends, design systems, performance, and LLM-powered dashboards.",
     url: "https://krishnasportfolio-rho.vercel.app",
     siteName: "Krishna Devashish Portfolio",
     images: [
@@ -84,9 +90,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Krishna Devashish | Senior React & Micro Frontend Engineer",
+    title: "Krishna Devashish | Senior Frontend Engineer",
     description:
-      "Senior Frontend Engineer (7+ years) • React • Micro Frontends • LLM Dashboards • Lighthouse 90+ • Bangalore",
+      "Senior Frontend Engineer with 8+ years in React, TypeScript, Micro Frontends, design systems, performance, and LLM-powered dashboards.",
     images: ["/og-image.jpeg"],
     creator: "@itskd_17",
   },
@@ -123,10 +129,13 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
+              "@id": "https://krishnasportfolio-rho.vercel.app/#person",
               name: "Krishna Devashish",
-              jobTitle: "Senior React & Micro Frontend Engineer",
+              jobTitle: "Senior Frontend Engineer",
               url: "https://krishnasportfolio-rho.vercel.app",
               image: "https://krishnasportfolio-rho.vercel.app/og-image.jpeg",
+              description:
+                "Senior Frontend Engineer specializing in React, TypeScript, Micro Frontends, design systems, performance, and LLM-powered dashboards.",
               sameAs: [
                 "https://www.linkedin.com/in/mrkd007",
                 "https://x.com/itskd_17",
@@ -145,6 +154,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-background focus:px-4 focus:py-2 focus:text-foreground focus:shadow-lg focus:outline-2 focus:outline-primary"
+        >
+          Skip to main content
+        </a>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

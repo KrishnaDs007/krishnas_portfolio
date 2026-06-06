@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import {
   ArrowRight,
@@ -8,45 +6,43 @@ import {
   FileCode,
   Palette,
   Server,
-  Cloud,
 } from "lucide-react";
-import { scrollToSection } from "@/lib/scroll-utils";
 
 export function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center pt-16 pb-20 md:pb-0"
+      className="flex min-h-[calc(100svh-4rem)] items-center pt-20 pb-10 sm:pt-24 sm:pb-14 lg:min-h-screen lg:pt-16 lg:pb-0"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
             {/* Left side - Text content */}
-            <div className="space-y-6 order-1 lg:order-1 text-center lg:text-left">
+            <div className="order-1 space-y-4 text-center sm:space-y-5 lg:order-1 lg:space-y-6 lg:text-left">
               {/* Experience Badge */}
               {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
               <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
               <span className="text-sm font-medium text-primary">
-                7+ YEARS EXPERIENCE
+                8+ YEARS EXPERIENCE
               </span>
             </div> */}
 
               {/* Animated Title */}
               <div className="space-y-2">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                <h1 className="text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
                   <span className="sr-only">Krishna Devashish | Senior React & Micro Frontend Engineer</span>
                   <span className="block text-foreground">Senior</span>
                   <span className="block text-primary animate-fade-in-up animation-delay-200">
                     Frontend Engineer
                   </span>
                 </h1>
-                <p className="text-xl md:text-2xl text-muted-foreground animate-fade-in-up animation-delay-400">
+                <p className="text-lg text-muted-foreground animate-fade-in-up animation-delay-400 sm:text-xl md:text-2xl">
                   React | JavaScript | TypeScript | Micro Frontend Architecture
                 </p>
               </div>
 
               {/* Brief Intro */}
-              <p className="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed animate-fade-in-up animation-delay-600">
+              <p className="mx-auto max-w-xl text-base leading-relaxed text-muted-foreground animate-fade-in-up animation-delay-600 sm:text-lg lg:mx-0">
                 Building scalable, high-performance web applications with a
                 focus on performance, design systems, and clean frontend
                 architecture.
@@ -54,14 +50,13 @@ export function Hero() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 animate-fade-in-up animation-delay-800">
-                <button
-                  onClick={() => scrollToSection("projects")}
+                <a
+                  href="#projects"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
-                   aria-label="View My Projects"
                 >
                   View My Work
                   <ArrowRight className="h-4 w-4" />
-                </button>
+                </a>
                 <a
                   href="/assets/KRISHNA-DEVASHISH.pdf"
                   download
@@ -106,6 +101,7 @@ export function Hero() {
                       src="/images/Profile_illustrated_clearbg.png"
                       alt="Krishna Devashish"
                       fill
+                      sizes="(min-width: 768px) 320px, 256px"
                       className="object-contain"
                       priority
                     />
@@ -115,9 +111,9 @@ export function Hero() {
                   <div className="absolute bottom-8 left-8 right-8 bg-background/95 backdrop-blur-sm border border-border rounded-xl p-4 shadow-lg">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-semibold text-foreground">
+                        <p className="font-semibold text-foreground">
                           Krishna Devashish
-                        </h3>
+                        </p>
                         {/* <p className="text-sm text-primary">
                           Senior Frontend Engineer
                         </p> */}
@@ -134,11 +130,11 @@ export function Hero() {
           </div>
 
           {/* Technical Expertise */}
-          <div className="mt-16 mb-8 pt-8 border-t border-border/50 animate-fade-in-up animation-delay-1000">
-            <p className="text-sm text-muted-foreground uppercase tracking-wider mb-6 text-center">
+          <div className="mt-10 mb-2 border-t border-border/50 pt-6 animate-fade-in-up animation-delay-1000 sm:mt-12 sm:mb-4 lg:mt-16 lg:mb-8 lg:pt-8">
+            <p className="mb-4 text-center text-sm uppercase tracking-wider text-muted-foreground sm:mb-6">
               Technical Expertise
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-3">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               <div className="group flex items-center gap-2 px-4 py-2.5 bg-card border border-border rounded-lg hover:border-primary/50 hover:bg-accent transition-all">
                 <Code2 className="h-5 w-5 text-primary" />
                 <span className="text-sm font-medium text-foreground">

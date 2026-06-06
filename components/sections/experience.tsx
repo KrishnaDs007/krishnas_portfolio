@@ -1,19 +1,17 @@
-"use client";
-
 import { Briefcase, GraduationCap, MapPin, Calendar } from "lucide-react";
 import { experiences, education, stats } from "@/lib/constants";
 
 export function Experience() {
   return (
-    <section id="experience" className="min-h-screen flex items-center py-20">
+    <section id="experience" className="flex items-center py-12 sm:py-14 lg:min-h-screen lg:py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-12">
+          <div className="mb-8 text-center sm:mb-10 lg:mb-12">
             <p className="text-sm text-primary font-medium uppercase tracking-wider mb-2">
               My Journey
             </p>
-            <div className="text-3xl md:text-4xl font-bold mb-4">
+            <div className="mb-3 text-3xl font-bold md:mb-4 md:text-4xl">
               Experience & <span className="text-primary">Education</span>
             </div>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -49,21 +47,21 @@ export function Experience() {
           </div>
 
           {/* Two Column Layout - Desktop */}
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
             {/* Work Experience Column */}
             <div>
-              <div className="flex items-center gap-2 mb-8">
+              <div className="mb-5 flex items-center gap-2 sm:mb-6 lg:mb-8">
                 <div className="p-2 rounded-lg bg-primary/10">
                   <Briefcase className="h-5 w-5 text-primary" />
                 </div>
                 <h2 className="text-xl font-bold">Work Experience</h2>
               </div>
 
-              <div className="space-y-8 relative">
+              <div className="relative space-y-5 sm:space-y-6 lg:space-y-8">
                 {/* Timeline Line */}
                 <div className="absolute left-[15px] top-0 bottom-0 w-[2px] bg-border hidden sm:block" />
 
-                {experiences.map((exp, index) => (
+                {experiences.map((exp) => (
                   <div key={exp.id} className="relative pl-0 sm:pl-12">
                     {/* Timeline Dot */}
                     <div className="absolute left-0 top-0 hidden sm:flex items-center justify-center w-8 h-8 rounded-full bg-background border-2 border-primary">
@@ -71,7 +69,7 @@ export function Experience() {
                     </div>
 
                     {/* Content Card */}
-                    <div className="bg-card border border-border rounded-xl p-6 hover:border-primary/50 transition-colors">
+                    <div className="rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/50 sm:p-6">
                       {/* Header */}
                       <div className="flex items-start justify-between mb-3">
                         <div>
@@ -90,7 +88,7 @@ export function Experience() {
                       </div>
 
                       {/* Date & Location */}
-                      <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
+                      <div className="mb-3 flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground sm:mb-4">
                         <div className="flex items-center gap-1">
                           <Calendar className="h-4 w-4" />
                           <span>
@@ -106,7 +104,7 @@ export function Experience() {
                       </div>
 
                       {/* Description */}
-                      <p className="text-muted-foreground mb-4 leading-relaxed">
+                      <p className="mb-3 leading-relaxed text-muted-foreground sm:mb-4">
                         {exp.description}
                       </p>
 
@@ -131,18 +129,18 @@ export function Experience() {
 
             {/* Education Column */}
             <div>
-              <div className="flex items-center gap-2 mb-8">
+              <div className="mb-5 flex items-center gap-2 sm:mb-6 lg:mb-8">
                 <div className="p-2 rounded-lg bg-primary/10">
                   <GraduationCap className="h-5 w-5 text-primary" />
                 </div>
                 <h2 className="text-xl font-bold">Education</h2>
               </div>
 
-              <div className="space-y-8 relative">
+              <div className="relative space-y-5 sm:space-y-6 lg:space-y-8">
                 {/* Timeline Line */}
                 <div className="absolute left-[15px] top-0 bottom-0 w-[2px] bg-border hidden sm:block" />
 
-                {education.map((edu, index) => (
+                {education.map((edu) => (
                   <div key={edu.id} className="relative pl-0 sm:pl-12">
                     {/* Timeline Dot */}
                     <div className="absolute left-0 top-0 hidden sm:flex items-center justify-center w-8 h-8 rounded-full bg-background border-2 border-primary">
@@ -150,7 +148,7 @@ export function Experience() {
                     </div>
 
                     {/* Content Card */}
-                    <div className="bg-card border border-border rounded-xl p-6 hover:border-primary/50 transition-colors">
+                    <div className="rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/50 sm:p-6">
                       {/* Header */}
                       <div className="flex items-start justify-between mb-3">
                         <div>
@@ -169,7 +167,7 @@ export function Experience() {
                       </div>
 
                       {/* Date & Location */}
-                      <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
+                      <div className="mb-3 flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground sm:mb-4">
                         <div className="flex items-center gap-1">
                           <Calendar className="h-4 w-4" />
                           <span>
@@ -185,7 +183,7 @@ export function Experience() {
                       </div>
 
                       {/* Description */}
-                      <p className="text-muted-foreground mb-4 leading-relaxed">
+                      <p className="mb-3 leading-relaxed text-muted-foreground sm:mb-4">
                         {edu.description}
                       </p>
 

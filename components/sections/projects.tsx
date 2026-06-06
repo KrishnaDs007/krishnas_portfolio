@@ -1,15 +1,24 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Image from "next/image";
+import dynamic from "next/dynamic";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import {
   getProjects,
   getProjectCategories,
   ProjectData,
 } from "@/lib/projects-utils";
-import { ProjectModal } from "@/components/ui/project-modal";
 
 const PROJECTS_PER_PAGE = 6; // Show 6 projects initially (2 rows of 3)
+const ALL_PROJECTS = getProjects();
+const CATEGORIES = getProjectCategories();
+
+const ProjectModal = dynamic(
+  () =>
+    import("@/components/ui/project-modal").then((mod) => mod.ProjectModal),
+  { ssr: false },
+);
 
 export function Projects() {
   const [activeTab, setActiveTab] = useState("All Projects");
@@ -18,16 +27,13 @@ export function Projects() {
   );
   const [showAll, setShowAll] = useState(false);
 
-  const allProjects = getProjects();
-  const categories = getProjectCategories();
-
   // Filter projects by category
   const filteredProjects = useMemo(() => {
     if (activeTab === "All Projects") {
-      return allProjects;
+      return ALL_PROJECTS;
     }
-    return allProjects.filter((project) => project.category === activeTab);
-  }, [activeTab, allProjects]);
+    return ALL_PROJECTS.filter((project) => project.category === activeTab);
+  }, [activeTab]);
 
   // Apply pagination
   const displayedProjects = showAll
@@ -40,6 +46,16 @@ export function Projects() {
     setSelectedProject(project);
   };
 
+  const handleProjectKeyDown = (
+    e: React.KeyboardEvent<HTMLDivElement>,
+    project: ProjectData,
+  ) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleProjectClick(project);
+    }
+  };
+
   const handleCloseModal = () => {
     setSelectedProject(null);
   };
@@ -47,34 +63,35 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="min-h-screen flex items-center py-20 bg-background"
+      className="flex items-center bg-background py-12 sm:py-14 lg:min-h-screen lg:py-20"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="mb-16">
+          <div className="mb-8 sm:mb-10 lg:mb-16">
             <p className="text-sm text-primary font-semibold uppercase tracking-[0.2em] mb-3">
               Recent Projects
             </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h2 className="mb-4 text-3xl font-bold leading-tight sm:text-4xl md:text-5xl lg:mb-6 lg:text-6xl">
               Recent <span className="text-primary">Projects</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
+            <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
               A selection of applications built with modern technologies,
               focusing on performance, scalability, and user experience.
             </p>
           </div>
 
           {/* Category Tabs */}
-          <div className="flex flex-wrap gap-3 mb-12">
-            {categories.map((category) => (
+          <div className="mb-8 flex flex-wrap gap-2 sm:gap-3 lg:mb-12">
+            {CATEGORIES.map((category) => (
               <button
                 key={category}
                 onClick={() => {
                   setActiveTab(category);
                   setShowAll(false); // Reset pagination when changing tabs
                 }}
-                className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                aria-pressed={activeTab === category}
+                className={`rounded-lg px-4 py-2 text-sm font-medium transition-all sm:px-5 sm:py-2.5 ${
                   activeTab === category
                     ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
                     : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-primary/50 hover:bg-accent"
@@ -86,23 +103,26 @@ export function Projects() {
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="mb-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:mb-12 lg:grid-cols-3 lg:gap-8">
             {displayedProjects.map((project) => (
               <div
                 key={project.id}
-                className="group bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 cursor-pointer"
+                role="button"
+                tabIndex={0}
+                aria-label={`View details for ${project.title}`}
+                className="group cursor-pointer overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 lg:rounded-2xl"
                 onClick={() => handleProjectClick(project)}
+                onKeyDown={(e) => handleProjectKeyDown(e, project)}
               >
                 {/* Project Image */}
                 <div className="relative aspect-[16/10] bg-accent overflow-hidden">
-                  <img
+                  <Image
                     src={project.images[0]}
                     alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    onError={(e) => {
-                      // Fallback to placeholder if image fails to load
-                      e.currentTarget.src = `https://placehold.co/600x400/1a1a1a/666?text=${encodeURIComponent(project.title)}`;
-                    }}
+                    fill
+                    sizes="(min-width: 1024px) 384px, (min-width: 768px) 50vw, calc(100vw - 32px)"
+                    quality={65}
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   {/* Overlay gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -114,22 +134,22 @@ export function Projects() {
                 </div>
 
                 {/* Project Info */}
-                <div className="p-6">
+                <div className="p-4 sm:p-5 lg:p-6">
                   {/* Year */}
                   <p className="text-xs text-primary font-semibold uppercase tracking-wider mb-2">
                     {project.year}
                   </p>
 
-                  <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                  <h3 className="mb-2 text-lg font-bold text-foreground transition-colors group-hover:text-primary sm:text-xl lg:mb-3">
                     {project.title}
                   </h3>
 
-                  <p className="text-sm text-muted-foreground mb-5 line-clamp-2 leading-relaxed">
+                  <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-muted-foreground lg:mb-5">
                     {project.shortDescription}
                   </p>
 
                   {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-5">
+                  <div className="mb-4 flex flex-wrap gap-2 lg:mb-5">
                     {project.technologies.slice(0, 3).map((tech) => (
                       <span
                         key={tech}
@@ -183,7 +203,7 @@ export function Projects() {
             <div className="text-center">
               <button
                 onClick={() => setShowAll(true)}
-                className="group px-8 py-4 bg-card border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-xl transition-all font-semibold inline-flex items-center gap-2"
+                className="group inline-flex items-center gap-2 rounded-xl border-2 border-primary bg-card px-6 py-3 font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground sm:px-8 sm:py-4"
               >
                 <span>Load More Projects</span>
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -196,7 +216,7 @@ export function Projects() {
             <div className="text-center">
               <button
                 onClick={() => setShowAll(false)}
-                className="px-8 py-4 bg-card border-2 border-border text-muted-foreground hover:border-primary/50 hover:text-foreground rounded-xl transition-all font-semibold"
+                className="rounded-xl border-2 border-border bg-card px-6 py-3 font-semibold text-muted-foreground transition-all hover:border-primary/50 hover:text-foreground sm:px-8 sm:py-4"
               >
                 Show Less
               </button>

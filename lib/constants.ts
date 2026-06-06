@@ -227,7 +227,7 @@ export interface StatsItem {
 }
 
 export const stats: StatsItem[] = [
-    { label: 'Years Experience', value: '7', suffix: '+' },
+    { label: 'Years Experience', value: '8', suffix: '+' },
     { label: 'Projects Completed', value: '25', suffix: '+' },
     // { label: 'Happy Clients', value: '45', suffix: '+' },
     // { label: 'Awards Won', value: '10', suffix: '+' }
@@ -253,7 +253,7 @@ export const skillsData: SkillItem[] = [
         category: 'Frontend',
         proficiencyLevel: 'Expert',
         proficiencyPercentage: 95,
-        yearsOfExperience: '5+ Years',
+        yearsOfExperience: '6+ Years',
         description: 'Building scalable SPAs and SSR applications with React hooks, Redux, and Context API.',
         iconKey: 'react'
     },
@@ -293,7 +293,7 @@ export const skillsData: SkillItem[] = [
         category: 'Frontend',
         proficiencyLevel: 'Expert',
         proficiencyPercentage: 95,
-        yearsOfExperience: '7+ Years',
+        yearsOfExperience: '8+ Years',
         description: 'Creating mobile-first, responsive layouts that work seamlessly across all devices.',
         iconKey: 'responsive-design'
     },

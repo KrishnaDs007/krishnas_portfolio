@@ -65,7 +65,7 @@ export function Contact() {
       } else {
         setError("Something went wrong. Please try again later.");
       }
-    } catch (err) {
+    } catch {
       setError("Failed to send message. Please check your connection.");
     } finally {
       setIsSubmitting(false);
@@ -100,28 +100,25 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="min-h-screen flex items-center py-20 bg-gradient-to-b from-background to-accent/20"
+      className="flex items-center bg-gradient-to-b from-background to-accent/20 py-12 sm:py-14 lg:min-h-screen lg:py-20"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Quick Action Section */}
-          <div className="mb-20 pt-20 border-t border-border/50">
+          <div className="mb-10 border-t border-border/50 pt-10 sm:mb-12 sm:pt-12 lg:mb-20 lg:pt-20">
             <div className="relative group">
               {/* Background Glow */}
               <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-pink-500 rounded-2xl blur opacity-10 group-hover:opacity-20 transition duration-1000 group-hover:duration-200"></div>
 
-              <div className="relative bg-card/60 backdrop-blur-md border border-border rounded-2xl p-8 md:p-12 overflow-hidden">
+              <div className="relative overflow-hidden rounded-xl border border-border bg-card/60 p-5 backdrop-blur-md sm:p-8 md:p-10 lg:rounded-2xl lg:p-12">
                 {/* Decorative Orbs */}
-                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-
-                <div className="relative grid md:grid-cols-[1fr_auto] gap-8 items-center">
+                <div className="relative grid items-center gap-6 md:grid-cols-[1fr_auto] lg:gap-8">
                   <div>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                    <h2 className="mb-3 text-2xl font-bold sm:text-3xl md:mb-4 md:text-4xl">
                       Have a bold idea?{" "}
-                      <span className="text-primary">Let's build it.</span>
+                      <span className="text-primary">Let&apos;s build it.</span>
                     </h2>
-                    <p className="text-lg text-muted-foreground max-w-xl">
+                    <p className="max-w-xl text-base text-muted-foreground sm:text-lg">
                       Whether you want to collaborate on a game changing project
                       or just have an impressive project idea drop it below. I
                       will make it a reality for you.
@@ -136,15 +133,17 @@ export function Contact() {
                       <textarea
                         value={quickMessage}
                         onChange={(e) => setQuickMessage(e.target.value)}
+                        aria-label="Quick project message"
                         placeholder="What should we create together?..."
                         required
                         rows={3}
-                        className="w-full px-5 py-4 bg-background/80 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none pr-14 text-foreground text-lg"
+                        className="w-full resize-none rounded-xl border border-border bg-background/80 px-4 py-3 pr-14 text-base text-foreground transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 sm:px-5 sm:py-4 sm:text-lg"
                       />
                       <button
                         type="submit"
                         className="absolute bottom-4 right-4 p-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20"
                         title="Send via Email"
+                        aria-label="Send quick message by email"
                       >
                         <Send className="h-5 w-5" />
                       </button>
@@ -156,14 +155,14 @@ export function Contact() {
           </div>
 
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div className="mb-8 text-center sm:mb-10 lg:mb-16">
             <p className="text-sm text-primary font-semibold uppercase tracking-[0.2em] mb-3">
               Get In Touch
             </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Let's Work <span className="text-primary">Together</span>
+            <h2 className="mb-4 text-3xl font-bold sm:text-4xl md:text-5xl lg:mb-6 lg:text-6xl">
+              Let&apos;s Work <span className="text-primary">Together</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="mx-auto max-w-2xl text-base text-muted-foreground sm:text-lg">
               Have a project in mind? Looking for a senior frontend partner?
               Drop me a line.
             </p>
@@ -171,27 +170,34 @@ export function Contact() {
 
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-12">
             {/* Contact Form */}
-            <div className="bg-card/50 backdrop-blur-sm border border-border rounded-2xl p-8 md:p-10">
+            <div className="rounded-xl border border-border bg-card/50 p-5 backdrop-blur-sm sm:p-8 md:p-10 lg:rounded-2xl">
               {showSuccess && (
-                <div className="mb-6 p-4 bg-green-500/10 border border-green-500/20 rounded-lg text-green-600 dark:text-green-400 animate-fade-in">
-                  Message sent successfully! I'll get back to you soon.
+                <div
+                  className="mb-6 p-4 bg-green-500/10 border border-green-500/20 rounded-lg text-green-800 dark:text-green-200 animate-fade-in"
+                  role="status"
+                  aria-live="polite"
+                >
+                  Message sent successfully! I&apos;ll get back to you soon.
                 </div>
               )}
 
               {error && (
-                <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-600 dark:text-red-400 animate-fade-in">
+                <div
+                  className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-700 dark:text-red-200 animate-fade-in"
+                  role="alert"
+                >
                   {error}
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 {/* Name and Email Row */}
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid gap-4 md:grid-cols-2 md:gap-6">
                   {/* Name */}
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3"
+                      className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:mb-3"
                     >
                       Your Name
                     </label>
@@ -211,7 +217,7 @@ export function Contact() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3"
+                      className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:mb-3"
                     >
                       Email Address
                     </label>
@@ -232,7 +238,7 @@ export function Contact() {
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3"
+                    className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:mb-3"
                   >
                     Subject
                   </label>
@@ -256,7 +262,7 @@ export function Contact() {
                   <div className="animate-fade-in-up">
                     <label
                       htmlFor="customSubject"
-                      className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3"
+                      className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:mb-3"
                     >
                       Please specify your subject
                     </label>
@@ -277,7 +283,7 @@ export function Contact() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3"
+                    className="mb-2 block text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:mb-3"
                   >
                     Message
                   </label>
@@ -287,7 +293,7 @@ export function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={6}
+                    rows={5}
                     className="w-full px-4 py-3.5 bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none text-foreground placeholder:text-muted-foreground/50"
                     placeholder="Tell me about your project..."
                   />
@@ -297,7 +303,7 @@ export function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white rounded-lg transition-all font-semibold text-base shadow-lg shadow-red-500/25 disabled:opacity-70 disabled:cursor-not-allowed group"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-red-700 to-pink-700 hover:from-red-800 hover:to-pink-800 text-white rounded-lg transition-all font-semibold text-base shadow-lg shadow-red-700/25 disabled:opacity-70 disabled:cursor-not-allowed group"
                 >
                   {isSubmitting ? (
                     <>
@@ -315,11 +321,11 @@ export function Contact() {
             </div>
 
             {/* Contact Information */}
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {/* Contact Info Cards */}
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {/* Email */}
-                <div className="group bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:border-primary/50 hover:bg-card/80 transition-all">
+                <div className="group rounded-xl border border-border bg-card/50 p-4 backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-card/80 sm:p-6">
                   <div className="flex items-start gap-4">
                     <div className="p-3 bg-red-500/10 rounded-lg group-hover:bg-red-500/20 transition-colors">
                       <Mail className="h-6 w-6 text-red-500" />
@@ -339,7 +345,7 @@ export function Contact() {
                 </div>
 
                 {/* Phone */}
-                <div className="group bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:border-primary/50 hover:bg-card/80 transition-all">
+                <div className="group rounded-xl border border-border bg-card/50 p-4 backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-card/80 sm:p-6">
                   <div className="flex items-start gap-4">
                     <div className="p-3 bg-red-500/10 rounded-lg group-hover:bg-red-500/20 transition-colors">
                       <Phone className="h-6 w-6 text-red-500" />
@@ -359,7 +365,7 @@ export function Contact() {
                 </div>
 
                 {/* Location */}
-                <div className="group bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6 hover:border-primary/50 hover:bg-card/80 transition-all">
+                <div className="group rounded-xl border border-border bg-card/50 p-4 backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-card/80 sm:p-6">
                   <div className="flex items-start gap-4">
                     <div className="p-3 bg-red-500/10 rounded-lg group-hover:bg-red-500/20 transition-colors">
                       <MapPin className="h-6 w-6 text-red-500" />
@@ -377,7 +383,7 @@ export function Contact() {
               </div>
 
               {/* Direct Contact Buttons */}
-              <div className="bg-accent/30 backdrop-blur-sm border border-border rounded-xl p-6">
+              <div className="rounded-xl border border-border bg-accent/30 p-4 backdrop-blur-sm sm:p-6">
                 <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-5">
                   Or Connect Instantly
                 </p>
@@ -385,7 +391,8 @@ export function Contact() {
                   {/* WhatsApp */}
                   <button
                     onClick={handleWhatsApp}
-                    className="w-full flex items-center justify-center gap-3 px-5 py-3.5 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-lg transition-all font-semibold shadow-lg shadow-green-500/20"
+                    className="w-full flex items-center justify-center gap-3 px-5 py-3.5 bg-[#0B6B2B] hover:bg-[#095923] text-white rounded-lg transition-all font-semibold shadow-lg shadow-green-500/20"
+                    aria-label="Contact me on WhatsApp"
                   >
                     <MessageSquare className="h-5 w-5" />
                     WhatsApp
@@ -394,7 +401,8 @@ export function Contact() {
                   {/* Call */}
                   <button
                     onClick={handleCall}
-                    className="w-full flex items-center justify-center gap-3 px-5 py-3.5 bg-gradient-to-r from-red-500/10 to-pink-500/10 border-2 border-red-500 text-red-500 hover:bg-gradient-to-r hover:from-red-500 hover:to-pink-500 hover:text-white rounded-lg transition-all font-semibold"
+                    className="w-full flex items-center justify-center gap-3 px-5 py-3.5 bg-gradient-to-r from-red-700/10 to-pink-700/10 border-2 border-red-700 text-red-700 hover:bg-gradient-to-r hover:from-red-800 hover:to-pink-800 hover:text-white rounded-lg transition-all font-semibold dark:border-red-400 dark:text-red-200"
+                    aria-label="Call me"
                   >
                     <Phone className="h-5 w-5" />
                     Call Me
