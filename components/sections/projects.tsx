@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import { ExternalLink, Github, ArrowRight, Star } from "lucide-react";
 import {
   getProjects,
   getProjectCategories,
@@ -131,6 +131,13 @@ export function Projects() {
                   <div className="absolute top-4 right-4 px-3 py-1.5 bg-background/95 backdrop-blur-md rounded-lg text-xs font-semibold border border-border/50">
                     {project.category}
                   </div>
+
+                  {project.featured && (
+                    <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-lg border border-amber-700/30 bg-amber-50/95 px-3 py-1.5 text-xs font-semibold text-amber-900 shadow-sm backdrop-blur-md dark:border-amber-400/40 dark:bg-amber-950/95 dark:text-amber-100">
+                      <Star className="h-3.5 w-3.5 fill-current" />
+                      Star Project
+                    </div>
+                  )}
                 </div>
 
                 {/* Project Info */}

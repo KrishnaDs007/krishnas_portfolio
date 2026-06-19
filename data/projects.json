@@ -1,5 +1,37 @@
 [
   {
+    "id": "proj-dsa-visualiser",
+    "title": "DSA Visualiser",
+    "category": "Developer Tools",
+    "shortDescription": "A polished, local-first data structures and algorithms visualizer for learning, comparing, and stepping through algorithms with synced code walkthroughs.",
+    "fullDescription": "Built and shipped AlgoPrecision, a production-ready DSA Visualiser that turns complex algorithms into interactive, step-by-step learning flows. The platform combines generator-driven animation frames, custom input controls, speed controls, synced pseudocode highlighting, searchable documentation, and a custom code complexity workspace. It covers a broad DSA catalog across sorting, searching, hashing, stacks, queues, linked lists, arrays and strings, trees, graphs, and dynamic programming, making it useful for interview preparation, classroom demos, and self-paced algorithm practice.",
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "Local Storage"
+    ],
+    "features": [
+      "Interactive algorithm visualizations with step controls, speed control, and custom inputs",
+      "Generator-driven animation frames with synced pseudocode highlighting",
+      "Coverage for sorting, searching, hashing, stacks, queues, linked lists, arrays, trees, graphs, and dynamic programming",
+      "Custom code visualizer with time and space complexity estimation",
+      "Searchable documentation with patterns, complexity notes, step summaries, and direct visualizer links",
+      "Local-first profile/dashboard flow with saved custom visualizers and JSON import/export"
+    ],
+    "images": [
+      "/images/projects/dsa-visualiser/dsa-visualiser-desktop.webp",
+      "/images/projects/dsa-visualiser/dsa-visualiser-sorting.webp",
+      "/images/projects/dsa-visualiser/dsa-visualiser-mobile.webp"
+    ],
+    "videoUrl": "",
+    "liveUrl": "https://dsa-vidualiser.vercel.app/",
+    "githubUrl": "https://github.com/KrishnaDs007/dsa-vidualiser",
+    "featured": true,
+    "year": "2026"
+  },
+  {
     "id": "proj-1",
     "title": "MiniFinCorp",
     "category": "Web Apps",
@@ -30,4 +62,3 @@
     "year": "2025"
   }
 ]
-// https://www.youtube.com/embed/your-video-id
