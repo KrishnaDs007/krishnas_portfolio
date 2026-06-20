@@ -63,7 +63,7 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="flex items-center bg-background py-12 sm:py-14 lg:min-h-screen lg:py-20"
+      className="flex items-center bg-background pb-12 sm:pb-14 lg:min-h-screen lg:pb-20"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">

@@ -58,7 +58,7 @@
     "videoUrl": "",
     "liveUrl": "https://minifincorp.in",
     "githubUrl": "https://github.com/KrishnaDs007/MiniFinCorp",
-    "featured": true,
+    "featured": false,
     "year": "2025"
   }
 ]

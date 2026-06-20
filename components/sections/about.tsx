@@ -19,7 +19,7 @@ export function About() {
   return (
     <section
       id="about"
-      className="flex items-center bg-accent/30 py-12 sm:py-14 lg:min-h-screen lg:py-20"
+      className="flex items-center bg-accent/30 pb-12 sm:pb-14 lg:min-h-screen lg:pb-20"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
@@ -279,7 +279,7 @@ export function About() {
                 {/* CTA Buttons */}
                 <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:gap-4 sm:pt-6">
                   <button
-                    onClick={() => scrollToSection("contact")}
+                    onClick={() => scrollToSection("contact", -180)}
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
                   >
                     <Mail className="h-4 w-4" />

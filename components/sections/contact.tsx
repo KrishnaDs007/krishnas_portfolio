@@ -100,7 +100,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="flex items-center bg-gradient-to-b from-background to-accent/20 py-12 sm:py-14 lg:min-h-screen lg:py-20"
+      className="flex items-center bg-gradient-to-b from-background to-accent/20 pb-12 sm:pb-14 lg:min-h-screen lg:pb-20"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">

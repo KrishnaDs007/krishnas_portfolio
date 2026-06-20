@@ -18,7 +18,7 @@ export function Header() {
     sectionId: string,
   ) => {
     e.preventDefault();
-    scrollToSection(sectionId);
+    scrollToSection(sectionId, sectionId !== "contact" ? 65 : -180);
   };
 
   const getIcon = (iconName: string) => {

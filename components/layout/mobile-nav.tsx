@@ -44,7 +44,7 @@ export function MobileNav() {
     sectionId: string,
   ) => {
     e.preventDefault();
-    scrollToSection(sectionId);
+    scrollToSection(sectionId, sectionId !== "contact" ? 65 : -180); // Adjust offset for header height
   };
 
   const getIcon = (iconName: string) => {

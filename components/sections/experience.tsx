@@ -3,7 +3,7 @@ import { experiences, education, stats } from "@/lib/constants";
 
 export function Experience() {
   return (
-    <section id="experience" className="flex items-center py-12 sm:py-14 lg:min-h-screen lg:py-20">
+    <section id="experience" className="flex items-center pb-12 sm:pb-14 lg:min-h-screen lg:pb-20">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
