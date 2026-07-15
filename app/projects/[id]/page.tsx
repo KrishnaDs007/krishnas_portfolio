@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ExternalLink, Github, Star } from "lucide-react";
 import { getProjectById, getProjects } from "@/lib/projects-utils";
 
+const siteUrl = "https://krishnasportfolio-rho.vercel.app";
+
 type ProjectPageProps = {
   params: Promise<{
     id: string;
@@ -59,8 +61,33 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
+  const projectUrl = `${siteUrl}/projects/${project.id}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: project.title,
+    applicationCategory: project.category,
+    description: project.shortDescription,
+    url: project.liveUrl ?? projectUrl,
+    image: project.images.map((image) => new URL(image, siteUrl).toString()),
+    codeRepository: project.githubUrl ?? undefined,
+    programmingLanguage: project.technologies,
+    dateCreated: project.year,
+    author: {
+      "@type": "Person",
+      name: "Krishna Devashish",
+      url: siteUrl,
+    },
+  };
+
   return (
     <main className="min-h-screen bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd),
+        }}
+      />
       <section className="border-b border-border/50 bg-accent/20 pt-8 pb-10 sm:pb-14">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-6xl">
