@@ -5,12 +5,38 @@ import { Resend } from "resend";
 import { EmailTemplate } from "@/components/email-template";
 import { contactInfo } from "@/lib/constants";
 
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export async function sendEmail(formData: {
   name: string;
   email: string;
   subject: string;
   message: string;
 }) {
+  const name = formData.name.trim();
+  const email = formData.email.trim();
+  const subject = formData.subject.trim();
+  const message = formData.message.trim();
+
+  if (name.length < 2 || name.length > 100) {
+    return { success: false, error: "Please enter a valid name." };
+  }
+
+  if (!emailPattern.test(email) || email.length > 254) {
+    return { success: false, error: "Please enter a valid email address." };
+  }
+
+  if (subject.length < 2 || subject.length > 120) {
+    return { success: false, error: "Please enter a valid subject." };
+  }
+
+  if (message.length < 10 || message.length > 5000) {
+    return {
+      success: false,
+      error: "Please enter a message between 10 and 5000 characters.",
+    };
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey || apiKey === "re_your_api_key_here") {
@@ -24,7 +50,6 @@ export async function sendEmail(formData: {
   const resend = new Resend(apiKey);
 
   try {
-    const { name, email, subject, message } = formData;
     console.log(`Attempting to send email from ${name} (${email})...`);
 
     const data = await resend.emails.send({
