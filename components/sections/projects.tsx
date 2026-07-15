@@ -2,29 +2,16 @@
 
 import { useState, useMemo } from "react";
 import Image from "next/image";
-import dynamic from "next/dynamic";
+import Link from "next/link";
 import { ExternalLink, Github, ArrowRight, Star } from "lucide-react";
-import {
-  getProjects,
-  getProjectCategories,
-  ProjectData,
-} from "@/lib/projects-utils";
+import { getProjects, getProjectCategories } from "@/lib/projects-utils";
 
 const PROJECTS_PER_PAGE = 6; // Show 6 projects initially (2 rows of 3)
 const ALL_PROJECTS = getProjects();
 const CATEGORIES = getProjectCategories();
 
-const ProjectModal = dynamic(
-  () =>
-    import("@/components/ui/project-modal").then((mod) => mod.ProjectModal),
-  { ssr: false },
-);
-
 export function Projects() {
   const [activeTab, setActiveTab] = useState("All Projects");
-  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(
-    null,
-  );
   const [showAll, setShowAll] = useState(false);
 
   // Filter projects by category
@@ -41,14 +28,6 @@ export function Projects() {
     : filteredProjects.slice(0, PROJECTS_PER_PAGE);
 
   const hasMore = filteredProjects.length > PROJECTS_PER_PAGE;
-
-  const handleProjectClick = (project: ProjectData) => {
-    setSelectedProject(project);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedProject(null);
-  };
 
   return (
     <section
@@ -163,14 +142,13 @@ export function Projects() {
 
                   {/* CTA Buttons */}
                   <div className="flex gap-3">
-                    <button
-                      type="button"
-                      onClick={() => handleProjectClick(project)}
+                    <Link
+                      href={`/projects/${project.id}`}
                       className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90"
                     >
                       <span>View Details</span>
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </button>
+                    </Link>
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
@@ -226,14 +204,6 @@ export function Projects() {
         </div>
       </div>
 
-      {/* Project Modal */}
-      {selectedProject && (
-        <ProjectModal
-          project={selectedProject}
-          isOpen={!!selectedProject}
-          onClose={handleCloseModal}
-        />
-      )}
     </section>
   );
 }
