@@ -120,7 +120,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
               {project.title}
             </h2>
             <p className="text-sm text-muted-foreground mt-1">
-              {project.category} • {project.year}
+              {project.category} - {project.year}
             </p>
             {project.featured && (
               <span className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-amber-700/30 bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-900 dark:border-amber-400/40 dark:bg-amber-950 dark:text-amber-100">
@@ -272,7 +272,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                           key={index}
                           className="flex items-start gap-3 text-muted-foreground"
                         >
-                          <span className="text-primary mt-1 text-lg">•</span>
+                          <span className="text-primary mt-1 text-lg">-</span>
                           <span className="leading-relaxed">{feature}</span>
                         </li>
                       ))}

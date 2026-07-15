@@ -156,16 +156,16 @@ export function About() {
                     </p>
                     <ul className="list-disc list-inside space-y-1.5 text-muted-foreground sm:space-y-2">
                       <li>
-                        Led Micro Frontend architecture with React + Webpack → reduced release cycles by 30%
+                        Led Micro Frontend architecture with React + Webpack and reduced release cycles by 30%
                       </li>
                       <li>
-                        Built shared React component library with Design Tokens → cut duplicate work by 40%
+                        Built shared React component library with Design Tokens and cut duplicate work by 40%
                       </li>
                       <li>
-                        Improved Lighthouse scores from 55–60 to 90+ across dashboards
+                        Improved Lighthouse scores from 55-60 to 90+ across dashboards
                       </li>
                       <li>
-                        Integrated Azure, OpenAI, and Gemini LLMs → created dynamic model-switching dashboard
+                        Integrated Azure, OpenAI, and Gemini LLMs and created dynamic model-switching dashboard
                       </li>
                       <li>Mentored juniors and boosted team speed by 20%</li>
                     </ul>
@@ -231,7 +231,7 @@ export function About() {
                         Integrated multi-LLM (Azure, OpenAI, Gemini) with configurable dashboard
                       </li>
                       <li>
-                        Upgraded build tools (Webpack v3 → v5) for faster workflows
+                        Upgraded build tools (Webpack v3 to v5) for faster workflows
                       </li>
                     </ul>
 

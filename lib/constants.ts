@@ -27,7 +27,7 @@ export const experiences: ExperienceItem[] = [
             'Reduced feature release cycles by ~30%',
             'Improved Lighthouse scores from ~60 to 90+',
             'Built shared component library reducing duplicate work by 40%',
-            'Improved load times by 25–40%',
+            'Improved load times by 25-40%',
             'Mentored junior developers and improved team velocity'
         ]
     },
