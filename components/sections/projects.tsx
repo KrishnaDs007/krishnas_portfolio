@@ -46,16 +46,6 @@ export function Projects() {
     setSelectedProject(project);
   };
 
-  const handleProjectKeyDown = (
-    e: React.KeyboardEvent<HTMLDivElement>,
-    project: ProjectData,
-  ) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      handleProjectClick(project);
-    }
-  };
-
   const handleCloseModal = () => {
     setSelectedProject(null);
   };
@@ -105,14 +95,10 @@ export function Projects() {
           {/* Projects Grid */}
           <div className="mb-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:mb-12 lg:grid-cols-3 lg:gap-8">
             {displayedProjects.map((project) => (
-              <div
+              <article
                 key={project.id}
-                role="button"
-                tabIndex={0}
-                aria-label={`View details for ${project.title}`}
-                className="group cursor-pointer overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 lg:rounded-2xl"
-                onClick={() => handleProjectClick(project)}
-                onKeyDown={(e) => handleProjectKeyDown(e, project)}
+                aria-labelledby={`project-title-${project.id}`}
+                className="group overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 lg:rounded-2xl"
               >
                 {/* Project Image */}
                 <div className="relative aspect-[16/10] bg-accent overflow-hidden">
@@ -147,7 +133,10 @@ export function Projects() {
                     {project.year}
                   </p>
 
-                  <h3 className="mb-2 text-lg font-bold text-foreground transition-colors group-hover:text-primary sm:text-xl lg:mb-3">
+                  <h3
+                    id={`project-title-${project.id}`}
+                    className="mb-2 text-lg font-bold text-foreground transition-colors group-hover:text-primary sm:text-xl lg:mb-3"
+                  >
                     {project.title}
                   </h3>
 
@@ -174,17 +163,23 @@ export function Projects() {
 
                   {/* CTA Buttons */}
                   <div className="flex gap-3">
+                    <button
+                      type="button"
+                      onClick={() => handleProjectClick(project)}
+                      className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90"
+                    >
+                      <span>View Details</span>
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </button>
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground text-sm rounded-lg transition-all font-medium group/btn"
+                        className="flex items-center justify-center gap-2 rounded-lg border-2 border-border px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:border-primary/50 hover:bg-accent"
+                        aria-label={`Open live demo for ${project.title}`}
                       >
                         <ExternalLink className="h-4 w-4" />
-                        <span>Live Demo</span>
-                        <ArrowRight className="h-4 w-4 opacity-0 -ml-4 group-hover/btn:opacity-100 group-hover/btn:ml-0 transition-all" />
                       </a>
                     )}
                     {project.githubUrl && (
@@ -192,16 +187,15 @@ export function Projects() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
                         className="flex items-center justify-center gap-2 px-4 py-2.5 border-2 border-border hover:border-primary/50 hover:bg-accent text-foreground text-sm rounded-lg transition-all font-medium"
-                        aria-label="View on GitHub"
+                        aria-label={`View ${project.title} on GitHub`}
                       >
                         <Github className="h-4 w-4" />
                       </a>
                     )}
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
 
