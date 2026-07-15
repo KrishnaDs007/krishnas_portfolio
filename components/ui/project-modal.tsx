@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import {
   X,
   ChevronLeft,
@@ -163,14 +164,13 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     : "animate-slide-in-left"
                 }`}
               >
-                <img
+                <Image
                   src={currentMedia.url}
                   alt={`${project.title} screenshot ${currentMediaIndex + 1}`}
-                  className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-                  onError={(e) => {
-                    // Fallback to placeholder if image fails to load
-                    e.currentTarget.src = `https://placehold.co/800x600/1a1a1a/666?text=${encodeURIComponent(project.title)}`;
-                  }}
+                  fill
+                  sizes="(min-width: 1280px) 1152px, calc(100vw - 64px)"
+                  quality={80}
+                  className="object-contain drop-shadow-2xl"
                 />
               </div>
             )}
