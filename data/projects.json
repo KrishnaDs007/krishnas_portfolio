@@ -32,6 +32,41 @@
     "year": "2026"
   },
   {
+    "id": "proj-ai-summariser-extension",
+    "title": "AI Summariser Chrome Extension",
+    "category": "Browser Extensions",
+    "shortDescription": "A Chrome Manifest V3 extension that summarises webpages, selected text, pasted content, and uploaded files using the user's preferred AI provider.",
+    "fullDescription": "Built a Chrome Manifest V3 extension that helps users extract, summarise, and reuse information from webpages and text-based sources. The extension supports full-page summaries, selected-text summaries from the context menu, pasted text, uploaded files, link extraction, follow-up questions, configurable summary styles, output length controls, language selection, and local recent-output history. It includes a professional popup experience, provider settings for Gemini, OpenAI, Anthropic, xAI, and custom OpenAI-compatible endpoints, plus local Chrome storage for provider API keys and saved outputs.",
+    "technologies": [
+      "Chrome Extension MV3",
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Chrome Storage",
+      "AI APIs"
+    ],
+    "features": [
+      "Summarises page content, selected text, pasted text, and uploaded text-based files",
+      "Supports Gemini, OpenAI, Anthropic, xAI, and custom OpenAI-compatible providers",
+      "Includes brief, detailed, and bullet summary modes with length and language controls",
+      "Adds follow-up questions, copy actions, Markdown export, and text download support",
+      "Extracts links from page or text sources without sending content to an AI provider",
+      "Provides provider setup, local history, context-menu summarisation, and a draggable page shortcut"
+    ],
+    "images": [
+      "/images/projects/ai-summariser/ai-summariser-popup-summary.webp",
+      "/images/projects/ai-summariser/ai-summariser-provider-settings.webp",
+      "/images/projects/ai-summariser/ai-summariser-upload.webp",
+      "/images/projects/ai-summariser/ai-summariser-links.webp",
+      "/images/projects/ai-summariser/ai-summariser-page-icon.webp"
+    ],
+    "videoUrl": "",
+    "liveUrl": null,
+    "githubUrl": "https://github.com/KrishnaDs007/learning/tree/main/SummariserExtension",
+    "featured": false,
+    "year": "2026"
+  },
+  {
     "id": "proj-1",
     "title": "MiniFinCorp",
     "category": "Web Apps",
