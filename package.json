@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "check": "npm run lint && npm run typecheck && npm run build"
+    "validate:assets": "node scripts/validate-project-assets.mjs",
+    "check": "npm run validate:assets && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@react-email/components": "^1.0.7",
