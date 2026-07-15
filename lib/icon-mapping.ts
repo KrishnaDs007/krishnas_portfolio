@@ -11,7 +11,6 @@ import {
     GitBranch,
     Package,
     Boxes,
-    Cpu,
     Workflow,
     Terminal,
     type LucideIcon,

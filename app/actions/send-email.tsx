@@ -14,9 +14,7 @@ export async function sendEmail(formData: {
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey || apiKey === "re_your_api_key_here") {
-    console.error(
-      "❌ ERROR: RESEND_API_KEY is missing or not set in .env file.",
-    );
+    console.error("ERROR: RESEND_API_KEY is missing or not set.");
     return {
       success: false,
       error: "API Configuration error. Please check server logs.",
@@ -27,7 +25,7 @@ export async function sendEmail(formData: {
 
   try {
     const { name, email, subject, message } = formData;
-    console.log(`📨 Attempting to send email from ${name} (${email})...`);
+    console.log(`Attempting to send email from ${name} (${email})...`);
 
     const data = await resend.emails.send({
       from: "Portfolio <onboarding@resend.dev>",
@@ -45,14 +43,17 @@ export async function sendEmail(formData: {
     });
 
     if (data.error) {
-      console.error("❌ Resend API Error:", data.error);
+      console.error("Resend API Error:", data.error);
       return { success: false, error: data.error.message };
     }
 
-    console.log("✅ Email sent successfully!", data);
+    console.log("Email sent successfully.", data);
     return { success: true, data };
-  } catch (error: any) {
-    console.error("❌ Server Action Error:", error);
-    return { success: false, error: error?.message || "Internal server error" };
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Internal server error";
+
+    console.error("Server Action Error:", error);
+    return { success: false, error: message };
   }
 }

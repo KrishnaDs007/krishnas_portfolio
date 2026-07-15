@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { SectionId } from '@/types/navigation';
 
 export const useScrollSpy = (sectionIds: string[]): string => {
     const [activeSection, setActiveSection] = useState<string>(sectionIds[0]);
