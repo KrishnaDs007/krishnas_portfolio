@@ -465,7 +465,7 @@ export const socialLinks: SocialLink[] = [
     },
     {
         platform: 'email',
-        url: 'mailto:krishnadevashish17@gmail.com',
+        url: 'mailto:contact@krishnadevashish.com',
         icon: 'Mail'
     }
 ];
@@ -479,7 +479,7 @@ export interface ContactInfo {
 }
 
 export const contactInfo: ContactInfo = {
-    email: 'krishnadevashish17@gmail.com',
+    email: 'contact@krishnadevashish.com',
     phone: '+917978423156',
     whatsapp: '+917978423156',
     location: 'Bengaluru, Karnataka, India'
