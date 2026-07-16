@@ -103,7 +103,6 @@ export function Hero() {
                       fill
                       sizes="(min-width: 768px) 320px, 256px"
                       className="object-contain"
-                      priority
                     />
                   </div>
 
