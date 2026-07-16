@@ -112,7 +112,7 @@ export function Contact() {
 
               <div className="relative overflow-hidden rounded-xl border border-border bg-card/60 p-5 backdrop-blur-md sm:p-8 md:p-10 lg:rounded-2xl lg:p-12">
                 {/* Decorative Orbs */}
-                <div className="relative grid items-center gap-6 md:grid-cols-[1fr_auto] lg:gap-8">
+                <div className="relative grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(360px,440px)] xl:gap-10">
                   <div>
                     <h2 className="mb-3 text-2xl font-bold sm:text-3xl md:mb-4 md:text-4xl">
                       Have a bold idea?{" "}
@@ -127,7 +127,7 @@ export function Contact() {
 
                   <form
                     onSubmit={handleQuickMail}
-                    className="w-full max-w-md space-y-4"
+                    className="w-full min-w-0 space-y-4"
                   >
                     <div className="relative">
                       <textarea
@@ -137,7 +137,7 @@ export function Contact() {
                         placeholder="What should we create together?..."
                         required
                         rows={3}
-                        className="w-full resize-none rounded-xl border border-border bg-background/80 px-4 py-3 pr-14 text-base text-foreground transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 sm:px-5 sm:py-4 sm:text-lg"
+                        className="min-h-32 w-full resize-none rounded-xl border border-border bg-background/80 px-4 py-3 pr-14 text-base text-foreground transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 sm:px-5 sm:py-4 sm:text-lg lg:min-h-36"
                       />
                       <button
                         type="submit"
