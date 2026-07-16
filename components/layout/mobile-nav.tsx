@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { ComponentType } from "react";
 import { Briefcase, FolderGit2, Home, Mail, User } from "lucide-react";
 import { NAV_ITEMS } from "@/lib/navigation-config";
@@ -18,6 +18,52 @@ const NAV_ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
 export function MobileNav() {
   const activeSection = useScrollSpy(NAV_ITEMS.map((item) => item.id));
   const [isVisible, setIsVisible] = useState(true);
+  const navItemsRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const [indicatorStyle, setIndicatorStyle] = useState({
+    left: 0,
+    width: 0,
+    opacity: 0,
+  });
+
+  const updateIndicator = useCallback(() => {
+    const navItems = navItemsRef.current;
+    const activeItem = itemRefs.current[activeSection];
+
+    if (!navItems || !activeItem) {
+      setIndicatorStyle((current) => ({ ...current, opacity: 0 }));
+      return;
+    }
+
+    const navRect = navItems.getBoundingClientRect();
+    const itemRect = activeItem.getBoundingClientRect();
+
+    setIndicatorStyle({
+      left: itemRect.left - navRect.left,
+      width: itemRect.width,
+      opacity: 1,
+    });
+  }, [activeSection]);
+
+  useEffect(() => {
+    const navItems = navItemsRef.current;
+    if (!navItems) return;
+
+    const scheduleUpdate = () => {
+      window.requestAnimationFrame(updateIndicator);
+    };
+    const frameId = window.requestAnimationFrame(updateIndicator);
+    const observer = new ResizeObserver(scheduleUpdate);
+    observer.observe(navItems);
+
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      observer.disconnect();
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, [updateIndicator]);
 
   useEffect(() => {
     // Create an Intersection Observer to detect when footer is visible
@@ -67,16 +113,31 @@ export function MobileNav() {
         isVisible ? "translate-y-0" : "translate-y-full"
       }`}
     >
-      <div className="flex items-center justify-around px-2 py-2">
+      <div
+        ref={navItemsRef}
+        className="relative flex items-center justify-around px-2 py-2"
+      >
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute top-2 bottom-2 rounded-xl border border-primary/25 bg-primary/15 shadow-lg shadow-primary/10 backdrop-blur-md transition-[left,width,opacity] duration-300 ease-out"
+          style={{
+            left: indicatorStyle.left,
+            width: indicatorStyle.width,
+            opacity: indicatorStyle.opacity,
+          }}
+        />
         {NAV_ITEMS.map((item) => (
           <button
             key={item.id}
+            ref={(element) => {
+              itemRefs.current[item.id] = element;
+            }}
             onClick={(e) => handleNavClick(e, item.id)}
             aria-current={activeSection === item.id ? "page" : undefined}
-            className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg text-xs font-medium transition-colors min-w-[60px] ${
+            className={`relative z-10 flex min-w-[60px] flex-col items-center gap-1 rounded-lg px-3 py-2 text-xs font-medium transition-colors ${
               activeSection === item.id
                 ? "text-primary"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-muted-foreground hover:text-primary"
             }`}
           >
             {getIcon(item.icon)}
