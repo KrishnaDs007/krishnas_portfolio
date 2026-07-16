@@ -15,6 +15,12 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 - Redeploy the site after adding the variable.
 - Confirm the production page source includes `googletagmanager.com/gtag/js`.
 
+## Vercel Environment Variables
+
+- Save `RESEND_API_KEY` as a Sensitive environment variable in Vercel.
+- If Vercel shows that the current `RESEND_API_KEY` value is visible, rotate the key in Resend first, then replace it in Vercel as Sensitive.
+- Do not mark `NEXT_PUBLIC_GA_MEASUREMENT_ID` as Sensitive. It is a public browser variable and must be readable by the client bundle.
+
 ## SPF Record
 
 Add an SPF TXT record in the DNS provider for `krishnadevashish.com`.
