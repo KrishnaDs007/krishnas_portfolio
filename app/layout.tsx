@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://krishnasportfolio-rho.vercel.app"),
+  metadataBase: new URL(siteConfig.url),
 
   title: {
-    default: "Krishna Devashish | Senior Frontend Engineer",
+    default: siteConfig.title,
     template: "%s | Krishna Devashish",
   },
 
-  description:
-    "Senior Frontend Engineer with 8+ years in React, TypeScript, Micro Frontends, design systems, performance, and LLM-powered dashboards.",
+  description: siteConfig.description,
 
   keywords: [
     "Krishna Devashish",
@@ -60,11 +60,11 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Krishna Devashish | Senior Frontend Engineer",
+    title: siteConfig.title,
     description:
       "Senior Frontend Engineer specializing in React, TypeScript, Micro Frontends, design systems, performance, and LLM-powered dashboards.",
-    url: "https://krishnasportfolio-rho.vercel.app",
-    siteName: "Krishna Devashish Portfolio",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
     images: [
       {
         url: "/og-image.jpeg",
@@ -79,9 +79,8 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Krishna Devashish | Senior Frontend Engineer",
-    description:
-      "Senior Frontend Engineer with 8+ years in React, TypeScript, Micro Frontends, design systems, performance, and LLM-powered dashboards.",
+    title: siteConfig.title,
+    description: siteConfig.description,
     images: ["/og-image.jpeg"],
     creator: "@itskd_17",
   },
@@ -118,11 +117,11 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              "@id": "https://krishnasportfolio-rho.vercel.app/#person",
+              "@id": `${siteConfig.url}/#person`,
               name: "Krishna Devashish",
               jobTitle: "Senior Frontend Engineer",
-              url: "https://krishnasportfolio-rho.vercel.app",
-              image: "https://krishnasportfolio-rho.vercel.app/og-image.jpeg",
+              url: siteConfig.url,
+              image: `${siteConfig.url}/og-image.jpeg`,
               description:
                 "Senior Frontend Engineer specializing in React, TypeScript, Micro Frontends, design systems, performance, and LLM-powered dashboards.",
               sameAs: [

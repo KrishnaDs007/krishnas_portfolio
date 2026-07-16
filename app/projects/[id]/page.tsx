@@ -4,8 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ExternalLink, Github, Star } from "lucide-react";
 import { getProjectById, getProjects } from "@/lib/projects-utils";
-
-const siteUrl = "https://krishnasportfolio-rho.vercel.app";
+import { siteConfig } from "@/lib/site-config";
 
 type ProjectPageProps = {
   params: Promise<{
@@ -61,7 +60,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  const projectUrl = `${siteUrl}/projects/${project.id}`;
+  const projectUrl = `${siteConfig.url}/projects/${project.id}`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -69,14 +68,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     applicationCategory: project.category,
     description: project.shortDescription,
     url: project.liveUrl ?? projectUrl,
-    image: project.images.map((image) => new URL(image, siteUrl).toString()),
+    image: project.images.map((image) =>
+      new URL(image, siteConfig.url).toString(),
+    ),
     codeRepository: project.githubUrl ?? undefined,
     programmingLanguage: project.technologies,
     dateCreated: project.year,
     author: {
       "@type": "Person",
       name: "Krishna Devashish",
-      url: siteUrl,
+      url: siteConfig.url,
     },
   };
 

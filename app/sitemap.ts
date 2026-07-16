@@ -1,11 +1,10 @@
 import type { MetadataRoute } from "next";
 import { getProjects } from "@/lib/projects-utils";
-
-const siteUrl = "https://krishnasportfolio-rho.vercel.app";
+import { siteConfig } from "@/lib/site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const projectPages = getProjects().map((project) => ({
-    url: `${siteUrl}/projects/${project.id}`,
+    url: `${siteConfig.url}/projects/${project.id}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: project.featured ? 0.9 : 0.8,
@@ -13,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: siteUrl,
+      url: siteConfig.url,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
