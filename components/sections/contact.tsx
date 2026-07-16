@@ -100,12 +100,12 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="flex items-center bg-gradient-to-b from-background to-accent/20 pb-12 sm:pb-14 lg:min-h-screen lg:pb-20"
+      className="bg-gradient-to-b from-background to-accent/20 py-12 sm:py-16 lg:py-20"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Quick Action Section */}
-          <div className="mb-10 border-t border-border/50 pt-10 sm:mb-12 sm:pt-12 lg:mb-20 lg:pt-20">
+          <div className="mb-10 border-t border-border/50 pt-10 sm:mb-12 sm:pt-12 lg:mb-14 lg:pt-14">
             <div className="relative group">
               {/* Background Glow */}
               <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-pink-500 rounded-2xl blur opacity-10 group-hover:opacity-20 transition duration-1000 group-hover:duration-200"></div>

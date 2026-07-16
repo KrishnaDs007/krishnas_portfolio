@@ -19,7 +19,7 @@ export function About() {
   return (
     <section
       id="about"
-      className="flex items-center bg-accent/30 pb-12 sm:pb-14 lg:min-h-screen lg:pb-20"
+      className="bg-accent/30 py-12 sm:py-16 lg:py-20"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">

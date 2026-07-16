@@ -12,7 +12,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="flex min-h-[calc(100svh-4rem)] items-center pt-20 pb-10 sm:pt-24 sm:pb-14 lg:min-h-screen lg:pt-16 lg:pb-0"
+      className="pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
@@ -130,7 +130,7 @@ export function Hero() {
           </div>
 
           {/* Technical Expertise */}
-          <div className="mt-10 mb-2 border-t border-border/50 pt-6 animate-fade-in-up animation-delay-1000 sm:mt-12 sm:mb-4 lg:mt-16 lg:mb-8 lg:pt-8">
+          <div className="mt-10 border-t border-border/50 pt-6 animate-fade-in-up animation-delay-1000 sm:mt-12 lg:mt-14 lg:pt-8">
             <p className="mb-4 text-center text-sm uppercase tracking-wider text-muted-foreground sm:mb-6">
               Technical Expertise
             </p>
