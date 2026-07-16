@@ -119,7 +119,7 @@ export function MobileNav() {
       >
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute top-2 bottom-2 rounded-xl border border-primary/25 bg-primary/15 shadow-lg shadow-primary/10 backdrop-blur-md transition-[left,width,opacity] duration-300 ease-out"
+          className="pointer-events-none absolute top-2 bottom-2 rounded-xl border border-primary/25 bg-[linear-gradient(135deg,rgba(255,255,255,0.45),rgba(255,59,48,0.16)_45%,rgba(255,255,255,0.08))] shadow-[inset_0_1px_0_rgba(255,255,255,0.50),inset_0_-1px_0_rgba(255,59,48,0.16),0_8px_22px_rgba(255,59,48,0.16),0_2px_8px_rgba(0,0,0,0.14)] backdrop-blur-xl transition-[left,width,opacity] duration-300 ease-out dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.14),rgba(255,59,48,0.22)_45%,rgba(255,255,255,0.05))] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),inset_0_-1px_0_rgba(255,59,48,0.16),0_8px_22px_rgba(255,59,48,0.18),0_2px_10px_rgba(0,0,0,0.35)]"
           style={{
             left: indicatorStyle.left,
             width: indicatorStyle.width,

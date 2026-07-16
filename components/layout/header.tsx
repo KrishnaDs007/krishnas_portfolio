@@ -106,11 +106,11 @@ export function Header() {
           {/* Desktop Navigation - Hidden on mobile */}
           <nav
             ref={navRef}
-            className="relative hidden items-center gap-1 rounded-xl border border-border/30 bg-background/35 p-1 backdrop-blur-md md:flex"
+            className="relative hidden items-center gap-1 rounded-xl border border-white/10 bg-background/35 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.10),0_12px_40px_rgba(0,0,0,0.18)] backdrop-blur-xl md:flex dark:border-white/10"
           >
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute top-1 bottom-1 rounded-lg border border-primary/30 bg-primary/20 shadow-lg shadow-primary/15 backdrop-blur-md transition-[left,width,opacity] duration-300 ease-out"
+              className="pointer-events-none absolute top-1 bottom-1 rounded-lg border border-primary/30 bg-[linear-gradient(135deg,rgba(255,255,255,0.55),rgba(255,59,48,0.18)_42%,rgba(255,255,255,0.10))] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),inset_0_-1px_0_rgba(255,59,48,0.18),0_10px_24px_rgba(255,59,48,0.20),0_2px_8px_rgba(0,0,0,0.14)] backdrop-blur-xl transition-[left,width,opacity] duration-300 ease-out dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.16),rgba(255,59,48,0.24)_45%,rgba(255,255,255,0.06))] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.20),inset_0_-1px_0_rgba(255,59,48,0.18),0_10px_24px_rgba(255,59,48,0.22),0_2px_10px_rgba(0,0,0,0.35)]"
               style={{
                 left: indicatorStyle.left,
                 width: indicatorStyle.width,
@@ -128,7 +128,7 @@ export function Header() {
                 aria-current={activeSection === item.id ? "page" : undefined}
                 className={`relative z-10 flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                   activeSection === item.id
-                    ? "text-primary-foreground"
+                    ? "text-primary"
                     : "text-muted-foreground hover:text-primary"
                 }`}
               >
