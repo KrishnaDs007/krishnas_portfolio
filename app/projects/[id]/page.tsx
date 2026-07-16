@@ -157,7 +157,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   fill
                   sizes="(min-width: 1024px) 640px, calc(100vw - 32px)"
                   priority
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
             </div>
@@ -210,7 +210,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                           alt={`${project.title} screenshot ${index + 2}`}
                           fill
                           sizes="(min-width: 768px) 50vw, calc(100vw - 32px)"
-                          className="object-cover"
+                          className="object-contain"
                         />
                       </div>
                     ))}
