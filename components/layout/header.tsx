@@ -1,13 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { Moon, Sun, Code2 } from "lucide-react";
+import {
+  Briefcase,
+  Code2,
+  FolderGit2,
+  Home,
+  Mail,
+  Moon,
+  Sun,
+  User,
+} from "lucide-react";
 import type { ComponentType } from "react";
 import { useTheme } from "next-themes";
 import { NAV_ITEMS } from "@/lib/navigation-config";
 import { scrollToSection } from "@/lib/scroll-utils";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
-import * as LucideIcons from "lucide-react";
+
+const NAV_ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
+  Home,
+  User,
+  Briefcase,
+  FolderGit2,
+  Mail,
+};
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -22,10 +38,7 @@ export function Header() {
   };
 
   const getIcon = (iconName: string) => {
-    const Icon = (LucideIcons as unknown as Record<
-      string,
-      ComponentType<{ className?: string }>
-    >)[iconName];
+    const Icon = NAV_ICON_MAP[iconName];
     return Icon ? <Icon className="h-4 w-4" /> : null;
   };
 
