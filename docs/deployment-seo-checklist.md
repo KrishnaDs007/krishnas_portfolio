@@ -1,0 +1,36 @@
+# Deployment SEO Checklist
+
+Use this checklist after deploying the portfolio to `https://www.krishnadevashish.com/`.
+
+## Google Analytics
+
+- Create or open the GA4 property for `krishnadevashish.com`.
+- Copy the web stream measurement ID. It should look like `G-XXXXXXXXXX`.
+- Add it to Vercel as:
+
+```env
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+- Redeploy the site after adding the variable.
+- Confirm the production page source includes `googletagmanager.com/gtag/js`.
+
+## SPF Record
+
+Add an SPF TXT record in the DNS provider for `krishnadevashish.com`.
+
+If the domain only sends mail through Google Workspace/Gmail, use:
+
+```txt
+v=spf1 include:_spf.google.com ~all
+```
+
+If another mail provider is used, add that provider's SPF include before `~all`.
+Keep only one SPF TXT record on the root domain.
+
+## Recheck After Deploy
+
+- Run SEO Site Checkup on `https://www.krishnadevashish.com/`.
+- Run SEOptimer on `https://www.krishnadevashish.com/`.
+- Run Seobility on `https://www.krishnadevashish.com/`.
+- Verify CDN/cache warnings against response headers for `/images`, `/assets`, favicon, and Open Graph images.
