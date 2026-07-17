@@ -7,6 +7,13 @@
     "fullDescription": "Built and shipped AlgoPrecision, a production-ready DSA Visualiser that turns complex algorithms into interactive, step-by-step learning flows. The platform combines generator-driven animation frames, custom input controls, speed controls, synced pseudocode highlighting, searchable documentation, and a custom code complexity workspace. It covers a broad DSA catalog across sorting, searching, hashing, stacks, queues, linked lists, arrays and strings, trees, graphs, and dynamic programming, making it useful for interview preparation, classroom demos, and self-paced algorithm practice.",
     "challenge": "Algorithm learning tools often show final output without explaining how state changes at each step. The goal was to create a visual learning surface that supports custom inputs, paced execution, and code-level reasoning without requiring a backend.",
     "architecture": "Designed a local-first Next.js application where algorithm modules emit generator-driven animation frames. The visualizer layer consumes those frames for playback controls, pseudocode highlighting, and state rendering while browser storage preserves custom visualizers and profile data.",
+    "architectureFlow": [
+      "Algorithm Module",
+      "Generator Frames",
+      "Playback Controller",
+      "Visualizer UI",
+      "Local Storage"
+    ],
     "decisions": [
       "Used generator-driven state frames to keep algorithm logic testable and animation playback deterministic",
       "Kept the app local-first to avoid authentication and backend cost for self-paced learners",
@@ -51,6 +58,13 @@
     "fullDescription": "Built a Chrome Manifest V3 extension that helps users extract, summarise, and reuse information from webpages and text-based sources. The extension supports full-page summaries, selected-text summaries from the context menu, pasted text, uploaded files, link extraction, follow-up questions, configurable summary styles, output length controls, language selection, and local recent-output history. It includes a professional popup experience, provider settings for Gemini, OpenAI, Anthropic, xAI, and custom OpenAI-compatible endpoints, plus local Chrome storage for provider API keys and saved outputs.",
     "challenge": "Users needed a privacy-conscious way to summarize different content sources without being locked into one AI provider or repeatedly copying page text into separate tools.",
     "architecture": "Built a Manifest V3 extension with popup, context-menu, page shortcut, and provider-settings flows. Content extraction runs in extension contexts, user preferences are stored locally, and provider adapters route prompts to Gemini, OpenAI, Anthropic, xAI, or compatible endpoints.",
+    "architectureFlow": [
+      "Page Content",
+      "Content Script",
+      "Extension Popup",
+      "Provider Adapter",
+      "AI API"
+    ],
     "decisions": [
       "Used provider adapters so new AI services can be added without rewriting the popup workflow",
       "Stored API keys and recent outputs in Chrome local storage to keep the extension self-contained",
@@ -98,6 +112,13 @@
     "fullDescription": "Developed a comprehensive financial help platform that streamlines access to Personal, Home, and Business loans. The application features a custom-built, interactive EMI calculator for financial planning and a seamless lead-generation system integrated with EmailJS. Built with React and SASS, it focuses on high-performance animations and a mobile-first user experience to simplify complex financial inquiries.",
     "challenge": "Financial service visitors need clear loan information, quick EMI estimates, and a low-friction way to submit inquiries from mobile and desktop devices.",
     "architecture": "Built a React 18 single-page application with modular SCSS, Redux-backed state handling, dynamic service sections, Swiper-powered carousels, and EmailJS lead submission for contact flows.",
+    "architectureFlow": [
+      "Service UI",
+      "Redux State",
+      "EMI Calculator",
+      "Lead Form",
+      "EmailJS"
+    ],
     "decisions": [
       "Built a custom EMI calculator instead of embedding a third-party widget to control UX and responsiveness",
       "Used modular SCSS to keep financial service sections maintainable across multiple page modules",

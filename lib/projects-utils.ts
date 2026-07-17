@@ -8,6 +8,7 @@ export interface ProjectData {
   fullDescription: string;
   challenge: string;
   architecture: string;
+  architectureFlow: string[];
   decisions: string[];
   impact: string[];
   technologies: string[];
@@ -60,6 +61,10 @@ const validateProject = (project: unknown, index: number): ProjectData => {
     throw new Error(`Project ${index} has invalid "decisions".`);
   }
 
+  if (!isStringArray(project.architectureFlow)) {
+    throw new Error(`Project ${index} has invalid "architectureFlow".`);
+  }
+
   if (!isStringArray(project.impact)) {
     throw new Error(`Project ${index} has invalid "impact".`);
   }
@@ -92,6 +97,7 @@ const validateProject = (project: unknown, index: number): ProjectData => {
     fullDescription: requireString(project, "fullDescription", index),
     challenge: requireString(project, "challenge", index),
     architecture: requireString(project, "architecture", index),
+    architectureFlow: project.architectureFlow,
     decisions: project.decisions,
     impact: project.impact,
     technologies: project.technologies,

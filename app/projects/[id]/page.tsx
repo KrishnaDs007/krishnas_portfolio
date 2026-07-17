@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink, Github, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, Github, Star } from "lucide-react";
 import { getProjectById, getProjects } from "@/lib/projects-utils";
 import { siteConfig } from "@/lib/site-config";
 
@@ -196,6 +196,27 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     {project.architecture}
                   </p>
                 </article>
+              </div>
+
+              <div>
+                <h2 className="mb-4 text-2xl font-bold text-foreground">
+                  Architecture Flow
+                </h2>
+                <div className="grid gap-3 rounded-xl border border-border bg-card p-4 sm:p-5 md:grid-cols-[repeat(5,minmax(0,1fr))]">
+                  {project.architectureFlow.map((step, index) => (
+                    <div
+                      key={step}
+                      className="relative flex items-center gap-3 md:block"
+                    >
+                      <div className="flex min-h-20 flex-1 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 px-3 py-4 text-center text-sm font-semibold text-foreground">
+                        {step}
+                      </div>
+                      {index < project.architectureFlow.length - 1 && (
+                        <ArrowRight className="h-5 w-5 shrink-0 text-primary md:absolute md:-right-4 md:top-1/2 md:z-10 md:-translate-y-1/2" />
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div className="grid gap-5 md:grid-cols-2">
