@@ -5,6 +5,18 @@
     "category": "Developer Tools",
     "shortDescription": "A polished, local-first data structures and algorithms visualizer for learning, comparing, and stepping through algorithms with synced code walkthroughs.",
     "fullDescription": "Built and shipped AlgoPrecision, a production-ready DSA Visualiser that turns complex algorithms into interactive, step-by-step learning flows. The platform combines generator-driven animation frames, custom input controls, speed controls, synced pseudocode highlighting, searchable documentation, and a custom code complexity workspace. It covers a broad DSA catalog across sorting, searching, hashing, stacks, queues, linked lists, arrays and strings, trees, graphs, and dynamic programming, making it useful for interview preparation, classroom demos, and self-paced algorithm practice.",
+    "challenge": "Algorithm learning tools often show final output without explaining how state changes at each step. The goal was to create a visual learning surface that supports custom inputs, paced execution, and code-level reasoning without requiring a backend.",
+    "architecture": "Designed a local-first Next.js application where algorithm modules emit generator-driven animation frames. The visualizer layer consumes those frames for playback controls, pseudocode highlighting, and state rendering while browser storage preserves custom visualizers and profile data.",
+    "decisions": [
+      "Used generator-driven state frames to keep algorithm logic testable and animation playback deterministic",
+      "Kept the app local-first to avoid authentication and backend cost for self-paced learners",
+      "Separated documentation, visualizer state, and complexity workspace so users can move between learning modes quickly"
+    ],
+    "impact": [
+      "Delivered a broad DSA catalog covering sorting, searching, stacks, queues, trees, graphs, and dynamic programming",
+      "Enabled learners to compare algorithm behavior through speed controls, custom inputs, and synced pseudocode",
+      "Created a reusable pattern for adding new algorithms without rewriting the playback system"
+    ],
     "technologies": [
       "Next.js",
       "TypeScript",
@@ -37,6 +49,18 @@
     "category": "Browser Extensions",
     "shortDescription": "A Chrome Manifest V3 extension that summarises webpages, selected text, pasted content, and uploaded files using the user's preferred AI provider.",
     "fullDescription": "Built a Chrome Manifest V3 extension that helps users extract, summarise, and reuse information from webpages and text-based sources. The extension supports full-page summaries, selected-text summaries from the context menu, pasted text, uploaded files, link extraction, follow-up questions, configurable summary styles, output length controls, language selection, and local recent-output history. It includes a professional popup experience, provider settings for Gemini, OpenAI, Anthropic, xAI, and custom OpenAI-compatible endpoints, plus local Chrome storage for provider API keys and saved outputs.",
+    "challenge": "Users needed a privacy-conscious way to summarize different content sources without being locked into one AI provider or repeatedly copying page text into separate tools.",
+    "architecture": "Built a Manifest V3 extension with popup, context-menu, page shortcut, and provider-settings flows. Content extraction runs in extension contexts, user preferences are stored locally, and provider adapters route prompts to Gemini, OpenAI, Anthropic, xAI, or compatible endpoints.",
+    "decisions": [
+      "Used provider adapters so new AI services can be added without rewriting the popup workflow",
+      "Stored API keys and recent outputs in Chrome local storage to keep the extension self-contained",
+      "Added link extraction as a non-AI utility so users can inspect page links without sending content to a provider"
+    ],
+    "impact": [
+      "Supports full-page, selected-text, pasted-text, and uploaded-file summarization from one extension",
+      "Gives users control over provider, summary style, output length, and language",
+      "Reduces repeated manual copy-paste workflows for research-heavy browsing"
+    ],
     "technologies": [
       "Chrome Extension MV3",
       "JavaScript",
@@ -72,6 +96,18 @@
     "category": "Web Apps",
     "shortDescription": "A modern, responsive financial services bridge connecting users with loans, insurance, and interactive EMI planning tools.",
     "fullDescription": "Developed a comprehensive financial help platform that streamlines access to Personal, Home, and Business loans. The application features a custom-built, interactive EMI calculator for financial planning and a seamless lead-generation system integrated with EmailJS. Built with React and SASS, it focuses on high-performance animations and a mobile-first user experience to simplify complex financial inquiries.",
+    "challenge": "Financial service visitors need clear loan information, quick EMI estimates, and a low-friction way to submit inquiries from mobile and desktop devices.",
+    "architecture": "Built a React 18 single-page application with modular SCSS, Redux-backed state handling, dynamic service sections, Swiper-powered carousels, and EmailJS lead submission for contact flows.",
+    "decisions": [
+      "Built a custom EMI calculator instead of embedding a third-party widget to control UX and responsiveness",
+      "Used modular SCSS to keep financial service sections maintainable across multiple page modules",
+      "Integrated EmailJS to support lead capture without requiring a custom backend"
+    ],
+    "impact": [
+      "Delivered a mobile-first financial services experience for personal, home, and business loan inquiries",
+      "Improved user decision support through real-time EMI planning",
+      "Created a lightweight lead-generation flow for customer inquiry capture"
+    ],
     "technologies": ["React 18", "Redux", "SASS/SCSS", "Swiper.js", "EmailJS"],
     "features": [
       "Interactive Loan EMI Calculator for real-time planning",

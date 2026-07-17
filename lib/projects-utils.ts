@@ -6,6 +6,10 @@ export interface ProjectData {
   category: string;
   shortDescription: string;
   fullDescription: string;
+  challenge: string;
+  architecture: string;
+  decisions: string[];
+  impact: string[];
   technologies: string[];
   features: string[];
   images: string[];
@@ -52,6 +56,14 @@ const validateProject = (project: unknown, index: number): ProjectData => {
     throw new Error(`Project ${index} has invalid "features".`);
   }
 
+  if (!isStringArray(project.decisions)) {
+    throw new Error(`Project ${index} has invalid "decisions".`);
+  }
+
+  if (!isStringArray(project.impact)) {
+    throw new Error(`Project ${index} has invalid "impact".`);
+  }
+
   if (!isStringArray(project.images) || project.images.length === 0) {
     throw new Error(`Project ${index} must include at least one image.`);
   }
@@ -78,6 +90,10 @@ const validateProject = (project: unknown, index: number): ProjectData => {
     category: requireString(project, "category", index),
     shortDescription: requireString(project, "shortDescription", index),
     fullDescription: requireString(project, "fullDescription", index),
+    challenge: requireString(project, "challenge", index),
+    architecture: requireString(project, "architecture", index),
+    decisions: project.decisions,
+    impact: project.impact,
     technologies: project.technologies,
     features: project.features,
     images: project.images,

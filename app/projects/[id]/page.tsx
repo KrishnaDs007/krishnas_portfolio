@@ -178,6 +178,60 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </p>
               </div>
 
+              <div className="grid gap-5 md:grid-cols-2">
+                <article className="rounded-xl border border-border bg-card p-5">
+                  <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-primary">
+                    Challenge
+                  </p>
+                  <p className="leading-relaxed text-muted-foreground">
+                    {project.challenge}
+                  </p>
+                </article>
+
+                <article className="rounded-xl border border-border bg-card p-5">
+                  <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-primary">
+                    Architecture
+                  </p>
+                  <p className="leading-relaxed text-muted-foreground">
+                    {project.architecture}
+                  </p>
+                </article>
+              </div>
+
+              <div className="grid gap-5 md:grid-cols-2">
+                <div>
+                  <h2 className="mb-4 text-2xl font-bold text-foreground">
+                    Key Decisions
+                  </h2>
+                  <ul className="grid gap-3">
+                    {project.decisions.map((decision) => (
+                      <li
+                        key={decision}
+                        className="rounded-xl border border-border bg-card p-4 text-muted-foreground"
+                      >
+                        {decision}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h2 className="mb-4 text-2xl font-bold text-foreground">
+                    Impact
+                  </h2>
+                  <ul className="grid gap-3">
+                    {project.impact.map((item) => (
+                      <li
+                        key={item}
+                        className="rounded-xl border border-primary/20 bg-primary/10 p-4 text-muted-foreground"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
               <div>
                 <h2 className="mb-4 text-2xl font-bold text-foreground">
                   Key Features
