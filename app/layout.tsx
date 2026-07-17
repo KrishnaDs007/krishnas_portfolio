@@ -4,6 +4,9 @@ import { GoogleAnalytics } from "@/components/google-analytics";
 import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/lib/site-config";
 
+const googleSiteVerification =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
 
@@ -84,6 +87,10 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: ["/og-image.jpeg"],
     creator: "@itskd_17",
+  },
+
+  verification: {
+    google: googleSiteVerification,
   },
 
   icons: {
