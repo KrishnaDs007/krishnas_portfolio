@@ -4,6 +4,7 @@ import {
   Download,
   Code2,
   FileCode,
+  FileText,
   Palette,
   Server,
 } from "lucide-react";
@@ -49,7 +50,7 @@ export function Hero() {
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 animate-fade-in-up animation-delay-800">
+              <div className="flex flex-col justify-center gap-3 animate-fade-in-up animation-delay-800 sm:flex-row sm:flex-wrap lg:justify-start lg:gap-4">
                 <a
                   href="#projects"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
@@ -65,6 +66,14 @@ export function Hero() {
                 >
                   <Download className="h-4 w-4" />
                   Download CV
+                </a>
+                <a
+                  href="/resume"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-primary/30 bg-primary/10 font-medium text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+                  aria-label="View resume page"
+                >
+                  <FileText className="h-4 w-4" />
+                  View Resume
                 </a>
               </div>
 

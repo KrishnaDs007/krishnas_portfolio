@@ -152,7 +152,7 @@ export const skills: SkillCategory[] = [
     },
     {
         category: 'Backend',
-        skills: ['Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'REST APIs', 'GraphQL']
+        skills: ['Node.js', 'Express', 'Python FastAPI', 'PostgreSQL', 'MongoDB', 'REST APIs', 'GraphQL']
     },
     {
         category: 'Tools & Others',
@@ -348,6 +348,16 @@ export const skillsData: SkillItem[] = [
         yearsOfExperience: '6+ Years',
         description: 'Designing and implementing RESTful APIs following best practices.',
         iconKey: 'rest-api'
+    },
+    {
+        id: 'skill-10-fastapi',
+        name: 'Python FastAPI',
+        category: 'Backend',
+        proficiencyLevel: 'Beginner',
+        proficiencyPercentage: 30,
+        yearsOfExperience: 'Learning',
+        description: 'Building typed Python API foundations with FastAPI, request validation, and clean endpoint structure.',
+        iconKey: 'fastapi'
     },
 
     // DevOps & Tools

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Github, Linkedin, Twitter, Mail, MapPin, type LucideIcon } from "lucide-react";
+import { Github, Linkedin, Twitter, Mail, MapPin, FileText, type LucideIcon } from "lucide-react";
 import { socialLinks, contactInfo } from "@/lib/constants";
 import { scrollToSection } from "@/lib/scroll-utils";
 
@@ -291,6 +291,14 @@ export function About() {
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-border bg-background font-medium hover:bg-accent transition-colors"
                   >
                     Download CV
+                  </a>
+                  <a
+                    href="/resume"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-primary/30 bg-primary/10 font-medium text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+                    aria-label="View resume page"
+                  >
+                    <FileText className="h-4 w-4" />
+                    View Resume
                   </a>
                 </div>
               </div>

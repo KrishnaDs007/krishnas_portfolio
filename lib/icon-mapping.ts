@@ -37,6 +37,7 @@ export const skillIcons: Record<string, LucideIcon> = {
     'mongodb': Database,
     'rest-api': Server,
     'graphql': Server,
+    'fastapi': Server,
 
     // DevOps & Tools
     'git': GitBranch,
