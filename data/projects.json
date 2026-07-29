@@ -1,5 +1,64 @@
 [
   {
+    "id": "proj-learning-studio",
+    "title": "Learning Studio",
+    "category": "Developer Tools",
+    "shortDescription": "A Next.js and MDX learning platform for senior frontend interview preparation with handbook chapters, batch revision packs, progress tracking, SEO, and JS/TS practice labs.",
+    "fullDescription": "Built and shipped Learning Studio, a polished ebook-style preparation platform for senior frontend engineers. The project turns a large interview handbook into a structured Next.js and MDX learning experience with adaptive volumes, topic cards, batch revision packs, last-minute cheat sheets, mock interview prompts, local reading progress, canonical SEO metadata, JSON-LD structured data, sitemap generation, and JavaScript/TypeScript practice grounds. It is designed as both a study product and a portfolio case study that demonstrates product thinking, content architecture, frontend system design, and incremental delivery.",
+    "challenge": "Large interview preparation material can become difficult to navigate, review, and maintain when it is generated as one long document. The goal was to create a scalable learning surface where chapters, volumes, batches, cheat sheets, mock interviews, reading progress, and practice consoles can grow incrementally without losing structure or review quality.",
+    "architecture": "Built a static-first Next.js App Router application with MDX-backed handbook chapters, JSON metadata for batches and topics, generated sitemap and robots routes, route-specific metadata, JSON-LD structured data, localStorage-backed reading progress, and separate JavaScript and TypeScript practice grounds. Content is organized into versioned volumes and committed in reviewable batches so the handbook can expand while preserving navigation, SEO, and reader progress.",
+    "architectureFlow": [
+      "MDX Chapters",
+      "Topic and Batch Metadata",
+      "Next.js App Router",
+      "Reading Progress",
+      "Practice Labs",
+      "SEO and Sitemap"
+    ],
+    "decisions": [
+      "Used MDX so long-form handbook chapters stay readable, structured, and easy to expand in batches",
+      "Modeled volumes, topics, and batches separately so users can read sequentially or revise by focused preparation packs",
+      "Kept progress local with minimum time and scroll-depth checks before adding any account or cloud sync complexity",
+      "Added canonical metadata, sitemap generation, topic metadata, WebSite JSON-LD, and TechArticle JSON-LD to make the public handbook search-friendly",
+      "Built JavaScript and TypeScript practice grounds as separate routes so learners can test code while reading"
+    ],
+    "impact": [
+      "Published a structured senior frontend preparation platform with 360+ handbook questions across JavaScript, React, TypeScript, performance, security, system design, leadership, and interview simulations",
+      "Created a scalable content workflow where new questions are added in 4-5 question batches with metadata, docs, and build validation",
+      "Improved reader experience with topic cards, volume pages, batch packs, cheat sheets, mock interviews, and local progress tracking",
+      "Prepared the project for a custom subdomain with canonical SEO, sitemap coverage, robots configuration, and structured data"
+    ],
+    "technologies": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "MDX",
+      "CSS",
+      "Vercel",
+      "Local Storage",
+      "SEO"
+    ],
+    "features": [
+      "MDX-backed senior frontend handbook with adaptive volumes and topic navigation",
+      "Batch revision pages, cheat sheets, mock interview packs, and PDF export support",
+      "Local reading progress using minimum active time and scroll-depth validation",
+      "JavaScript and TypeScript practice grounds with console output routes",
+      "Custom-domain-ready SEO with canonical metadata, sitemap, robots, Open Graph, and JSON-LD",
+      "Incremental content workflow with build validation and Git history by question batches"
+    ],
+    "images": [
+      "/images/projects/learning-studio/learning-studio-home.webp",
+      "/images/projects/learning-studio/learning-studio-volume.webp",
+      "/images/projects/learning-studio/learning-studio-question.webp",
+      "/images/projects/learning-studio/learning-studio-practice.webp"
+    ],
+    "videoUrl": "",
+    "liveUrl": "https://learning-studio.krishnadevashish.com/",
+    "githubUrl": "https://github.com/KrishnaDs007/learning-studio",
+    "featured": true,
+    "year": "2026"
+  },
+  {
     "id": "proj-dsa-visualiser",
     "title": "DSA Visualiser",
     "category": "Developer Tools",
