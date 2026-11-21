@@ -88,10 +88,14 @@ krishna_portfolio/
    ```
 
 2. **Environment Configuration**
-   Create a `.env` file in the root and add your Resend API key:
+   Copy `.env.example` to `.env` and configure Resend.
    ```env
    RESEND_API_KEY=your_resend_api_key_here
+   RESEND_FROM_EMAIL=contact@krishnadevashish.com
+   CONTACT_TO_EMAIL=contact@krishnadevashish.com
    ```
+
+   Verify the sender domain in [Resend Domains](https://resend.com/domains) before using it. For local testing, set `RESEND_FROM_EMAIL=onboarding@resend.dev` and set `CONTACT_TO_EMAIL` to the email address on your Resend account.
 
 3. **Run Dev Server**
    ```bash

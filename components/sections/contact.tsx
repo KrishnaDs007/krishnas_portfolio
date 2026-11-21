@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Mail,
   Phone,
@@ -10,6 +10,11 @@ import {
   Loader2,
 } from "lucide-react";
 import { contactInfo } from "@/lib/constants";
+import {
+  CONTACT_MESSAGE_MAX_LENGTH,
+  CONTACT_MESSAGE_MIN_LENGTH,
+  getContactMessageError,
+} from "@/lib/contact-message";
 import { sendEmail } from "@/app/actions/send-email";
 
 export function Contact() {
@@ -25,6 +30,13 @@ export function Contact() {
   const [error, setError] = useState<string | null>(null);
   const [quickMessage, setQuickMessage] = useState("");
 
+  useEffect(() => {
+    if (!error) return;
+
+    const timeout = window.setTimeout(() => setError(null), 5000);
+    return () => window.clearTimeout(timeout);
+  }, [error]);
+
   const handleQuickMail = (e: React.FormEvent) => {
     e.preventDefault();
     if (!quickMessage.trim()) return;
@@ -36,6 +48,12 @@ export function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const messageError = getContactMessageError(formData.message);
+    if (messageError) {
+      setError(messageError);
+      return;
+    }
+
     setIsSubmitting(true);
     setError(null);
 
@@ -183,10 +201,17 @@ export function Contact() {
 
               {error && (
                 <div
-                  className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-700 dark:text-red-200 animate-fade-in"
-                  role="alert"
+                  className="mb-6 flex items-start justify-between gap-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-700 dark:text-red-200 animate-fade-in"
                 >
-                  {error}
+                  <span role="alert">{error}</span>
+                  <button
+                    type="button"
+                    onClick={() => setError(null)}
+                    aria-label="Clear error message"
+                    className="shrink-0 rounded text-sm font-semibold underline focus-visible:outline-2 focus-visible:outline-offset-2"
+                  >
+                    Clear
+                  </button>
                 </div>
               )}
 
@@ -292,11 +317,18 @@ export function Contact() {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
+                    maxLength={CONTACT_MESSAGE_MAX_LENGTH}
+                    aria-describedby="contact-message-length"
                     required
                     rows={5}
                     className="w-full px-4 py-3.5 bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none text-foreground placeholder:text-muted-foreground/50"
                     placeholder="Tell me about your project..."
                   />
+                  <p id="contact-message-length" className="mt-2 text-sm text-muted-foreground">
+                    {CONTACT_MESSAGE_MIN_LENGTH}–{CONTACT_MESSAGE_MAX_LENGTH} characters
+                    {" · "}
+                    {formData.message.length}/{CONTACT_MESSAGE_MAX_LENGTH}
+                  </p>
                 </div>
 
                 {/* Submit Button */}

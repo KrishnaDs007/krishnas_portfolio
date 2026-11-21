@@ -4,6 +4,7 @@ import React from "react";
 import { Resend } from "resend";
 import { EmailTemplate } from "@/components/email-template";
 import { contactInfo } from "@/lib/constants";
+import { getContactMessageError } from "@/lib/contact-message";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -30,17 +31,25 @@ export async function sendEmail(formData: {
     return { success: false, error: "Please enter a valid subject." };
   }
 
-  if (message.length < 10 || message.length > 5000) {
-    return {
-      success: false,
-      error: "Please enter a message between 10 and 5000 characters.",
-    };
+  const messageError = getContactMessageError(formData.message);
+  if (messageError) {
+    return { success: false, error: messageError };
   }
 
   const apiKey = process.env.RESEND_API_KEY;
+  const fromEmail = process.env.RESEND_FROM_EMAIL?.trim();
+  const toEmail = process.env.CONTACT_TO_EMAIL?.trim() || contactInfo.email;
 
   if (!apiKey || apiKey === "re_your_api_key_here") {
     console.error("ERROR: RESEND_API_KEY is missing or not set.");
+    return {
+      success: false,
+      error: "API Configuration error. Please check server logs.",
+    };
+  }
+
+  if (!fromEmail || !emailPattern.test(fromEmail)) {
+    console.error("ERROR: RESEND_FROM_EMAIL must be a valid sender address.");
     return {
       success: false,
       error: "API Configuration error. Please check server logs.",
@@ -53,8 +62,8 @@ export async function sendEmail(formData: {
     console.log(`Attempting to send email from ${name} (${email})...`);
 
     const data = await resend.emails.send({
-      from: "Portfolio <onboarding@resend.dev>",
-      to: [contactInfo.email],
+      from: `Portfolio <${fromEmail}>`,
+      to: [toEmail],
       subject: `[Portfolio] ${subject}: from ${name}`,
       react: (
         <EmailTemplate
