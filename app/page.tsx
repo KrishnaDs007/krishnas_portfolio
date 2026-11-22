@@ -16,7 +16,10 @@ export default function Home() {
         <About />
         <Experience />
         <Skills />
-        <Projects projects={getProjectCards()} categories={getProjectCategories()} />
+        <Projects
+          projects={getProjectCards()}
+          categories={getProjectCategories()}
+        />
         <Contact />
       </main>
       <Footer />

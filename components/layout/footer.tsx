@@ -29,11 +29,16 @@ export function Footer() {
           <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:mb-8 lg:grid-cols-3">
             {/* Logo & Description */}
             <div className="lg:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
-              <Link href="#home" className="mb-3 flex items-center gap-2 md:mb-4">
+              <Link
+                href="#home"
+                className="mb-3 flex items-center gap-2 md:mb-4"
+              >
                 <div className="p-2 bg-primary rounded-lg">
                   <Code2 className="h-6 w-6 text-primary-foreground" />
                 </div>
-                <span className="text-xl font-bold">Krishna&apos;s Portfolio</span>
+                <span className="text-xl font-bold">
+                  Krishna&apos;s Portfolio
+                </span>
               </Link>
               <p className="text-muted-foreground text-sm leading-relaxed max-w-xs md:max-w-none">
                 Building pixel-perfect, engaging, and accessible digital

@@ -27,7 +27,10 @@ test("loads on demand and answers suggested and exact questions without a server
   await user.type(input, answers[1].question);
   await user.click(submit);
   expect(screen.getByRole("status")).toHaveTextContent("Turborepo");
-  expect(within(screen.getByRole("status")).getByRole("link")).toHaveAttribute("href", "/resume#experience-heading");
+  expect(within(screen.getByRole("status")).getByRole("link")).toHaveAttribute(
+    "href",
+    "/resume#experience-heading",
+  );
   expect(ask).not.toHaveBeenCalled();
   await user.click(screen.getByRole("button", { name: "Close chat" }));
   expect(screen.queryByLabelText("Your question")).not.toBeInTheDocument();
@@ -38,8 +41,12 @@ test("ignores empty and duplicate submissions while a model reply is pending", a
   const form = submit.closest("form")!;
   fireEvent.submit(form);
   expect(ask).not.toHaveBeenCalled();
-  let resolve!: (answer: typeof answers[number]) => void;
-  ask.mockReturnValue(new Promise((done) => { resolve = done; }));
+  let resolve!: (answer: (typeof answers)[number]) => void;
+  ask.mockReturnValue(
+    new Promise((done) => {
+      resolve = done;
+    }),
+  );
   await user.type(input, "Tell me about your current role");
   await user.click(submit);
   expect(screen.getByRole("status")).toHaveTextContent("Finding an answer");
@@ -50,11 +57,16 @@ test("ignores empty and duplicate submissions while a model reply is pending", a
   expect(screen.getByRole("status")).toHaveTextContent("Brillio");
 });
 
-test.each([false, true])("falls back to contact when the request is unavailable (rejected=%s)", async (rejected) => {
-  const { user, input, submit } = await openChat();
-  if (rejected) ask.mockRejectedValue(new Error("Offline"));
-  else ask.mockResolvedValue(null);
-  await user.type(input, "Does this cover my question?");
-  await user.click(submit);
-  expect(await screen.findByRole("link", { name: "Contact me" })).toHaveAttribute("href", "/#contact");
-});
+test.each([false, true])(
+  "falls back to contact when the request is unavailable (rejected=%s)",
+  async (rejected) => {
+    const { user, input, submit } = await openChat();
+    if (rejected) ask.mockRejectedValue(new Error("Offline"));
+    else ask.mockResolvedValue(null);
+    await user.type(input, "Does this cover my question?");
+    await user.click(submit);
+    expect(
+      await screen.findByRole("link", { name: "Contact me" }),
+    ).toHaveAttribute("href", "/#contact");
+  },
+);

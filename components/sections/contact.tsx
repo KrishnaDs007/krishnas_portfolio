@@ -208,9 +208,7 @@ export function Contact() {
               )}
 
               {error && (
-                <div
-                  className="mb-6 flex items-start justify-between gap-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-700 dark:text-red-200 animate-fade-in"
-                >
+                <div className="mb-6 flex items-start justify-between gap-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-700 dark:text-red-200 animate-fade-in">
                   <span role="alert">{error}</span>
                   <button
                     type="button"
@@ -332,8 +330,12 @@ export function Contact() {
                     className="w-full px-4 py-3.5 bg-background/80 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none text-foreground placeholder:text-muted-foreground/50"
                     placeholder="Tell me about your project..."
                   />
-                  <p id="contact-message-length" className="mt-2 text-sm text-muted-foreground">
-                    {CONTACT_MESSAGE_MIN_LENGTH}–{CONTACT_MESSAGE_MAX_LENGTH} characters
+                  <p
+                    id="contact-message-length"
+                    className="mt-2 text-sm text-muted-foreground"
+                  >
+                    {CONTACT_MESSAGE_MIN_LENGTH}–{CONTACT_MESSAGE_MAX_LENGTH}{" "}
+                    characters
                     {" · "}
                     {formData.message.length}/{CONTACT_MESSAGE_MAX_LENGTH}
                   </p>

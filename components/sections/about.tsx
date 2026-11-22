@@ -2,7 +2,15 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Github, Linkedin, Twitter, Mail, MapPin, FileText, type LucideIcon } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Twitter,
+  Mail,
+  MapPin,
+  FileText,
+  type LucideIcon,
+} from "lucide-react";
 import { socialLinks, contactInfo } from "@/lib/constants";
 import { scrollToSection } from "@/lib/scroll-utils";
 
@@ -17,10 +25,7 @@ export function About() {
   const [activeArea, setActiveArea] = useState("overview");
 
   return (
-    <section
-      id="about"
-      className="bg-accent/30 py-12 sm:py-16 lg:py-20"
-    >
+    <section id="about" className="bg-accent/30 py-12 sm:py-16 lg:py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
@@ -148,7 +153,11 @@ export function About() {
                     </h3>
 
                     <p className="text-muted-foreground leading-relaxed">
-                      I’m a software engineer with 8+ years of experience building web applications. I specialize in frontend architecture with React and TypeScript, and I currently work on a full-stack Next.js client project at Brillio Technologies.
+                      I’m a software engineer with 8+ years of experience
+                      building web applications. I specialize in frontend
+                      architecture with React and TypeScript, and I currently
+                      work on a full-stack Next.js client project at Brillio
+                      Technologies.
                     </p>
 
                     <p className="text-muted-foreground leading-relaxed">
@@ -156,22 +165,27 @@ export function About() {
                     </p>
                     <ul className="list-disc list-inside space-y-1.5 text-muted-foreground sm:space-y-2">
                       <li>
-                        Led Micro Frontend architecture with React + Webpack and reduced release cycles by 30%
+                        Led Micro Frontend architecture with React + Webpack and
+                        reduced release cycles by 30%
                       </li>
                       <li>
-                        Built shared React component library with Design Tokens and cut duplicate work by 40%
+                        Built shared React component library with Design Tokens
+                        and cut duplicate work by 40%
                       </li>
                       <li>
-                        Improved Lighthouse scores from 55-60 to 90+ across dashboards
+                        Improved Lighthouse scores from 55-60 to 90+ across
+                        dashboards
                       </li>
                       <li>
-                        Integrated Azure, OpenAI, and Gemini LLMs and created dynamic model-switching dashboard
+                        Integrated Azure, OpenAI, and Gemini LLMs and created
+                        dynamic model-switching dashboard
                       </li>
                       <li>Mentored juniors and boosted team speed by 20%</li>
                     </ul>
 
                     <p className="text-muted-foreground leading-relaxed">
-                      I love solving tough frontend challenges, mentoring teams, and building systems that grow easily with the product.
+                      I love solving tough frontend challenges, mentoring teams,
+                      and building systems that grow easily with the product.
                     </p>
                   </div>
                 )}
@@ -181,7 +195,10 @@ export function About() {
                     <h3 className="text-2xl font-bold">Frontend Development</h3>
 
                     <p className="text-muted-foreground leading-relaxed">
-                      I specialize in creating responsive, high-performance UIs with React, TypeScript, and modern JavaScript. I have worked on enterprise dashboards, analytics tools, and AI chatbot interfaces for global users.
+                      I specialize in creating responsive, high-performance UIs
+                      with React, TypeScript, and modern JavaScript. I have
+                      worked on enterprise dashboards, analytics tools, and AI
+                      chatbot interfaces for global users.
                     </p>
 
                     <p className="text-muted-foreground leading-relaxed">
@@ -192,7 +209,8 @@ export function About() {
                       <li>State management with Redux and React patterns</li>
                       <li>REST API integration and real-time data handling</li>
                       <li>
-                        Accessibility (a11y), responsiveness, and cross-browser support
+                        Accessibility (a11y), responsiveness, and cross-browser
+                        support
                       </li>
                       <li>
                         Agile teamwork with designers and backend engineers
@@ -200,7 +218,8 @@ export function About() {
                     </ul>
 
                     <p className="text-muted-foreground leading-relaxed">
-                      I deliver clean, production-ready interfaces that give users a smooth and fast experience.
+                      I deliver clean, production-ready interfaces that give
+                      users a smooth and fast experience.
                     </p>
                   </div>
                 )}
@@ -212,7 +231,10 @@ export function About() {
                     </h3>
 
                     <p className="text-muted-foreground leading-relaxed">
-                      I design frontend systems that are easy to scale, maintain, and perform well. I led the move to Micro Frontends at EnterpriseBot, splitting big apps into independent parts.
+                      I design frontend systems that are easy to scale,
+                      maintain, and perform well. I led the move to Micro
+                      Frontends at EnterpriseBot, splitting big apps into
+                      independent parts.
                     </p>
 
                     <p className="text-muted-foreground leading-relaxed">
@@ -221,22 +243,26 @@ export function About() {
                     <ul className="list-disc list-inside text-muted-foreground space-y-2">
                       <li>Built Micro Frontend setup with React + Webpack</li>
                       <li>
-                        Used code splitting, lazy loading, and bundle optimization
+                        Used code splitting, lazy loading, and bundle
+                        optimization
                       </li>
                       <li>
                         Boosted Lighthouse scores to 90+ and improved Web Vitals
                       </li>
                       <li>Reduced release time by 30% with modular design</li>
                       <li>
-                        Integrated multi-LLM (Azure, OpenAI, Gemini) with configurable dashboard
+                        Integrated multi-LLM (Azure, OpenAI, Gemini) with
+                        configurable dashboard
                       </li>
                       <li>
-                        Upgraded build tools (Webpack v3 to v5) for faster workflows
+                        Upgraded build tools (Webpack v3 to v5) for faster
+                        workflows
                       </li>
                     </ul>
 
                     <p className="text-muted-foreground leading-relaxed">
-                      I build strong foundations so teams can add features quickly without breaking things.
+                      I build strong foundations so teams can add features
+                      quickly without breaking things.
                     </p>
                   </div>
                 )}
@@ -248,7 +274,9 @@ export function About() {
                     </h3>
 
                     <p className="text-muted-foreground leading-relaxed">
-                      I love building design systems that make teams faster and UI consistent. At EnterpriseBot, I created a shared React component library used across products.
+                      I love building design systems that make teams faster and
+                      UI consistent. At EnterpriseBot, I created a shared React
+                      component library used across products.
                     </p>
 
                     <p className="text-muted-foreground leading-relaxed">
@@ -259,7 +287,8 @@ export function About() {
                         Developed reusable React components with Design Tokens
                       </li>
                       <li>
-                        Added accessibility, dark/light themes, and responsive styles
+                        Added accessibility, dark/light themes, and responsive
+                        styles
                       </li>
                       <li>
                         Worked with designers for consistent look and feel
@@ -271,7 +300,8 @@ export function About() {
                     </ul>
 
                     <p className="text-muted-foreground leading-relaxed">
-                      The result: cleaner code, faster delivery, and better user experience everywhere.
+                      The result: cleaner code, faster delivery, and better user
+                      experience everywhere.
                     </p>
                   </div>
                 )}

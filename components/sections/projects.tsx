@@ -7,7 +7,13 @@ import { ExternalLink, Github, ArrowRight, Star } from "lucide-react";
 import type { ProjectCard } from "@/lib/projects-utils";
 
 const PROJECTS_PER_PAGE = 6; // Show 6 projects initially (2 rows of 3)
-export function Projects({ projects, categories }: { projects: ProjectCard[]; categories: string[] }) {
+export function Projects({
+  projects,
+  categories,
+}: {
+  projects: ProjectCard[];
+  categories: string[];
+}) {
   const [activeTab, setActiveTab] = useState("All Projects");
   const [showAll, setShowAll] = useState(false);
 
@@ -27,10 +33,7 @@ export function Projects({ projects, categories }: { projects: ProjectCard[]; ca
   const hasMore = filteredProjects.length > PROJECTS_PER_PAGE;
 
   return (
-    <section
-      id="projects"
-      className="bg-background py-12 sm:py-16 lg:py-20"
-    >
+    <section id="projects" className="bg-background py-12 sm:py-16 lg:py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
@@ -201,7 +204,6 @@ export function Projects({ projects, categories }: { projects: ProjectCard[]; ca
           )}
         </div>
       </div>
-
     </section>
   );
 }

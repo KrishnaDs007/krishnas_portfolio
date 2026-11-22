@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, ExternalLink, Github, Star } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ExternalLink,
+  Github,
+  Star,
+} from "lucide-react";
 import { getProjectById, getProjects } from "@/lib/projects-utils";
 import { siteConfig } from "@/lib/site-config";
 

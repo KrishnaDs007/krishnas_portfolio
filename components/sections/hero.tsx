@@ -33,7 +33,9 @@ export function Hero() {
               {/* Animated Title */}
               <div className="space-y-2">
                 <h1 className="text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
-                  <span className="sr-only">Krishna Devashish | Senior React & Micro Frontend Engineer</span>
+                  <span className="sr-only">
+                    Krishna Devashish | Senior React & Micro Frontend Engineer
+                  </span>
                   <span className="block text-foreground">Senior</span>
                   <span className="block text-primary animate-fade-in-up animation-delay-200">
                     Frontend Engineer

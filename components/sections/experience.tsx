@@ -15,26 +15,27 @@ export function Experience() {
               Experience & <span className="text-primary">Education</span>
             </div>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              My work across frontend architecture, full-stack development,
-              and team mentoring, alongside my academic background.
+              My work across frontend architecture, full-stack development, and
+              team mentoring, alongside my academic background.
             </p>
           </div>
 
           {/* Stats Cards - Desktop Only */}
           <div className="hidden lg:flex justify-end gap-4 mb-8">
-            {
-              stats.map((stat, index) => (
-                <div key={index} className="px-6 py-4 rounded-xl bg-card border border-border">
-                  <div className="text-2xl font-bold text-primary">
-                    {stat.value}
-                    {stat.suffix}
-                  </div>
-                  <div className="text-sm text-muted-foreground uppercase tracking-wider">
-                    {stat.label}
-                  </div>
+            {stats.map((stat, index) => (
+              <div
+                key={index}
+                className="px-6 py-4 rounded-xl bg-card border border-border"
+              >
+                <div className="text-2xl font-bold text-primary">
+                  {stat.value}
+                  {stat.suffix}
                 </div>
-              ))
-            }
+                <div className="text-sm text-muted-foreground uppercase tracking-wider">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
             {/* <div className="px-6 py-4 rounded-xl bg-card border border-border">
               <div className="text-2xl font-bold text-primary">
                 {stats[1].value}
@@ -109,7 +110,9 @@ export function Experience() {
                       </p>
                       {exp.learning && (
                         <p className="mb-3 text-sm leading-relaxed text-muted-foreground sm:mb-4">
-                          <strong className="text-foreground">What I learned.</strong>{" "}
+                          <strong className="text-foreground">
+                            What I learned.
+                          </strong>{" "}
                           {exp.learning}
                         </p>
                       )}

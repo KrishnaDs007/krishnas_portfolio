@@ -13,9 +13,15 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
-async function fillForm(user: ReturnType<typeof userEvent.setup>, message: string) {
+async function fillForm(
+  user: ReturnType<typeof userEvent.setup>,
+  message: string,
+) {
   await user.type(screen.getByLabelText("Your Name"), "Test Visitor");
-  await user.type(screen.getByLabelText("Email Address"), "visitor@example.com");
+  await user.type(
+    screen.getByLabelText("Email Address"),
+    "visitor@example.com",
+  );
   await user.type(screen.getByLabelText("Message", { exact: true }), message);
 }
 
@@ -28,7 +34,9 @@ test("rejects a short message and allows the error to be cleared", async () => {
   expect(send).not.toHaveBeenCalled();
   await user.click(screen.getByRole("button", { name: "Clear error message" }));
   expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-  expect(screen.getByLabelText("Message", { exact: true })).toHaveValue("short");
+  expect(screen.getByLabelText("Message", { exact: true })).toHaveValue(
+    "short",
+  );
 });
 
 test("shows and clears a server error while preserving the draft", async () => {
@@ -39,10 +47,14 @@ test("shows and clears a server error while preserving the draft", async () => {
   const message = "I have a project to discuss.";
   await fillForm(user, message);
   await user.click(screen.getByRole("button", { name: "Send Message" }));
-  expect(await screen.findByRole("alert")).toHaveTextContent("Too many messages.");
+  expect(await screen.findByRole("alert")).toHaveTextContent(
+    "Too many messages.",
+  );
   act(() => jest.advanceTimersByTime(5000));
   expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-  expect(screen.getByLabelText("Message", { exact: true })).toHaveValue(message);
+  expect(screen.getByLabelText("Message", { exact: true })).toHaveValue(
+    message,
+  );
 });
 
 test("sends a custom subject and resets the form on success", async () => {
@@ -51,11 +63,21 @@ test("sends a custom subject and resets the form on success", async () => {
   send.mockResolvedValue({ success: true });
   render(<Contact />);
   await fillForm(user, "I have a project to discuss.");
-  await user.selectOptions(screen.getByLabelText("Subject", { exact: true }), "Other");
-  await user.type(screen.getByLabelText("Please specify your subject"), "Design systems");
+  await user.selectOptions(
+    screen.getByLabelText("Subject", { exact: true }),
+    "Other",
+  );
+  await user.type(
+    screen.getByLabelText("Please specify your subject"),
+    "Design systems",
+  );
   await user.click(screen.getByRole("button", { name: "Send Message" }));
-  expect(send).toHaveBeenCalledWith(expect.objectContaining({ subject: "Design systems" }));
-  expect(await screen.findByRole("status")).toHaveTextContent(/sent successfully/i);
+  expect(send).toHaveBeenCalledWith(
+    expect.objectContaining({ subject: "Design systems" }),
+  );
+  expect(await screen.findByRole("status")).toHaveTextContent(
+    /sent successfully/i,
+  );
   expect(screen.getByLabelText("Message", { exact: true })).toHaveValue("");
   act(() => jest.advanceTimersByTime(5000));
   expect(screen.queryByRole("status")).not.toBeInTheDocument();
@@ -64,7 +86,11 @@ test("sends a custom subject and resets the form on success", async () => {
 test("guards against duplicate submissions and reports a rejected request", async () => {
   const user = userEvent.setup();
   let reject!: (error: Error) => void;
-  send.mockReturnValue(new Promise((_, fail) => { reject = fail; }));
+  send.mockReturnValue(
+    new Promise((_, fail) => {
+      reject = fail;
+    }),
+  );
   render(<Contact />);
   await fillForm(user, "I have a project to discuss.");
   await user.click(screen.getByRole("button", { name: "Send Message" }));
@@ -72,7 +98,9 @@ test("guards against duplicate submissions and reports a rejected request", asyn
   fireEvent.submit(pending.closest("form")!);
   expect(send).toHaveBeenCalledTimes(1);
   await act(async () => reject(new Error("offline")));
-  expect(await screen.findByRole("alert")).toHaveTextContent(/check your connection/i);
+  expect(await screen.findByRole("alert")).toHaveTextContent(
+    /check your connection/i,
+  );
 });
 
 test("opens WhatsApp and handles quick contact actions", async () => {
@@ -80,11 +108,18 @@ test("opens WhatsApp and handles quick contact actions", async () => {
   const open = jest.spyOn(window, "open").mockImplementation(() => null);
   jest.spyOn(console, "error").mockImplementation(() => {});
   render(<Contact />);
-  await user.click(screen.getByRole("button", { name: "Contact me on WhatsApp" }));
-  expect(open).toHaveBeenCalledWith(expect.stringMatching(/^https:\/\/wa\.me\//), "_blank");
+  await user.click(
+    screen.getByRole("button", { name: "Contact me on WhatsApp" }),
+  );
+  expect(open).toHaveBeenCalledWith(
+    expect.stringMatching(/^https:\/\/wa\.me\//),
+    "_blank",
+  );
   await user.click(screen.getByRole("button", { name: "Call me" }));
   const quick = screen.getByRole("textbox", { name: "Quick project message" });
-  const sendQuick = screen.getByRole("button", { name: "Send quick message by email" });
+  const sendQuick = screen.getByRole("button", {
+    name: "Send quick message by email",
+  });
   await user.type(quick, "  ");
   await user.click(sendQuick);
   expect(quick).toHaveValue("  ");

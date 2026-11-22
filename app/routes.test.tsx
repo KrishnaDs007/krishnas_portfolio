@@ -6,7 +6,10 @@ import Home from "./page";
 import Layout, { metadata as portfolioMetadata, viewport } from "./layout";
 import NotFound from "./not-found";
 import Resume, { metadata as resumeMetadata } from "./resume/page";
-import Project, { generateMetadata, generateStaticParams } from "./projects/[id]/page";
+import Project, {
+  generateMetadata,
+  generateStaticParams,
+} from "./projects/[id]/page";
 import robots from "./robots";
 import sitemap from "./sitemap";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
@@ -22,19 +25,34 @@ let intersect: IntersectionObserverCallback;
 
 beforeEach(() => {
   Object.defineProperties(window, {
-    matchMedia: { configurable: true, value: jest.fn(() => ({
-      matches: false, addListener: jest.fn(), removeListener: jest.fn(),
-    })) },
-    ResizeObserver: { configurable: true, value: class {
-      constructor(callback: ResizeObserverCallback) { resize = callback; }
-      observe() {}
-      disconnect() {}
-    } },
-    IntersectionObserver: { configurable: true, value: class {
-      constructor(callback: IntersectionObserverCallback) { intersect = callback; }
-      observe() {}
-      disconnect() {}
-    } },
+    matchMedia: {
+      configurable: true,
+      value: jest.fn(() => ({
+        matches: false,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+      })),
+    },
+    ResizeObserver: {
+      configurable: true,
+      value: class {
+        constructor(callback: ResizeObserverCallback) {
+          resize = callback;
+        }
+        observe() {}
+        disconnect() {}
+      },
+    },
+    IntersectionObserver: {
+      configurable: true,
+      value: class {
+        constructor(callback: IntersectionObserverCallback) {
+          intersect = callback;
+        }
+        observe() {}
+        disconnect() {}
+      },
+    },
   });
 });
 
@@ -42,39 +60,72 @@ afterEach(() => jest.restoreAllMocks());
 
 test("exposes metadata routes and recovery links", () => {
   expect(robots().sitemap).toBe(`${siteConfig.url}/sitemap.xml`);
-  expect(sitemap().map(({ url }) => url)).toEqual(expect.arrayContaining(
-    generateStaticParams().map(({ id }) => `${siteConfig.url}/projects/${id}`),
-  ));
+  expect(sitemap().map(({ url }) => url)).toEqual(
+    expect.arrayContaining(
+      generateStaticParams().map(
+        ({ id }) => `${siteConfig.url}/projects/${id}`,
+      ),
+    ),
+  );
   render(<NotFound />);
-  expect(screen.getByRole("link", { name: "Back to portfolio" })).toHaveAttribute("href", "/");
+  expect(
+    screen.getByRole("link", { name: "Back to portfolio" }),
+  ).toHaveAttribute("href", "/");
 });
 
 test("renders resume and layout entry points", () => {
-  expect(new URL(String(portfolioMetadata.metadataBase)).origin).toBe(siteConfig.url);
+  expect(new URL(String(portfolioMetadata.metadataBase)).origin).toBe(
+    siteConfig.url,
+  );
   expect(resumeMetadata.title).toEqual(expect.stringMatching(/resume/i));
   expect(viewport.width).toBe("device-width");
   render(<Resume />);
-  expect(screen.getAllByRole("link", { name: /download/i }).length).toBeGreaterThan(0);
+  expect(
+    screen.getAllByRole("link", { name: /download/i }).length,
+  ).toBeGreaterThan(0);
   const career = within(screen.getByRole("region", { name: "Experience" }));
-  expect(career.getAllByRole("heading", { level: 3 }).map((heading) => heading.textContent)).toEqual([
-    "Senior Data Scientist", "Senior Developer", "Senior Frontend Engineer", "Frontend Developer",
+  expect(
+    career
+      .getAllByRole("heading", { level: 3 })
+      .map((heading) => heading.textContent),
+  ).toEqual([
+    "Senior Data Scientist",
+    "Senior Developer",
+    "Senior Frontend Engineer",
+    "Frontend Developer",
   ]);
   expect(career.getByText("15 October 2026 - Present")).toBeVisible();
   expect(career.getByText("1 September 2026 - 15 October 2026")).toBeVisible();
   expect(career.getByText("September 2019 - 2 June 2026")).toBeVisible();
   expect(career.getByText(/set up a Turborepo workspace/)).toBeVisible();
-  expect(renderToStaticMarkup(<Layout><main id="main-content">Portfolio</main></Layout>))
-    .toContain("Skip to main content");
+  expect(
+    renderToStaticMarkup(
+      <Layout>
+        <main id="main-content">Portfolio</main>
+      </Layout>,
+    ),
+  ).toContain("Skip to main content");
 });
 
 test("renders education without a location and skips unknown social icons", () => {
   const item = education[0];
   const location = item.location;
   item.location = "";
-  socialLinks.push({ platform: "unknown", url: "https://example.com", icon: "unknown" });
+  socialLinks.push({
+    platform: "unknown",
+    url: "https://example.com",
+    icon: "unknown",
+  });
   try {
-    render(<><Resume /><Home /></>);
-    expect(screen.queryByRole("link", { name: /unknown profile/i })).not.toBeInTheDocument();
+    render(
+      <>
+        <Resume />
+        <Home />
+      </>,
+    );
+    expect(
+      screen.queryByRole("link", { name: /unknown profile/i }),
+    ).not.toBeInTheDocument();
   } finally {
     item.location = location;
     socialLinks.pop();
@@ -85,61 +136,112 @@ test("keeps mobile navigation available without a footer or matching active link
   const frame = jest.spyOn(window, "requestAnimationFrame").mockReturnValue(1);
   render(<MobileNav activeSection="missing" />);
   act(() => frame.mock.calls[0][0](0));
-  expect(screen.getByRole("button", { name: "Home" })).not.toHaveAttribute("aria-current");
+  expect(screen.getByRole("button", { name: "Home" })).not.toHaveAttribute(
+    "aria-current",
+  );
 });
 
-test.each(generateStaticParams())("renders the $id case study and metadata", async ({ id }) => {
-  const props = { params: Promise.resolve({ id }) };
-  const metadata = await generateMetadata(props);
-  expect(metadata.openGraph?.title).toEqual(expect.stringContaining(String(metadata.title)));
-  render(await Project(props));
-  expect(screen.getByRole("heading", { level: 1 })).toBeVisible();
-});
+test.each(generateStaticParams())(
+  "renders the $id case study and metadata",
+  async ({ id }) => {
+    const props = { params: Promise.resolve({ id }) };
+    const metadata = await generateMetadata(props);
+    expect(metadata.openGraph?.title).toEqual(
+      expect.stringContaining(String(metadata.title)),
+    );
+    render(await Project(props));
+    expect(screen.getByRole("heading", { level: 1 })).toBeVisible();
+  },
+);
 
 test("handles an unknown project", async () => {
   const props = { params: Promise.resolve({ id: "missing-project" }) };
-  await expect(generateMetadata(props)).resolves.toMatchObject({ title: expect.stringMatching(/not found/i) });
-  await expect(Project(props)).rejects.toMatchObject({ digest: expect.stringContaining("404") });
+  await expect(generateMetadata(props)).resolves.toMatchObject({
+    title: expect.stringMatching(/not found/i),
+  });
+  await expect(Project(props)).rejects.toMatchObject({
+    digest: expect.stringContaining("404"),
+  });
 });
 
 test("filters projects, changes expertise, and exercises desktop and mobile navigation", async () => {
   const user = userEvent.setup();
   const scroll = jest.spyOn(window, "scrollTo").mockImplementation(() => {});
   const { container } = render(<Home />);
-  const mobile = within(screen.getByRole("navigation", { name: "Mobile section navigation" }));
-  await user.click(within(container.querySelector("header")!).getByRole("link", { name: "About" }));
-  await user.click(within(container.querySelector("header")!).getByRole("link", { name: "Contact" }));
+  const mobile = within(
+    screen.getByRole("navigation", { name: "Mobile section navigation" }),
+  );
+  await user.click(
+    within(container.querySelector("header")!).getByRole("link", {
+      name: "About",
+    }),
+  );
+  await user.click(
+    within(container.querySelector("header")!).getByRole("link", {
+      name: "Contact",
+    }),
+  );
   await user.click(mobile.getByRole("button", { name: "Contact" }));
   await user.click(mobile.getByRole("button", { name: "Home" }));
   const footerObserver = {} as IntersectionObserver;
-  act(() => intersect([{ isIntersecting: true } as IntersectionObserverEntry], footerObserver));
-  expect(mobile.getByRole("button", { name: "Home" }).closest("nav")).toHaveClass("translate-y-full");
+  act(() =>
+    intersect(
+      [{ isIntersecting: true } as IntersectionObserverEntry],
+      footerObserver,
+    ),
+  );
+  expect(
+    mobile.getByRole("button", { name: "Home" }).closest("nav"),
+  ).toHaveClass("translate-y-full");
   act(() => {
-    intersect([{ isIntersecting: false } as IntersectionObserverEntry], footerObserver);
+    intersect(
+      [{ isIntersecting: false } as IntersectionObserverEntry],
+      footerObserver,
+    );
     resize([], {} as ResizeObserver);
     window.dispatchEvent(new Event("resize"));
   });
 
-  for (const name of ["Frontend Development", "Architecture & Performance", "Design Systems", "Overview"]) {
+  for (const name of [
+    "Frontend Development",
+    "Architecture & Performance",
+    "Design Systems",
+    "Overview",
+  ]) {
     await user.click(screen.getByRole("button", { name }));
-    expect(screen.getByRole("button", { name })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
   }
   await user.click(screen.getByRole("button", { name: "Contact Me" }));
   expect(scroll).toHaveBeenCalled();
   await user.click(screen.getByRole("button", { name: "Browser Extensions" }));
-  expect(screen.getAllByRole("link", { name: /view details for/i })).toHaveLength(1);
+  expect(
+    screen.getAllByRole("link", { name: /view details for/i }),
+  ).toHaveLength(1);
   await user.click(screen.getByRole("button", { name: "All Projects" }));
-  expect(screen.getAllByRole("link", { name: /view details for/i })).toHaveLength(generateStaticParams().length);
+  expect(
+    screen.getAllByRole("link", { name: /view details for/i }),
+  ).toHaveLength(generateStaticParams().length);
   await user.click(screen.getByRole("button", { name: "All" }));
-  expect(screen.getByRole("button", { name: "All" })).toHaveAttribute("aria-pressed", "true");
+  expect(screen.getByRole("button", { name: "All" })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
 });
 
 test("scroll spy skips missing sections and updates once for a scroll burst", () => {
   const frame = jest.spyOn(window, "requestAnimationFrame").mockReturnValue(3);
-  const cancel = jest.spyOn(window, "cancelAnimationFrame").mockImplementation(() => {});
+  const cancel = jest
+    .spyOn(window, "cancelAnimationFrame")
+    .mockImplementation(() => {});
   const second = document.createElement("section");
   second.id = "second";
-  Object.defineProperties(second, { offsetTop: { value: 20 }, offsetHeight: { value: 300 } });
+  Object.defineProperties(second, {
+    offsetTop: { value: 20 },
+    offsetHeight: { value: 300 },
+  });
   document.body.append(second);
   const ids = ["absent", "second"];
   const { result, unmount } = renderHook(() => useScrollSpy(ids));

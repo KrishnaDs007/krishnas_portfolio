@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { GoogleAnalytics, PortfolioSpeedInsights } from "@/components/google-analytics";
+import {
+  GoogleAnalytics,
+  PortfolioSpeedInsights,
+} from "@/components/google-analytics";
 import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/lib/site-config";
 
-const googleSiteVerification =
-  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

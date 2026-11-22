@@ -37,10 +37,7 @@ export function Skills() {
       : skillsData.filter((skill) => skill.category === activeTab);
 
   return (
-    <section
-      id="skills"
-      className="bg-accent/30 py-12 sm:py-16 lg:py-20"
-    >
+    <section id="skills" className="bg-accent/30 py-12 sm:py-16 lg:py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}

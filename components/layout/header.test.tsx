@@ -10,7 +10,10 @@ beforeEach(() => {
     observe() {}
     disconnect() {}
   }
-  Object.defineProperty(window, "ResizeObserver", { configurable: true, value: ResizeObserverStub });
+  Object.defineProperty(window, "ResizeObserver", {
+    configurable: true,
+    value: ResizeObserverStub,
+  });
 });
 
 afterEach(() => {
@@ -19,25 +22,44 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
-test.each([["dark", "light"], ["light", "dark"]])(
+test.each([
+  ["dark", "light"],
+  ["light", "dark"],
+])(
   "switches from system %s to %s on the first click",
   async (resolvedTheme, expected) => {
     const setTheme = jest.fn();
-    jest.mocked(useTheme).mockReturnValue({ theme: "system", resolvedTheme, setTheme, themes: [] });
+    jest.mocked(useTheme).mockReturnValue({
+      theme: "system",
+      resolvedTheme,
+      setTheme,
+      themes: [],
+    });
     render(<Header activeSection="home" />);
-    await userEvent.setup().click(screen.getByRole("button", { name: "Toggle theme" }));
+    await userEvent
+      .setup()
+      .click(screen.getByRole("button", { name: "Toggle theme" }));
     expect(setTheme).toHaveBeenCalledWith(expected);
   },
 );
 
-test.each([true, false])("uses the document theme before theme resolution (dark=%s)", async (dark) => {
-  document.documentElement.classList.toggle("dark", dark);
-  const frame = jest.spyOn(window, "requestAnimationFrame").mockReturnValue(1);
-  const setTheme = jest.fn();
-  jest.mocked(useTheme).mockReturnValue({ setTheme, themes: [] });
-  render(<Header activeSection="missing" />);
-  act(() => frame.mock.calls[0][0](0));
-  expect(screen.getByRole("link", { name: "Home" })).not.toHaveAttribute("aria-current");
-  await userEvent.setup().click(screen.getByRole("button", { name: "Toggle theme" }));
-  expect(setTheme).toHaveBeenCalledWith(dark ? "light" : "dark");
-});
+test.each([true, false])(
+  "uses the document theme before theme resolution (dark=%s)",
+  async (dark) => {
+    document.documentElement.classList.toggle("dark", dark);
+    const frame = jest
+      .spyOn(window, "requestAnimationFrame")
+      .mockReturnValue(1);
+    const setTheme = jest.fn();
+    jest.mocked(useTheme).mockReturnValue({ setTheme, themes: [] });
+    render(<Header activeSection="missing" />);
+    act(() => frame.mock.calls[0][0](0));
+    expect(screen.getByRole("link", { name: "Home" })).not.toHaveAttribute(
+      "aria-current",
+    );
+    await userEvent
+      .setup()
+      .click(screen.getByRole("button", { name: "Toggle theme" }));
+    expect(setTheme).toHaveBeenCalledWith(dark ? "light" : "dark");
+  },
+);

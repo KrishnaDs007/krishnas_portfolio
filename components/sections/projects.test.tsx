@@ -18,8 +18,14 @@ test("expands the results and resets pagination when categories change", async (
     image: "/images/Krishna.jpeg",
   }));
   const user = userEvent.setup();
-  renderWithNext(<Projects projects={projects} categories={["All Projects", "Web", "Other"]} />);
-  const cards = () => screen.getAllByRole("link", { name: /view details for/i });
+  renderWithNext(
+    <Projects
+      projects={projects}
+      categories={["All Projects", "Web", "Other"]}
+    />,
+  );
+  const cards = () =>
+    screen.getAllByRole("link", { name: /view details for/i });
   expect(cards()).toHaveLength(6);
   await user.click(screen.getByRole("button", { name: "Load More Projects" }));
   expect(cards()).toHaveLength(8);

@@ -89,7 +89,8 @@ export function Header({ activeSection }: { activeSection: string }) {
   };
 
   const toggleTheme = () => {
-    const currentTheme = resolvedTheme ??
+    const currentTheme =
+      resolvedTheme ??
       (document.documentElement.classList.contains("dark") ? "dark" : "light");
     setTheme(currentTheme === "dark" ? "light" : "dark");
   };

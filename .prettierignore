@@ -1,0 +1,9 @@
+package-lock.json
+public/
+.next/
+coverage/
+out/
+build/
+.agents/
+.codex/
+.aws/

@@ -8,7 +8,10 @@ import { getContactMessageError } from "@/lib/contact-message";
 import { allowContactSubmission } from "@/lib/contact-rate-limit";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const deliveryFailure = { success: false, error: "Something went wrong. Please try again later." } as const;
+const deliveryFailure = {
+  success: false,
+  error: "Something went wrong. Please try again later.",
+} as const;
 
 type ContactSubmission = {
   name: string;
@@ -19,7 +22,9 @@ type ContactSubmission = {
 
 type ContactResult = { success: true } | { success: false; error: string };
 
-export async function sendEmail(formData: ContactSubmission): Promise<ContactResult> {
+export async function sendEmail(
+  formData: ContactSubmission,
+): Promise<ContactResult> {
   if (
     !formData ||
     typeof formData.name !== "string" ||
@@ -56,19 +61,30 @@ export async function sendEmail(formData: ContactSubmission): Promise<ContactRes
   const fromEmail = process.env.RESEND_FROM_EMAIL?.trim();
   const toEmail = process.env.CONTACT_TO_EMAIL?.trim() || contactInfo.email;
 
-  if (!apiKey || apiKey === "your_resend_api_key_here" || apiKey === "re_your_api_key_here") {
+  if (
+    !apiKey ||
+    apiKey === "your_resend_api_key_here" ||
+    apiKey === "re_your_api_key_here"
+  ) {
     console.error("ERROR: RESEND_API_KEY is missing or not set.");
     return deliveryFailure;
   }
 
-  if (!fromEmail || !emailPattern.test(fromEmail) || !emailPattern.test(toEmail)) {
+  if (
+    !fromEmail ||
+    !emailPattern.test(fromEmail) ||
+    !emailPattern.test(toEmail)
+  ) {
     console.error("Contact email sender or recipient is invalid.");
     return deliveryFailure;
   }
 
   try {
     if (!(await allowContactSubmission())) {
-      return { success: false, error: "Too many messages. Please try again in a few minutes." };
+      return {
+        success: false,
+        error: "Too many messages. Please try again in a few minutes.",
+      };
     }
   } catch {
     console.error("Contact rate limiter is unavailable or misconfigured.");

@@ -26,6 +26,7 @@ These conventions apply to future work in this portfolio repository.
 
 - Use the Node.js version specified in `.nvmrc` and install from the lockfile with `npm ci`.
 - Run `npm run check` before opening a pull request. Add focused regression tests for changed behavior. Use browser verification for routing, styling, motion, or interactions that depend on real layout.
+- Use `npm run format` to apply Prettier formatting. The full check verifies formatting in CI.
 - Keep the coverage scope intact. The configured gate requires 100% statements and lines and at least 98% branches and functions.
 - Document deployment changes and call out external integrations that were not verified. Keep commit messages concise and describe the change they introduce.
 

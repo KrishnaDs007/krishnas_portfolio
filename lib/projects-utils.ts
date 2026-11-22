@@ -21,9 +21,17 @@ export interface ProjectData {
   year: string;
 }
 
-export type ProjectCard = Pick<ProjectData,
-  "id" | "title" | "category" | "shortDescription" | "year" | "featured" |
-  "technologies" | "liveUrl" | "githubUrl"
+export type ProjectCard = Pick<
+  ProjectData,
+  | "id"
+  | "title"
+  | "category"
+  | "shortDescription"
+  | "year"
+  | "featured"
+  | "technologies"
+  | "liveUrl"
+  | "githubUrl"
 > & { image: string };
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -37,8 +45,11 @@ const isHttpUrlOrNull = (value: unknown): value is string | null => {
   if (typeof value !== "string") return false;
   try {
     const url = new URL(value);
-    return (url.protocol === "https:" || url.protocol === "http:") &&
-      !url.username && !url.password;
+    return (
+      (url.protocol === "https:" || url.protocol === "http:") &&
+      !url.username &&
+      !url.password
+    );
   } catch {
     return false;
   }
@@ -159,9 +170,28 @@ export const getProjectCategories = (): string[] => {
 };
 
 export const getProjectCards = (): ProjectCard[] =>
-  validatedProjects.map(({
-    id, title, category, shortDescription, year, featured, technologies, liveUrl, githubUrl, images,
-  }) => ({
-    id, title, category, shortDescription, year, featured, technologies, liveUrl, githubUrl,
-    image: images[0],
-  }));
+  validatedProjects.map(
+    ({
+      id,
+      title,
+      category,
+      shortDescription,
+      year,
+      featured,
+      technologies,
+      liveUrl,
+      githubUrl,
+      images,
+    }) => ({
+      id,
+      title,
+      category,
+      shortDescription,
+      year,
+      featured,
+      technologies,
+      liveUrl,
+      githubUrl,
+      image: images[0],
+    }),
+  );

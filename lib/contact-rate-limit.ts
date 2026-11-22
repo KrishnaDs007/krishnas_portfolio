@@ -8,19 +8,24 @@ if count == 1 then redis.call("EXPIRE", KEYS[1], ARGV[1]) end
 return count
 `;
 
-export async function allowContactSubmission(scope: "contact" | "career-chat" = "contact") {
+export async function allowContactSubmission(
+  scope: "contact" | "career-chat" = "contact",
+) {
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!url && !token && process.env.NODE_ENV !== "production") return true;
-  if (!url || !token) throw new Error("Missing contact rate limit configuration");
+  if (!url || !token)
+    throw new Error("Missing contact rate limit configuration");
 
   const requestHeaders = await headers();
-  const ip = process.env.VERCEL === "1"
-    ? requestHeaders.get("x-vercel-forwarded-for")?.trim()
-    : undefined;
-  const client = ip && isIP(ip)
-    ? createHmac("sha256", token).update(ip).digest("hex")
-    : "shared";
+  const ip =
+    process.env.VERCEL === "1"
+      ? requestHeaders.get("x-vercel-forwarded-for")?.trim()
+      : undefined;
+  const client =
+    ip && isIP(ip)
+      ? createHmac("sha256", token).update(ip).digest("hex")
+      : "shared";
   const environment = process.env.VERCEL_ENV ?? process.env.NODE_ENV;
 
   const response = await fetch(url, {
@@ -29,7 +34,13 @@ export async function allowContactSubmission(scope: "contact" | "career-chat" = 
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(["EVAL", incrementWithExpiry, "1", `portfolio:${scope}:${environment}:${client}`, "600"]),
+    body: JSON.stringify([
+      "EVAL",
+      incrementWithExpiry,
+      "1",
+      `portfolio:${scope}:${environment}:${client}`,
+      "600",
+    ]),
     cache: "no-store",
     signal: AbortSignal.timeout(3000),
   });

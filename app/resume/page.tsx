@@ -100,8 +100,8 @@ export default function ResumePage() {
                 <p className="max-w-3xl text-lg leading-relaxed text-muted-foreground">
                   Software engineer with 8+ years of experience in frontend
                   architecture, design systems, and web performance. Currently
-                  delivering full-stack Next.js features on a client project
-                  at Brillio Technologies.
+                  delivering full-stack Next.js features on a client project at
+                  Brillio Technologies.
                 </p>
               </div>
 
@@ -170,7 +170,9 @@ export default function ResumePage() {
                       )}
                       {experience.learning && (
                         <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-                          <strong className="text-foreground">What I learned.</strong>{" "}
+                          <strong className="text-foreground">
+                            What I learned.
+                          </strong>{" "}
                           {experience.learning}
                         </p>
                       )}
