@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Code2, Github, Linkedin, Twitter, Mail } from "lucide-react";
 import { socialLinks } from "@/lib/constants";
+import { AnalyticsPreference } from "@/components/google-analytics";
 
 const navigationLinks = [
   { name: "Home", href: "#home" },
@@ -88,10 +89,11 @@ export function Footer() {
           </div>
 
           {/* Copyright */}
-          <div className="border-t border-border pt-6 lg:pt-8">
+          <div className="border-t border-border pt-6 text-center lg:pt-8">
             <p className="text-center text-sm text-muted-foreground">
               © {currentYear} Krishna Devashish. All rights reserved.
             </p>
+            <AnalyticsPreference />
           </div>
         </div>
       </div>
