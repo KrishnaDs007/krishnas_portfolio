@@ -37,6 +37,13 @@ export function Contact() {
     return () => window.clearTimeout(timeout);
   }, [error]);
 
+  useEffect(() => {
+    if (!showSuccess) return;
+
+    const timeout = window.setTimeout(() => setShowSuccess(false), 5000);
+    return () => window.clearTimeout(timeout);
+  }, [showSuccess]);
+
   const handleQuickMail = (e: React.FormEvent) => {
     e.preventDefault();
     if (!quickMessage.trim()) return;
@@ -48,6 +55,8 @@ export function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setShowSuccess(false);
     const messageError = getContactMessageError(formData.message);
     if (messageError) {
       setError(messageError);
@@ -70,7 +79,6 @@ export function Contact() {
       if (result.success) {
         // Show success message
         setShowSuccess(true);
-        setTimeout(() => setShowSuccess(false), 5000);
 
         // Reset form
         setFormData({
@@ -81,7 +89,7 @@ export function Contact() {
         });
         setCustomSubject("");
       } else {
-        setError("Something went wrong. Please try again later.");
+        setError(result.error);
       }
     } catch {
       setError("Failed to send message. Please check your connection.");

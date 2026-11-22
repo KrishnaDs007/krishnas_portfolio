@@ -5,15 +5,31 @@ import { Resend } from "resend";
 import { EmailTemplate } from "@/components/email-template";
 import { contactInfo } from "@/lib/constants";
 import { getContactMessageError } from "@/lib/contact-message";
+import { allowContactSubmission } from "@/lib/contact-rate-limit";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const deliveryFailure = { success: false, error: "Something went wrong. Please try again later." } as const;
 
-export async function sendEmail(formData: {
+type ContactSubmission = {
   name: string;
   email: string;
   subject: string;
   message: string;
-}) {
+};
+
+type ContactResult = { success: true } | { success: false; error: string };
+
+export async function sendEmail(formData: ContactSubmission): Promise<ContactResult> {
+  if (
+    !formData ||
+    typeof formData.name !== "string" ||
+    typeof formData.email !== "string" ||
+    typeof formData.subject !== "string" ||
+    typeof formData.message !== "string"
+  ) {
+    return { success: false, error: "Please check your contact form fields." };
+  }
+
   const name = formData.name.trim();
   const email = formData.email.trim();
   const subject = formData.subject.trim();
@@ -40,28 +56,28 @@ export async function sendEmail(formData: {
   const fromEmail = process.env.RESEND_FROM_EMAIL?.trim();
   const toEmail = process.env.CONTACT_TO_EMAIL?.trim() || contactInfo.email;
 
-  if (!apiKey || apiKey === "re_your_api_key_here") {
+  if (!apiKey || apiKey === "your_resend_api_key_here" || apiKey === "re_your_api_key_here") {
     console.error("ERROR: RESEND_API_KEY is missing or not set.");
-    return {
-      success: false,
-      error: "API Configuration error. Please check server logs.",
-    };
+    return deliveryFailure;
   }
 
-  if (!fromEmail || !emailPattern.test(fromEmail)) {
-    console.error("ERROR: RESEND_FROM_EMAIL must be a valid sender address.");
-    return {
-      success: false,
-      error: "API Configuration error. Please check server logs.",
-    };
+  if (!fromEmail || !emailPattern.test(fromEmail) || !emailPattern.test(toEmail)) {
+    console.error("Contact email sender or recipient is invalid.");
+    return deliveryFailure;
   }
-
-  const resend = new Resend(apiKey);
 
   try {
-    console.log(`Attempting to send email from ${name} (${email})...`);
+    if (!(await allowContactSubmission())) {
+      return { success: false, error: "Too many messages. Please try again in a few minutes." };
+    }
+  } catch {
+    console.error("Contact rate limiter is unavailable or misconfigured.");
+    return deliveryFailure;
+  }
 
-    const data = await resend.emails.send({
+  try {
+    const resend = new Resend(apiKey);
+    const { error } = await resend.emails.send({
       from: `Portfolio <${fromEmail}>`,
       to: [toEmail],
       subject: `[Portfolio] ${subject}: from ${name}`,
@@ -76,18 +92,14 @@ export async function sendEmail(formData: {
       replyTo: email,
     });
 
-    if (data.error) {
-      console.error("Resend API Error:", data.error);
-      return { success: false, error: data.error.message };
+    if (error) {
+      console.error("Resend rejected contact email:", error.name);
+      return deliveryFailure;
     }
 
-    console.log("Email sent successfully.", data);
-    return { success: true, data };
-  } catch (error: unknown) {
-    const message =
-      error instanceof Error ? error.message : "Internal server error";
-
-    console.error("Server Action Error:", error);
-    return { success: false, error: message };
+    return { success: true };
+  } catch {
+    console.error("Resend contact request failed.");
+    return deliveryFailure;
   }
 }
