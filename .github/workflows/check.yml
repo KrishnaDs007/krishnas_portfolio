@@ -17,5 +17,7 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
+      - name: Use the npm version that generated the lockfile
+        run: npm install --global npm@11.20.0
       - run: npm ci
       - run: npm run check

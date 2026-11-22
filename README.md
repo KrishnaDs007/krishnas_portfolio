@@ -4,7 +4,7 @@ A Next.js portfolio with project case studies, a downloadable résumé, and a co
 
 ## Getting started
 
-Use Node.js 22 LTS, as specified in [`.nvmrc`](.nvmrc), and npm. If your version manager supports `.nvmrc`, run `nvm use` from the repository root.
+Use Node.js 22 LTS, as specified in [`.nvmrc`](.nvmrc), and npm 11.20.0, which CI uses to install the lockfile. If your version manager supports `.nvmrc`, run `nvm use` from the repository root and check `npm --version` before installing.
 
 ```sh
 npm ci
