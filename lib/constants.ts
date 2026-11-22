@@ -10,16 +10,45 @@ export interface ExperienceItem {
     description: string;
     skills: string[];
     achievements?: string[];
+    learning?: string;
 }
 
 export const experiences: ExperienceItem[] = [
+    {
+        id: 'exp-4',
+        title: 'Senior Data Scientist',
+        company: 'Brillio Technologies',
+        startDate: '15 October 2026',
+        endDate: 'Present',
+        isCurrent: true,
+        description: 'Work on a client project as a full-stack engineer, using Next.js across the frontend and server-side application.',
+        skills: ['Next.js', 'Full-Stack Development'],
+        learning: 'Developing a broader view of how frontend and server-side decisions fit together when delivering features for a client.'
+    },
+    {
+        id: 'exp-3',
+        title: 'Senior Developer',
+        company: 'Nucleo',
+        startDate: '1 September 2026',
+        endDate: '15 October 2026',
+        isCurrent: false,
+        description: 'Worked full-time at an early-stage startup, defining product workflows and module boundaries, planning the frontend architecture, and setting up a Turborepo workspace for the company’s UI projects. Mentored junior developers and new hires and helped interview and select engineering candidates.',
+        skills: ['Turborepo', 'Frontend Architecture', 'Technical Mentoring', 'Technical Interviewing'],
+        achievements: [
+            'Mapped core product workflows and defined how responsibilities were split across modules.',
+            'Created an architecture plan for the modules and set up a Turborepo workspace for the company’s frontend projects.',
+            'Wrote development guidelines for junior developers and mentored them and new hires as they joined the team.',
+            'Interviewed engineering candidates and contributed to hiring decisions.'
+        ],
+        learning: 'Learned how clear module boundaries, shared tooling, and written guidelines can help an early-stage team onboard and build consistently.'
+    },
     {
         id: 'exp-1',
         title: 'Senior Frontend Engineer',
         company: 'EnterpriseBot (Ebot AI IT Solutions Pvt. Ltd.)',
         location: 'Bangalore, India',
         startDate: 'September 2019',
-        endDate: 'June 2026',
+        endDate: '2 June 2026',
         isCurrent: false,
         description: 'Led micro frontend architecture using React and Webpack. Built shared UI libraries, improved performance, and delivered scalable enterprise dashboards.',
         skills: ['React', 'TypeScript', 'Micro Frontend', 'Webpack', 'Redux', 'Design Systems'],

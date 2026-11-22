@@ -15,8 +15,8 @@ export function Experience() {
               Experience & <span className="text-primary">Education</span>
             </div>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              A timeline of my professional career and academic background as a
-              Senior Frontend Developer.
+              My work across frontend architecture, full-stack development,
+              and team mentoring, alongside my academic background.
             </p>
           </div>
 
@@ -107,6 +107,12 @@ export function Experience() {
                       <p className="mb-3 leading-relaxed text-muted-foreground sm:mb-4">
                         {exp.description}
                       </p>
+                      {exp.learning && (
+                        <p className="mb-3 text-sm leading-relaxed text-muted-foreground sm:mb-4">
+                          <strong className="text-foreground">What I learned.</strong>{" "}
+                          {exp.learning}
+                        </p>
+                      )}
 
                       {/* Skills Tags */}
                       {exp.skills && exp.skills.length > 0 && (

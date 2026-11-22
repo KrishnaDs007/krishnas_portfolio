@@ -55,6 +55,14 @@ test("renders resume and layout entry points", () => {
   expect(viewport.width).toBe("device-width");
   render(<Resume />);
   expect(screen.getAllByRole("link", { name: /download/i }).length).toBeGreaterThan(0);
+  const career = within(screen.getByRole("region", { name: "Experience" }));
+  expect(career.getAllByRole("heading", { level: 3 }).map((heading) => heading.textContent)).toEqual([
+    "Senior Data Scientist", "Senior Developer", "Senior Frontend Engineer", "Frontend Developer",
+  ]);
+  expect(career.getByText("15 October 2026 - Present")).toBeVisible();
+  expect(career.getByText("1 September 2026 - 15 October 2026")).toBeVisible();
+  expect(career.getByText("September 2019 - 2 June 2026")).toBeVisible();
+  expect(career.getByText(/set up a Turborepo workspace/)).toBeVisible();
   expect(renderToStaticMarkup(<Layout><main id="main-content">Portfolio</main></Layout>))
     .toContain("Skip to main content");
 });

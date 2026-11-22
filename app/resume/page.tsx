@@ -98,9 +98,10 @@ export default function ResumePage() {
                   Krishna Devashish
                 </h1>
                 <p className="max-w-3xl text-lg leading-relaxed text-muted-foreground">
-                  Senior Frontend Engineer with 8+ years of experience building
-                  scalable React, TypeScript, Micro Frontend, design-system, and
-                  performance-focused web applications.
+                  Software engineer with 8+ years of experience in frontend
+                  architecture, design systems, and web performance. Currently
+                  delivering full-stack Next.js features on a client project
+                  at Brillio Technologies.
                 </p>
               </div>
 
@@ -166,6 +167,12 @@ export default function ResumePage() {
                             <li key={achievement}>- {achievement}</li>
                           ))}
                         </ul>
+                      )}
+                      {experience.learning && (
+                        <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+                          <strong className="text-foreground">What I learned.</strong>{" "}
+                          {experience.learning}
+                        </p>
                       )}
                       <div className="flex flex-wrap gap-2">
                         {experience.skills.map((skill) => (

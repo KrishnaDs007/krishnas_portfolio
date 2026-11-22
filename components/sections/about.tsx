@@ -148,7 +148,7 @@ export function About() {
                     </h3>
 
                     <p className="text-muted-foreground leading-relaxed">
-                      I am a Senior Frontend Engineer with 8+ years of experience. I build fast, scalable, and user-friendly web apps using React, TypeScript, and modern JavaScript. My goal is always clean code that performs well at scale.
+                      I’m a software engineer with 8+ years of experience building web applications. I specialize in frontend architecture with React and TypeScript, and I currently work on a full-stack Next.js client project at Brillio Technologies.
                     </p>
 
                     <p className="text-muted-foreground leading-relaxed">
