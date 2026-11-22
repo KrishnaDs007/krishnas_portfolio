@@ -52,7 +52,7 @@
       "/images/projects/learning-studio/learning-studio-question.webp",
       "/images/projects/learning-studio/learning-studio-practice.webp"
     ],
-    "videoUrl": "",
+    "videoUrl": null,
     "liveUrl": "https://learning-studio.krishnadevashish.com/",
     "githubUrl": "https://github.com/KrishnaDs007/learning-studio",
     "featured": true,
@@ -103,7 +103,7 @@
       "/images/projects/dsa-visualiser/dsa-visualiser-sorting.webp",
       "/images/projects/dsa-visualiser/dsa-visualiser-mobile.webp"
     ],
-    "videoUrl": "",
+    "videoUrl": null,
     "liveUrl": "https://dsa-vidualiser.vercel.app/",
     "githubUrl": "https://github.com/KrishnaDs007/dsa-vidualiser",
     "featured": true,
@@ -157,7 +157,7 @@
       "/images/projects/ai-summariser/ai-summariser-links.webp",
       "/images/projects/ai-summariser/ai-summariser-page-icon.webp"
     ],
-    "videoUrl": "",
+    "videoUrl": null,
     "liveUrl": null,
     "githubUrl": "https://github.com/KrishnaDs007/learning/tree/main/SummariserExtension",
     "featured": false,
@@ -206,7 +206,7 @@
       "/images/projects/minifincorp/minifincorp7.webp",
       "/images/projects/minifincorp/minifincorp8.webp"
     ],
-    "videoUrl": "",
+    "videoUrl": null,
     "liveUrl": "https://minifincorp.in",
     "githubUrl": "https://github.com/KrishnaDs007/MiniFinCorp",
     "featured": false,

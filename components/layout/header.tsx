@@ -14,9 +14,8 @@ import {
 } from "lucide-react";
 import type { ComponentType } from "react";
 import { useTheme } from "next-themes";
-import { NAV_ITEMS, NAV_SECTION_IDS } from "@/lib/navigation-config";
+import { NAV_ITEMS } from "@/lib/navigation-config";
 import { scrollToSection } from "@/lib/scroll-utils";
-import { useScrollSpy } from "@/hooks/use-scroll-spy";
 
 const NAV_ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   Home,
@@ -26,9 +25,8 @@ const NAV_ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   Mail,
 };
 
-export function Header() {
+export function Header({ activeSection }: { activeSection: string }) {
   const { resolvedTheme, setTheme } = useTheme();
-  const activeSection = useScrollSpy(NAV_SECTION_IDS);
   const navRef = useRef<HTMLElement>(null);
   const itemRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const [indicatorStyle, setIndicatorStyle] = useState({
@@ -58,7 +56,6 @@ export function Header() {
 
   useEffect(() => {
     const nav = navRef.current;
-    if (!nav) return;
 
     let frameId = 0;
     const scheduleUpdate = () => {
@@ -67,7 +64,7 @@ export function Header() {
     };
     scheduleUpdate();
     const observer = new ResizeObserver(scheduleUpdate);
-    observer.observe(nav);
+    if (nav) observer.observe(nav);
 
     window.addEventListener("resize", scheduleUpdate);
 

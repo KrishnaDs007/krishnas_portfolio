@@ -1,5 +1,4 @@
-import { Header } from "@/components/layout/header";
-import { MobileNav } from "@/components/layout/mobile-nav";
+import { PortfolioNavigation } from "@/components/layout/portfolio-navigation";
 import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/sections/hero";
 import { About } from "@/components/sections/about";
@@ -7,22 +6,20 @@ import { Experience } from "@/components/sections/experience";
 import { Skills } from "@/components/sections/skills";
 import { Projects } from "@/components/sections/projects";
 import { Contact } from "@/components/sections/contact";
+import { getProjectCards, getProjectCategories } from "@/lib/projects-utils";
 
 export default function Home() {
   return (
-    <>
-      <Header />
+    <PortfolioNavigation>
       <main id="main-content" className="relative">
         <Hero />
         <About />
         <Experience />
         <Skills />
-        <Projects />
-        {/* <Testimonials /> */}
+        <Projects projects={getProjectCards()} categories={getProjectCategories()} />
         <Contact />
       </main>
       <Footer />
-      <MobileNav />
-    </>
+    </PortfolioNavigation>
   );
 }

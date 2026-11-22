@@ -3,9 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ComponentType } from "react";
 import { Briefcase, FolderGit2, Home, Mail, User } from "lucide-react";
-import { NAV_ITEMS, NAV_SECTION_IDS } from "@/lib/navigation-config";
+import { NAV_ITEMS } from "@/lib/navigation-config";
 import { scrollToSection } from "@/lib/scroll-utils";
-import { useScrollSpy } from "@/hooks/use-scroll-spy";
 
 const NAV_ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   Home,
@@ -15,8 +14,7 @@ const NAV_ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   Mail,
 };
 
-export function MobileNav() {
-  const activeSection = useScrollSpy(NAV_SECTION_IDS);
+export function MobileNav({ activeSection }: { activeSection: string }) {
   const [isVisible, setIsVisible] = useState(true);
   const navItemsRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -47,7 +45,6 @@ export function MobileNav() {
 
   useEffect(() => {
     const navItems = navItemsRef.current;
-    if (!navItems) return;
 
     let frameId = 0;
     const scheduleUpdate = () => {
@@ -56,7 +53,7 @@ export function MobileNav() {
     };
     scheduleUpdate();
     const observer = new ResizeObserver(scheduleUpdate);
-    observer.observe(navItems);
+    if (navItems) observer.observe(navItems);
 
     window.addEventListener("resize", scheduleUpdate);
 

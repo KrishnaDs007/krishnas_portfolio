@@ -24,10 +24,21 @@ export const useScrollSpy = (sectionIds: string[]): string => {
             }
         };
 
-        window.addEventListener('scroll', handleScroll);
+        let frame: number | null = null;
+        const scheduleScroll = () => {
+            if (frame !== null) return;
+            frame = window.requestAnimationFrame(() => {
+                frame = null;
+                handleScroll();
+            });
+        };
+        window.addEventListener('scroll', scheduleScroll, { passive: true });
         handleScroll(); // Call once on mount
 
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', scheduleScroll);
+            if (frame !== null) window.cancelAnimationFrame(frame);
+        };
     }, [sectionIds]);
 
     return activeSection;

@@ -21,14 +21,28 @@ export interface ProjectData {
   year: string;
 }
 
+export type ProjectCard = Pick<ProjectData,
+  "id" | "title" | "category" | "shortDescription" | "year" | "featured" |
+  "technologies" | "liveUrl" | "githubUrl"
+> & { image: string };
+
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 
 const isStringArray = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((item) => typeof item === "string");
 
-const isNullableString = (value: unknown): value is string | null =>
-  typeof value === "string" || value === null;
+const isHttpUrlOrNull = (value: unknown): value is string | null => {
+  if (value === null) return true;
+  if (typeof value !== "string") return false;
+  try {
+    const url = new URL(value);
+    return (url.protocol === "https:" || url.protocol === "http:") &&
+      !url.username && !url.password;
+  } catch {
+    return false;
+  }
+};
 
 const requireString = (
   project: Record<string, unknown>,
@@ -73,15 +87,15 @@ const validateProject = (project: unknown, index: number): ProjectData => {
     throw new Error(`Project ${index} must include at least one image.`);
   }
 
-  if (!isNullableString(project.videoUrl)) {
+  if (!isHttpUrlOrNull(project.videoUrl)) {
     throw new Error(`Project ${index} has an invalid "videoUrl".`);
   }
 
-  if (!isNullableString(project.liveUrl)) {
+  if (!isHttpUrlOrNull(project.liveUrl)) {
     throw new Error(`Project ${index} has an invalid "liveUrl".`);
   }
 
-  if (!isNullableString(project.githubUrl)) {
+  if (!isHttpUrlOrNull(project.githubUrl)) {
     throw new Error(`Project ${index} has an invalid "githubUrl".`);
   }
 
@@ -116,7 +130,15 @@ const getValidatedProjects = (): ProjectData[] => {
     throw new Error("Project data must be an array.");
   }
 
-  return projectsData.map(validateProject);
+  const ids = new Set<string>();
+  return projectsData.map((entry, index) => {
+    const project = validateProject(entry, index);
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(project.id) || ids.has(project.id)) {
+      throw new Error(`Project ${index} has an invalid or duplicate ID.`);
+    }
+    ids.add(project.id);
+    return project;
+  });
 };
 
 const validatedProjects = getValidatedProjects();
@@ -136,10 +158,10 @@ export const getProjectCategories = (): string[] => {
   return ["All Projects", ...Array.from(categories)];
 };
 
-export const getProjectsByCategory = (category: string): ProjectData[] => {
-  if (category === "All Projects") {
-    return validatedProjects;
-  }
-
-  return validatedProjects.filter((project) => project.category === category);
-};
+export const getProjectCards = (): ProjectCard[] =>
+  validatedProjects.map(({
+    id, title, category, shortDescription, year, featured, technologies, liveUrl, githubUrl, images,
+  }) => ({
+    id, title, category, shortDescription, year, featured, technologies, liveUrl, githubUrl,
+    image: images[0],
+  }));

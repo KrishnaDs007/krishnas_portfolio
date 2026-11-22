@@ -4,23 +4,20 @@ import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Github, ArrowRight, Star } from "lucide-react";
-import { getProjects, getProjectCategories } from "@/lib/projects-utils";
+import type { ProjectCard } from "@/lib/projects-utils";
 
 const PROJECTS_PER_PAGE = 6; // Show 6 projects initially (2 rows of 3)
-const ALL_PROJECTS = getProjects();
-const CATEGORIES = getProjectCategories();
-
-export function Projects() {
+export function Projects({ projects, categories }: { projects: ProjectCard[]; categories: string[] }) {
   const [activeTab, setActiveTab] = useState("All Projects");
   const [showAll, setShowAll] = useState(false);
 
   // Filter projects by category
   const filteredProjects = useMemo(() => {
     if (activeTab === "All Projects") {
-      return ALL_PROJECTS;
+      return projects;
     }
-    return ALL_PROJECTS.filter((project) => project.category === activeTab);
-  }, [activeTab]);
+    return projects.filter((project) => project.category === activeTab);
+  }, [activeTab, projects]);
 
   // Apply pagination
   const displayedProjects = showAll
@@ -52,7 +49,7 @@ export function Projects() {
 
           {/* Category Tabs */}
           <div className="mb-8 flex flex-wrap gap-2 sm:gap-3 lg:mb-12">
-            {CATEGORIES.map((category) => (
+            {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => {
@@ -82,7 +79,7 @@ export function Projects() {
                 {/* Project Image */}
                 <div className="relative aspect-[16/10] bg-accent overflow-hidden">
                   <Image
-                    src={project.images[0]}
+                    src={project.image}
                     alt={project.title}
                     fill
                     sizes="(min-width: 1024px) 384px, (min-width: 768px) 50vw, calc(100vw - 32px)"
