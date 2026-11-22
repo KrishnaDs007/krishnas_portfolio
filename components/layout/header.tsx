@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import type { ComponentType } from "react";
 import { useTheme } from "next-themes";
-import { NAV_ITEMS } from "@/lib/navigation-config";
+import { NAV_ITEMS, NAV_SECTION_IDS } from "@/lib/navigation-config";
 import { scrollToSection } from "@/lib/scroll-utils";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
 
@@ -27,8 +27,8 @@ const NAV_ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
 };
 
 export function Header() {
-  const { theme, setTheme } = useTheme();
-  const activeSection = useScrollSpy(NAV_ITEMS.map((item) => item.id));
+  const { resolvedTheme, setTheme } = useTheme();
+  const activeSection = useScrollSpy(NAV_SECTION_IDS);
   const navRef = useRef<HTMLElement>(null);
   const itemRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const [indicatorStyle, setIndicatorStyle] = useState({
@@ -60,10 +60,12 @@ export function Header() {
     const nav = navRef.current;
     if (!nav) return;
 
+    let frameId = 0;
     const scheduleUpdate = () => {
-      window.requestAnimationFrame(updateIndicator);
+      window.cancelAnimationFrame(frameId);
+      frameId = window.requestAnimationFrame(updateIndicator);
     };
-    const frameId = window.requestAnimationFrame(updateIndicator);
+    scheduleUpdate();
     const observer = new ResizeObserver(scheduleUpdate);
     observer.observe(nav);
 
@@ -89,6 +91,12 @@ export function Header() {
     return Icon ? <Icon className="h-4 w-4" /> : null;
   };
 
+  const toggleTheme = () => {
+    const currentTheme = resolvedTheme ??
+      (document.documentElement.classList.contains("dark") ? "dark" : "light");
+    setTheme(currentTheme === "dark" ? "light" : "dark");
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
@@ -110,9 +118,9 @@ export function Header() {
           >
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute top-1 bottom-1 rounded-lg border border-primary/30 bg-[linear-gradient(135deg,rgba(255,255,255,0.55),rgba(255,59,48,0.18)_42%,rgba(255,255,255,0.10))] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),inset_0_-1px_0_rgba(255,59,48,0.18),0_10px_24px_rgba(255,59,48,0.20),0_2px_8px_rgba(0,0,0,0.14)] backdrop-blur-xl transition-[left,width,opacity] duration-300 ease-out dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.16),rgba(255,59,48,0.24)_45%,rgba(255,255,255,0.06))] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.20),inset_0_-1px_0_rgba(255,59,48,0.18),0_10px_24px_rgba(255,59,48,0.22),0_2px_10px_rgba(0,0,0,0.35)]"
+              className="pointer-events-none absolute top-1 bottom-1 rounded-lg border border-primary/30 bg-[linear-gradient(135deg,rgba(255,255,255,0.55),rgba(255,59,48,0.18)_42%,rgba(255,255,255,0.10))] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),inset_0_-1px_0_rgba(255,59,48,0.18),0_10px_24px_rgba(255,59,48,0.20),0_2px_8px_rgba(0,0,0,0.14)] backdrop-blur-xl left-0 transition-[transform,width,opacity] duration-300 ease-out dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.16),rgba(255,59,48,0.24)_45%,rgba(255,255,255,0.06))] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.20),inset_0_-1px_0_rgba(255,59,48,0.18),0_10px_24px_rgba(255,59,48,0.22),0_2px_10px_rgba(0,0,0,0.35)]"
               style={{
-                left: indicatorStyle.left,
+                transform: `translateX(${indicatorStyle.left}px)`,
                 width: indicatorStyle.width,
                 opacity: indicatorStyle.opacity,
               }}
@@ -141,7 +149,8 @@ export function Header() {
           {/* Right side - Theme toggle only */}
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              type="button"
+              onClick={toggleTheme}
               className="relative p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
               aria-label="Toggle theme"
             >

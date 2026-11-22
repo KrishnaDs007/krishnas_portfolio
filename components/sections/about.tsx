@@ -49,7 +49,7 @@ export function About() {
                       src="/images/Krishna.jpeg"
                       alt="Krishna Devashish"
                       fill
-                      sizes="(min-width: 1024px) 384px, (min-width: 640px) 384px, 320px"
+                      sizes="(min-width: 640px) 382px, (min-width: 352px) 318px, calc(100vw - 34px)"
                       quality={60}
                       className="object-cover"
                     />

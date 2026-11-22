@@ -32,3 +32,5 @@ export const NAV_ITEMS: NavItem[] = [
         icon: 'Mail',
     },
 ];
+
+export const NAV_SECTION_IDS = NAV_ITEMS.map((item) => item.id);

@@ -144,6 +144,7 @@ export function Projects() {
                   <div className="flex gap-3">
                     <Link
                       href={`/projects/${project.id}`}
+                      aria-label={`View details for ${project.title}`}
                       className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90"
                     >
                       <span>View Details</span>

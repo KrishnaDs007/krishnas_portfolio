@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ComponentType } from "react";
 import { Briefcase, FolderGit2, Home, Mail, User } from "lucide-react";
-import { NAV_ITEMS } from "@/lib/navigation-config";
+import { NAV_ITEMS, NAV_SECTION_IDS } from "@/lib/navigation-config";
 import { scrollToSection } from "@/lib/scroll-utils";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
 
@@ -16,7 +16,7 @@ const NAV_ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
 };
 
 export function MobileNav() {
-  const activeSection = useScrollSpy(NAV_ITEMS.map((item) => item.id));
+  const activeSection = useScrollSpy(NAV_SECTION_IDS);
   const [isVisible, setIsVisible] = useState(true);
   const navItemsRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -49,10 +49,12 @@ export function MobileNav() {
     const navItems = navItemsRef.current;
     if (!navItems) return;
 
+    let frameId = 0;
     const scheduleUpdate = () => {
-      window.requestAnimationFrame(updateIndicator);
+      window.cancelAnimationFrame(frameId);
+      frameId = window.requestAnimationFrame(updateIndicator);
     };
-    const frameId = window.requestAnimationFrame(updateIndicator);
+    scheduleUpdate();
     const observer = new ResizeObserver(scheduleUpdate);
     observer.observe(navItems);
 
@@ -119,9 +121,9 @@ export function MobileNav() {
       >
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute top-2 bottom-2 rounded-xl border border-primary/25 bg-[linear-gradient(135deg,rgba(255,255,255,0.45),rgba(255,59,48,0.16)_45%,rgba(255,255,255,0.08))] shadow-[inset_0_1px_0_rgba(255,255,255,0.50),inset_0_-1px_0_rgba(255,59,48,0.16),0_8px_22px_rgba(255,59,48,0.16),0_2px_8px_rgba(0,0,0,0.14)] backdrop-blur-xl transition-[left,width,opacity] duration-300 ease-out dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.14),rgba(255,59,48,0.22)_45%,rgba(255,255,255,0.05))] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),inset_0_-1px_0_rgba(255,59,48,0.16),0_8px_22px_rgba(255,59,48,0.18),0_2px_10px_rgba(0,0,0,0.35)]"
+          className="pointer-events-none absolute top-2 bottom-2 rounded-xl border border-primary/25 bg-[linear-gradient(135deg,rgba(255,255,255,0.45),rgba(255,59,48,0.16)_45%,rgba(255,255,255,0.08))] shadow-[inset_0_1px_0_rgba(255,255,255,0.50),inset_0_-1px_0_rgba(255,59,48,0.16),0_8px_22px_rgba(255,59,48,0.16),0_2px_8px_rgba(0,0,0,0.14)] backdrop-blur-xl left-0 transition-[transform,width,opacity] duration-300 ease-out dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.14),rgba(255,59,48,0.22)_45%,rgba(255,255,255,0.05))] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),inset_0_-1px_0_rgba(255,59,48,0.16),0_8px_22px_rgba(255,59,48,0.18),0_2px_10px_rgba(0,0,0,0.35)]"
           style={{
-            left: indicatorStyle.left,
+            transform: `translateX(${indicatorStyle.left}px)`,
             width: indicatorStyle.width,
             opacity: indicatorStyle.opacity,
           }}
