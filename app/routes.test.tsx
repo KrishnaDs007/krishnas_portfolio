@@ -15,6 +15,7 @@ import { education, socialLinks } from "@/lib/constants";
 import { MobileNav } from "@/components/layout/mobile-nav";
 
 jest.mock("@/app/actions/send-email", () => ({ sendEmail: jest.fn() }));
+jest.mock("@vercel/speed-insights/next", () => ({ SpeedInsights: () => null }));
 
 let resize: ResizeObserverCallback;
 let intersect: IntersectionObserverCallback;

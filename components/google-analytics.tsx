@@ -1,9 +1,11 @@
 "use client";
 
 import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { useState, useSyncExternalStore } from "react";
 
 const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const speedInsightsEnabled = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
 const consentKey = "analytics-consent";
 
 function subscribe(onChange: () => void) {
@@ -50,10 +52,21 @@ export function GoogleAnalytics() {
   );
 }
 
+export function PortfolioSpeedInsights() {
+  const preference = useSyncExternalStore(subscribe, getPreference, getServerPreference);
+  if (!speedInsightsEnabled || preference !== "allowed") return null;
+
+  return (
+    <SpeedInsights
+      beforeSend={(event) => getPreference() === "allowed" ? event : null}
+    />
+  );
+}
+
 export function AnalyticsPreference() {
   const preference = useSyncExternalStore(subscribe, getPreference, getServerPreference);
   const [saveFailed, setSaveFailed] = useState(false);
-  if (!measurementId || preference === "blocked") return null;
+  if ((!measurementId && !speedInsightsEnabled) || preference === "blocked") return null;
 
   const togglePreference = () => {
     try {

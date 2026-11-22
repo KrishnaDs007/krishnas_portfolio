@@ -16,6 +16,12 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 - With analytics enabled, confirm the browser requests `googletagmanager.com/gtag/js` after load and the pageview appears in GA4 Realtime.
 - Disable analytics in the footer and confirm the script is absent after the page reloads.
 
+## Vercel Speed Insights
+
+- Enable Speed Insights in the Vercel project's dashboard before deploying. Keep Vercel's system environment variables exposed so the Next.js build can identify production via `NEXT_PUBLIC_VERCEL_ENV`.
+- Deploy and visit the production site with analytics enabled. Confirm that Web Vitals appear in the Speed Insights production view. Local and preview builds do not send Speed Insights events.
+- Disable analytics in the site footer and confirm that Speed Insights does not load on the next page load. The same setting applies to GA4.
+
 ## Vercel Environment Variables
 
 - Save `RESEND_API_KEY` as a Sensitive environment variable in Vercel.
