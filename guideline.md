@@ -28,3 +28,11 @@ These conventions apply to future work in this portfolio repository.
 - Run `npm run check` before opening a pull request. Add focused regression tests for changed behavior. Use browser verification for routing, styling, motion, or interactions that depend on real layout.
 - Keep the coverage scope intact. The configured gate requires 100% statements and lines and at least 98% branches and functions.
 - Document deployment changes and call out external integrations that were not verified. Keep commit messages concise and describe the change they introduce.
+
+## Dependency security
+
+- Run `npm audit` before merging dependency changes and review it monthly for newly published advisories. Run `npm audit --omit=dev` to identify findings in the production dependency tree. Review build and test dependencies too because they run locally and in CI.
+- Use `npm explain <package>` to identify the parent of a vulnerable transitive dependency. Upgrade that parent or apply a compatible fix with `npm audit fix`. Review the manifest and lockfile diff before accepting any update. Avoid using `npm audit fix --force` as a default because it can cross major versions.
+- Use a narrowly scoped npm override only when a patched parent release is unavailable. Check compatibility with the supported Node version, record why the override exists in the pull request, and remove it when the parent resolves to a patched version on its own.
+- Commit `package.json` and `package-lock.json` together when both change. Verify with `npm ci`, `npm run check`, and both audit commands on the Node version in `.nvmrc`. After a framework or runtime dependency upgrade, smoke-test the affected production routes and integrations in a preview environment.
+- If a finding remains, record the advisory, affected dependency path, production or development exposure, and the follow-up owner and review date. Recheck when a patched release becomes available.
