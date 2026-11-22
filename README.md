@@ -22,6 +22,8 @@ Open [localhost:3000](http://localhost:3000). The site can run locally without p
 | `CONTACT_TO_EMAIL` | Server, optional | Overrides the portfolio contact inbox. |
 | `UPSTASH_REDIS_REST_URL` | Server, required for production contact submissions | Endpoint for shared rate limiting. |
 | `UPSTASH_REDIS_REST_TOKEN` | Server, required for production contact submissions | Credential for the Redis endpoint. |
+| `GROQ_API_KEY` | Server, optional | Enables free-form career questions. Suggested answers work without a key. |
+| `GROQ_MODEL` | Server, optional | Overrides the default Groq model, `openai/gpt-oss-20b`. |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Browser, optional | Enables Google Analytics with the visitor's analytics preference applied. |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Public metadata, optional | Publishes the Google Search Console verification token. |
 
@@ -44,6 +46,8 @@ Store production credentials in the hosting provider's environment settings. Kee
 The home, résumé, and project case studies are statically rendered. Interactive sections use client components. The project grid receives a compact card model, while full case-study data stays with the server routes.
 
 The contact server action validates submissions, applies a shared rate limit, and sends the email through Resend. On Vercel, the limit is five attempts per client IP in a ten-minute window. Other hosts use a shared bucket. The form returns a temporary delivery error when the rate limiter is unavailable in production.
+
+The career chat loads when a visitor opens it. Suggested questions use built-in answers. For a typed question, Groq selects a topic from a fixed list and the site returns the corresponding portfolio answer. Production requests use Redis with a separate five-attempt bucket per client IP on Vercel. When Groq or Redis is unavailable, the chat points visitors to the suggested answers and contact form.
 
 ## Testing and checks
 

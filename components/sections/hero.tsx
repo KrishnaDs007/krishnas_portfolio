@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { CareerChat } from "./career-chat";
+import { getCareerAnswers } from "@/lib/career-answers";
 import {
   ArrowRight,
   Download,
@@ -55,7 +57,7 @@ export function Hero() {
                   href="#projects"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
                 >
-                  View My Work
+                  View Architecture Work
                   <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
@@ -75,7 +77,14 @@ export function Hero() {
                   <FileText className="h-4 w-4" />
                   View Resume
                 </a>
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center rounded-lg border border-border bg-background px-6 py-3 font-medium hover:bg-accent transition-colors"
+                >
+                  Contact Me
+                </a>
               </div>
+              <CareerChat answers={getCareerAnswers()} />
 
               {/* Stats Section - Commented for later update */}
               {/* 

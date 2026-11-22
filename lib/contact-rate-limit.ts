@@ -8,7 +8,7 @@ if count == 1 then redis.call("EXPIRE", KEYS[1], ARGV[1]) end
 return count
 `;
 
-export async function allowContactSubmission() {
+export async function allowContactSubmission(scope: "contact" | "career-chat" = "contact") {
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!url && !token && process.env.NODE_ENV !== "production") return true;
@@ -29,7 +29,7 @@ export async function allowContactSubmission() {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(["EVAL", incrementWithExpiry, "1", `portfolio:contact:${environment}:${client}`, "600"]),
+    body: JSON.stringify(["EVAL", incrementWithExpiry, "1", `portfolio:${scope}:${environment}:${client}`, "600"]),
     cache: "no-store",
     signal: AbortSignal.timeout(3000),
   });
