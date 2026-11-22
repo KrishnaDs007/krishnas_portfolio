@@ -13,11 +13,14 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
 - Redeploy the site after adding the variable.
-- Confirm the production page source includes `googletagmanager.com/gtag/js`.
+- With analytics enabled, confirm the browser requests `googletagmanager.com/gtag/js` after load and the pageview appears in GA4 Realtime.
+- Disable analytics in the footer and confirm the script is absent after the page reloads.
 
 ## Vercel Environment Variables
 
 - Save `RESEND_API_KEY` as a Sensitive environment variable in Vercel.
+- Set `RESEND_FROM_EMAIL` to an address on your verified Resend domain. Set `CONTACT_TO_EMAIL` only to override the default inbox.
+- Set `UPSTASH_REDIS_REST_URL` and save `UPSTASH_REDIS_REST_TOKEN` as Sensitive before deploying. Contact submissions require both.
 - If Vercel shows that the current `RESEND_API_KEY` value is visible, rotate the key in Resend first, then replace it in Vercel as Sensitive.
 - Do not mark `NEXT_PUBLIC_GA_MEASUREMENT_ID` as Sensitive. It is a public browser variable and must be readable by the client bundle.
 - Add `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` only after Google Search Console gives you the HTML meta-tag token.
