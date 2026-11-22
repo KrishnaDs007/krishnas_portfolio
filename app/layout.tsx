@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site-config";
 const googleSiteVerification =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
 
   title: {
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport = {
+const viewport = {
   width: "device-width",
   initialScale: 1,
   // maximumScale: 1,
@@ -117,6 +117,8 @@ export const viewport = {
   ],
   colorScheme: "dark light",
 };
+
+export { metadata, viewport };
 
 export default function RootLayout({
   children,

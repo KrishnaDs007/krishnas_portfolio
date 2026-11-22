@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 
 // Icon mapping for skills
-export const skillIcons: Record<string, LucideIcon> = {
+const skillIcons: Record<string, LucideIcon> = {
     // Frontend
     'react': Code2,
     'nextjs': Code2,
@@ -51,7 +51,7 @@ export const skillIcons: Record<string, LucideIcon> = {
 };
 
 // Tool/Workflow icons
-export const toolIcons: Record<string, LucideIcon> = {
+const toolIcons: Record<string, LucideIcon> = {
     'vscode': FileCode,
     'git-github': GitBranch,
     'ci-cd-pipelines': Workflow,

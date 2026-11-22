@@ -9,7 +9,7 @@ import {
 } from "@/lib/constants";
 import { siteConfig } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Resume",
   description:
     "ATS-friendly resume for Krishna Devashish, Senior Frontend Engineer specializing in React, TypeScript, Micro Frontends, design systems, and performance.",
@@ -24,6 +24,8 @@ export const metadata: Metadata = {
     images: ["/og-image.jpeg"],
   },
 };
+
+export { metadata };
 
 const coreSkills = Array.from(
   new Set(
