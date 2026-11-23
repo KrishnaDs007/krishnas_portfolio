@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { CareerChat } from "./career-chat";
-import { getCareerAnswers } from "@/lib/career-answers";
 import {
   ArrowRight,
   Download,
@@ -86,7 +84,6 @@ export function Hero() {
                   Contact Me
                 </a>
               </div>
-              <CareerChat answers={getCareerAnswers()} />
 
               {/* Stats Section - Commented for later update */}
               {/* 

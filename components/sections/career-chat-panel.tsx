@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { Dialog } from "radix-ui";
 import { askAboutCareer } from "@/app/actions/career-chat";
 import {
   MAX_CAREER_QUESTION_LENGTH,
@@ -8,9 +9,9 @@ import {
 } from "@/lib/career-answers";
 
 const fallback = {
-  text: "I can answer questions about the work and experience listed on this site. Try a suggested question or use the contact form if you need more detail.",
-  href: "/#contact",
-  label: "Contact me",
+  text: "I can answer questions about the technologies and engineering practices I use. Try a suggested question or explore my projects.",
+  href: "/#projects",
+  label: "Explore projects",
 };
 
 export default function CareerChatPanel({
@@ -19,6 +20,7 @@ export default function CareerChatPanel({
   answers: CareerAnswer[];
 }) {
   const [question, setQuestion] = useState("");
+  const [askedQuestion, setAskedQuestion] = useState("");
   const [reply, setReply] = useState<Pick<
     CareerAnswer,
     "text" | "href" | "label"
@@ -31,6 +33,7 @@ export default function CareerChatPanel({
     if (!text || pending) return;
 
     setQuestion("");
+    setAskedQuestion(text);
     const suggested = answers.find(
       (answer) => answer.question.toLowerCase() === text.toLowerCase(),
     );
@@ -51,22 +54,45 @@ export default function CareerChatPanel({
   }
 
   return (
-    <section
-      aria-label="Ask about my work"
-      className="space-y-4 rounded-xl border border-border bg-card p-4 shadow-sm"
-    >
+    <div className="space-y-4">
       <div className="flex flex-wrap gap-2">
         {answers.map((answer) => (
           <button
             key={answer.id}
             type="button"
             disabled={pending}
-            onClick={() => setReply(answer)}
-            className="rounded-lg border border-border px-3 py-1.5 text-sm hover:bg-accent"
+            onClick={() => {
+              setAskedQuestion(answer.question);
+              setReply(answer);
+            }}
+            className="rounded-full border border-border px-3 py-1.5 text-left text-sm hover:bg-accent"
           >
             {answer.question}
           </button>
         ))}
+      </div>
+      {askedQuestion && (
+        <p className="ml-auto w-fit max-w-[90%] rounded-2xl rounded-br-sm bg-primary px-3 py-2 text-sm break-words text-primary-foreground">
+          {askedQuestion}
+        </p>
+      )}
+      <div role="status" className="text-sm">
+        {pending && <p className="text-muted-foreground">Finding an answer…</p>}
+        {reply && (
+          <div className="max-w-[95%] space-y-2 rounded-2xl rounded-bl-sm bg-accent px-3 py-2">
+            <p className="leading-relaxed text-accent-foreground">
+              {reply.text}
+            </p>
+            <Dialog.Close asChild>
+              <a
+                href={reply.href}
+                className="inline-block font-medium text-primary underline underline-offset-4"
+              >
+                {reply.label}
+              </a>
+            </Dialog.Close>
+          </div>
+        )}
       </div>
       <form onSubmit={submit} className="space-y-2">
         <label htmlFor="career-question" className="block text-sm font-medium">
@@ -95,22 +121,6 @@ export default function CareerChatPanel({
           of the chat.
         </p>
       </form>
-      <div role="status" className="space-y-2 text-sm">
-        {pending && <p>Finding an answer…</p>}
-        {reply && (
-          <>
-            <p className="leading-relaxed text-muted-foreground">
-              {reply.text}
-            </p>
-            <a
-              href={reply.href}
-              className="inline-block font-medium text-primary underline underline-offset-4"
-            >
-              {reply.label}
-            </a>
-          </>
-        )}
-      </div>
-    </section>
+    </div>
   );
 }

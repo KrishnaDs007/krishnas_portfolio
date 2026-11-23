@@ -11,29 +11,55 @@ const ask = jest.mocked(askAboutCareer);
 
 beforeEach(() => ask.mockReset());
 
+test("suggests only technical topics and keeps employers out of built-in answers", () => {
+  expect(answers.map(({ id }) => id)).toEqual([
+    "nextjs",
+    "architecture",
+    "monorepos",
+    "performance",
+    "design-systems",
+  ]);
+  expect(JSON.stringify(answers)).not.toMatch(
+    /Nucleo|Brillio|EnterpriseBot|Airtory/i,
+  );
+});
+
 async function openChat() {
   const user = userEvent.setup();
   render(<CareerChat answers={answers} />);
   expect(screen.queryByLabelText("Your question")).not.toBeInTheDocument();
   await user.click(screen.getByRole("button", { name: "Ask about my work" }));
   const input = await screen.findByLabelText("Your question");
+  expect(
+    screen.getByRole("dialog", { name: "Ask about my work" }),
+  ).toBeVisible();
   return { user, input, submit: screen.getByRole("button", { name: "Ask" }) };
 }
 
 test("loads on demand and answers suggested and exact questions without a server call", async () => {
   const { user, input, submit } = await openChat();
   await user.click(screen.getByRole("button", { name: answers[0].question }));
-  expect(screen.getByRole("status")).toHaveTextContent("Senior Data Scientist");
-  await user.type(input, answers[1].question);
+  expect(screen.getByRole("status")).toHaveTextContent("Next.js");
+  await user.type(input, answers[2].question);
   await user.click(submit);
   expect(screen.getByRole("status")).toHaveTextContent("Turborepo");
   expect(within(screen.getByRole("status")).getByRole("link")).toHaveAttribute(
     "href",
-    "/resume#experience-heading",
+    "/#skills",
   );
   expect(ask).not.toHaveBeenCalled();
   await user.click(screen.getByRole("button", { name: "Close chat" }));
   expect(screen.queryByLabelText("Your question")).not.toBeInTheDocument();
+});
+
+test("closes on Escape and returns focus to the floating launcher", async () => {
+  const { user, input } = await openChat();
+  await user.click(input);
+  await user.keyboard("{Escape}");
+  expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  expect(
+    screen.getByRole("button", { name: "Ask about my work" }),
+  ).toHaveFocus();
 });
 
 test("ignores empty and duplicate submissions while a model reply is pending", async () => {
@@ -47,18 +73,18 @@ test("ignores empty and duplicate submissions while a model reply is pending", a
       resolve = done;
     }),
   );
-  await user.type(input, "Tell me about your current role");
+  await user.type(input, "How do you build Next.js apps?");
   await user.click(submit);
   expect(screen.getByRole("status")).toHaveTextContent("Finding an answer");
   await user.type(input, "A second question");
   fireEvent.submit(form);
   expect(ask).toHaveBeenCalledTimes(1);
   await act(async () => resolve(answers[0]));
-  expect(screen.getByRole("status")).toHaveTextContent("Brillio");
+  expect(screen.getByRole("status")).toHaveTextContent("Next.js");
 });
 
 test.each([false, true])(
-  "falls back to contact when the request is unavailable (rejected=%s)",
+  "falls back to projects when the request is unavailable (rejected=%s)",
   async (rejected) => {
     const { user, input, submit } = await openChat();
     if (rejected) ask.mockRejectedValue(new Error("Offline"));
@@ -66,7 +92,7 @@ test.each([false, true])(
     await user.type(input, "Does this cover my question?");
     await user.click(submit);
     expect(
-      await screen.findByRole("link", { name: "Contact me" }),
-    ).toHaveAttribute("href", "/#contact");
+      await screen.findByRole("link", { name: "Explore projects" }),
+    ).toHaveAttribute("href", "/#projects");
   },
 );

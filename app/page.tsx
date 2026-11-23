@@ -6,6 +6,8 @@ import { Experience } from "@/components/sections/experience";
 import { Skills } from "@/components/sections/skills";
 import { Projects } from "@/components/sections/projects";
 import { Contact } from "@/components/sections/contact";
+import { CareerChat } from "@/components/sections/career-chat";
+import { getCareerAnswers } from "@/lib/career-answers";
 import { getProjectCards, getProjectCategories } from "@/lib/projects-utils";
 
 export default function Home() {
@@ -23,6 +25,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <CareerChat answers={getCareerAnswers()} />
     </PortfolioNavigation>
   );
 }

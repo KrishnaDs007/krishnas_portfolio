@@ -32,7 +32,7 @@ test.each([null, "  ", "x".repeat(301)])(
 
 test("keeps model calls disabled without a key", async () => {
   delete process.env.GROQ_API_KEY;
-  await expect(askAboutCareer("Tell me about Nucleo")).resolves.toBeNull();
+  await expect(askAboutCareer("Tell me about Turborepo")).resolves.toBeNull();
   expect(allow).not.toHaveBeenCalled();
 });
 
@@ -40,21 +40,21 @@ test("returns the curated answer for a valid topic", async () => {
   jest
     .mocked(fetch)
     .mockResolvedValue(
-      Response.json({ choices: [{ message: { content: " nucleo " } }] }),
+      Response.json({ choices: [{ message: { content: " monorepos " } }] }),
     );
-  await expect(askAboutCareer(" Tell me about Nucleo ")).resolves.toMatchObject(
-    {
-      id: "nucleo",
-      text: expect.stringContaining("Turborepo"),
-    },
-  );
+  await expect(
+    askAboutCareer(" Tell me about Turborepo "),
+  ).resolves.toMatchObject({
+    id: "monorepos",
+    text: expect.stringContaining("Turborepo"),
+  });
   expect(allow).toHaveBeenCalledWith("career-chat");
   const [url, options] = jest.mocked(fetch).mock.calls[0];
   expect(url).toBe("https://api.groq.com/openai/v1/chat/completions");
   expect(JSON.parse(String(options?.body))).toMatchObject({
     model: "openai/gpt-oss-20b",
     messages: expect.arrayContaining([
-      { role: "user", content: "Tell me about Nucleo" },
+      { role: "user", content: "Tell me about Turborepo" },
     ]),
   });
 });

@@ -47,7 +47,7 @@ The home, résumé, and project case studies are statically rendered. Interactiv
 
 The contact server action validates submissions, applies a shared rate limit, and sends the email through Resend. On Vercel, the limit is five attempts per client IP in a ten-minute window. Other hosts use a shared bucket. The form returns a temporary delivery error when the rate limiter is unavailable in production.
 
-The career chat loads when a visitor opens it. Suggested questions use built-in answers. For a typed question, Groq selects a topic from a fixed list and the site returns the corresponding portfolio answer. Production requests use Redis with a separate five-attempt bucket per client IP on Vercel. When Groq or Redis is unavailable, the chat points visitors to the suggested answers and contact form.
+The career chat loads when a visitor opens it. Suggested questions use built-in answers. For a typed question, Groq selects a topic from a fixed list and the site returns the corresponding portfolio answer. Production requests use Redis with a separate five-attempt bucket per client IP on Vercel. When Groq or Redis is unavailable, the chat points visitors to suggested technology questions and public projects.
 
 ## Testing and checks
 
