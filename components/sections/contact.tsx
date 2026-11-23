@@ -16,6 +16,7 @@ import {
   getContactMessageError,
 } from "@/lib/contact-message";
 import { sendEmail } from "@/app/actions/send-email";
+import { QuickMessageForm } from "./quick-message-form";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -28,7 +29,6 @@ export function Contact() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [quickMessage, setQuickMessage] = useState("");
 
   useEffect(() => {
     if (!error) return;
@@ -43,15 +43,6 @@ export function Contact() {
     const timeout = window.setTimeout(() => setShowSuccess(false), 5000);
     return () => window.clearTimeout(timeout);
   }, [showSuccess]);
-
-  const handleQuickMail = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!quickMessage.trim()) return;
-    const subject = encodeURIComponent("Quick Collaboration / Inquiry");
-    const body = encodeURIComponent(quickMessage);
-    window.location.href = `mailto:${contactInfo.email}?subject=${subject}&body=${body}`;
-    setQuickMessage("");
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -151,30 +142,11 @@ export function Contact() {
                     </p>
                   </div>
 
-                  <form
-                    onSubmit={handleQuickMail}
-                    className="w-full min-w-0 space-y-4"
-                  >
-                    <div className="relative">
-                      <textarea
-                        value={quickMessage}
-                        onChange={(e) => setQuickMessage(e.target.value)}
-                        aria-label="Quick project message"
-                        placeholder="What should we create together?..."
-                        required
-                        rows={3}
-                        className="min-h-32 w-full resize-none rounded-xl border border-border bg-background/80 px-4 py-3 pr-14 text-base text-foreground transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 sm:px-5 sm:py-4 sm:text-lg lg:min-h-36"
-                      />
-                      <button
-                        type="submit"
-                        className="absolute bottom-4 right-4 p-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20"
-                        title="Send via Email"
-                        aria-label="Send quick message by email"
-                      >
-                        <Send className="h-5 w-5" />
-                      </button>
-                    </div>
-                  </form>
+                  <QuickMessageForm
+                    source="quick-form"
+                    label="Quick project message"
+                    placeholder="What should we create together?"
+                  />
                 </div>
               </div>
             </div>

@@ -1,10 +1,12 @@
 import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { askAboutCareer } from "@/app/actions/career-chat";
+import { sendQuickMessage } from "@/app/actions/send-email";
 import { getCareerAnswers } from "@/lib/career-answers";
 import { CareerChat } from "./career-chat";
 
 jest.mock("@/app/actions/career-chat", () => ({ askAboutCareer: jest.fn() }));
+jest.mock("@/app/actions/send-email", () => ({ sendQuickMessage: jest.fn() }));
 
 const answers = getCareerAnswers();
 const ask = jest.mocked(askAboutCareer);
@@ -60,6 +62,58 @@ test("closes on Escape and returns focus to the floating launcher", async () => 
   expect(
     screen.getByRole("button", { name: "Ask about my work" }),
   ).toHaveFocus();
+});
+
+test("sends a message from the chat without asking Groq", async () => {
+  const { user, input, submit } = await openChat();
+  jest.mocked(sendQuickMessage).mockResolvedValue({ success: true });
+  expect(
+    screen.queryByRole("textbox", { name: "Message for Krishna" }),
+  ).not.toBeInTheDocument();
+  expect(
+    screen.queryByRole("button", { name: "Send a message" }),
+  ).not.toBeInTheDocument();
+  await user.type(input, "Can I send you a message?");
+  await user.click(submit);
+  expect(
+    screen.getByText("Write your message below to send it to Krishna."),
+  ).toBeVisible();
+  expect(sendQuickMessage).not.toHaveBeenCalled();
+  await user.type(
+    screen.getByRole("textbox", { name: "Message for Krishna" }),
+    "I have a project to discuss.",
+  );
+  await user.click(
+    screen.getByRole("button", { name: "Send message to Krishna" }),
+  );
+  expect(await screen.findByText("Message sent.")).toBeVisible();
+  expect(sendQuickMessage).toHaveBeenCalledWith(
+    "I have a project to discuss.",
+    "chat",
+  );
+  expect(ask).not.toHaveBeenCalled();
+  await user.click(screen.getByRole("button", { name: answers[0].question }));
+  expect(
+    screen.queryByRole("textbox", { name: "Message for Krishna" }),
+  ).not.toBeInTheDocument();
+});
+
+test("shows messaging for a direct request and keeps technical email questions in chat", async () => {
+  const { user, input, submit } = await openChat();
+  ask.mockResolvedValue(answers[0]);
+  await user.type(input, "send a message");
+  await user.click(submit);
+  expect(
+    screen.getByRole("textbox", { name: "Message for Krishna" }),
+  ).toBeVisible();
+  expect(ask).not.toHaveBeenCalled();
+  await user.type(input, "How do you send an email in Next.js?");
+  await user.click(submit);
+  expect(await screen.findByText(answers[0].text)).toBeVisible();
+  expect(ask).toHaveBeenCalledWith("How do you send an email in Next.js?");
+  expect(
+    screen.queryByRole("textbox", { name: "Message for Krishna" }),
+  ).not.toBeInTheDocument();
 });
 
 test("ignores empty and duplicate submissions while a model reply is pending", async () => {

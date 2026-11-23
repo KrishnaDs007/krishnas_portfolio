@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { Dialog } from "radix-ui";
 import { askAboutCareer } from "@/app/actions/career-chat";
+import { QuickMessageForm } from "./quick-message-form";
 import {
   MAX_CAREER_QUESTION_LENGTH,
   type CareerAnswer,
@@ -13,6 +14,9 @@ const fallback = {
   href: "/#projects",
   label: "Explore projects",
 };
+
+const messageIntent =
+  /^(?:(?:can|could|may) i |(?:i want|i would like|i'd like) to |please |how (?:can|do) i )?(?:send (?:(?:you|krishna) )?(?:a )?(?:message|mail|email)(?: to (?:you|krishna))?|(?:leave|write) (?:(?:you|krishna) )?a message|contact (?:you|krishna)|(?:message|email) (?:you|krishna|me))\s*[.!?]*$/i;
 
 export default function CareerChatPanel({
   answers,
@@ -26,6 +30,7 @@ export default function CareerChatPanel({
     "text" | "href" | "label"
   > | null>(null);
   const [pending, setPending] = useState(false);
+  const [showMessageForm, setShowMessageForm] = useState(false);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -34,6 +39,13 @@ export default function CareerChatPanel({
 
     setQuestion("");
     setAskedQuestion(text);
+    const wantsToSendMessage = messageIntent.test(text);
+    setShowMessageForm(wantsToSendMessage);
+    if (wantsToSendMessage) {
+      setReply(null);
+      return;
+    }
+
     const suggested = answers.find(
       (answer) => answer.question.toLowerCase() === text.toLowerCase(),
     );
@@ -64,6 +76,7 @@ export default function CareerChatPanel({
             onClick={() => {
               setAskedQuestion(answer.question);
               setReply(answer);
+              setShowMessageForm(false);
             }}
             className="rounded-full border border-border px-3 py-1.5 text-left text-sm hover:bg-accent"
           >
@@ -78,6 +91,11 @@ export default function CareerChatPanel({
       )}
       <div role="status" className="text-sm">
         {pending && <p className="text-muted-foreground">Finding an answer…</p>}
+        {showMessageForm && (
+          <p className="rounded-2xl rounded-bl-sm bg-accent px-3 py-2 text-accent-foreground">
+            Write your message below to send it to Krishna.
+          </p>
+        )}
         {reply && (
           <div className="max-w-[95%] space-y-2 rounded-2xl rounded-bl-sm bg-accent px-3 py-2">
             <p className="leading-relaxed text-accent-foreground">
@@ -94,6 +112,13 @@ export default function CareerChatPanel({
           </div>
         )}
       </div>
+      {showMessageForm && (
+        <QuickMessageForm
+          source="chat"
+          label="Message for Krishna"
+          placeholder="Write a message to Krishna"
+        />
+      )}
       <form onSubmit={submit} className="space-y-2">
         <label htmlFor="career-question" className="block text-sm font-medium">
           Your question

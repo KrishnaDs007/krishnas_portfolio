@@ -1,7 +1,7 @@
 /** @jest-environment node */
 
 import { Resend } from "resend";
-import { sendEmail } from "./send-email";
+import { sendEmail, sendQuickMessage } from "./send-email";
 import { allowContactSubmission } from "@/lib/contact-rate-limit";
 
 jest.mock("resend");
@@ -32,6 +32,40 @@ beforeEach(() => {
 });
 
 afterEach(() => jest.restoreAllMocks());
+
+test.each([
+  ["quick-form", "Quick project message"],
+  ["chat", "Message from chat"],
+] as const)(
+  "delivers %s messages to the configured inbox",
+  async (source, subject) => {
+    await expect(
+      sendQuickMessage(" A project idea to discuss. ", source),
+    ).resolves.toEqual({ success: true });
+    expect(limit).toHaveBeenCalledWith();
+    expect(send).toHaveBeenCalledWith({
+      from: "Portfolio <contact@example.com>",
+      to: ["inbox@example.com"],
+      subject: `[Portfolio] ${subject}`,
+      text: "A project idea to discuss.",
+    });
+  },
+);
+
+test("validates quick messages before invoking the limiter or mail service", async () => {
+  await expect(sendQuickMessage(null!, "chat")).resolves.toMatchObject({
+    success: false,
+  });
+  await expect(
+    sendQuickMessage("A project idea to discuss.", "other" as "chat"),
+  ).resolves.toMatchObject({ success: false });
+  await expect(sendQuickMessage("short", "quick-form")).resolves.toMatchObject({
+    success: false,
+    error: expect.stringMatching(/at least 10/),
+  });
+  expect(limit).not.toHaveBeenCalled();
+  expect(send).not.toHaveBeenCalled();
+});
 
 test("rejects short and malformed submissions before sending", async () => {
   await expect(

@@ -45,7 +45,7 @@ Store production credentials in the hosting provider's environment settings. Kee
 
 The home, résumé, and project case studies are statically rendered. Interactive sections use client components. The project grid receives a compact card model, while full case-study data stays with the server routes.
 
-The contact server action validates submissions, applies a shared rate limit, and sends the email through Resend. On Vercel, the limit is five attempts per client IP in a ten-minute window. Other hosts use a shared bucket. The form returns a temporary delivery error when the rate limiter is unavailable in production.
+The contact form, quick-message box, and chat message form send email through Resend. The chat shows the form when a visitor types a request such as “send a message.” Quick messages accept 10–500 characters and do not require a sender address. Visitors can include their email in the message for a reply. All three forms share a server-side rate limit of five attempts per client IP in a ten-minute window on Vercel. Other hosts use a shared bucket. The forms return a temporary delivery error when the limiter is unavailable in production.
 
 The career chat loads when a visitor opens it. Suggested questions use built-in answers. For a typed question, Groq selects a topic from a fixed list and the site returns the corresponding portfolio answer. Production requests use Redis with a separate five-attempt bucket per client IP on Vercel. When Groq or Redis is unavailable, the chat points visitors to suggested technology questions and public projects.
 

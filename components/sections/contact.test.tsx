@@ -1,13 +1,20 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { sendEmail } from "@/app/actions/send-email";
+import { sendEmail, sendQuickMessage } from "@/app/actions/send-email";
 import { Contact } from "./contact";
 
-jest.mock("@/app/actions/send-email", () => ({ sendEmail: jest.fn() }));
+jest.mock("@/app/actions/send-email", () => ({
+  sendEmail: jest.fn(),
+  sendQuickMessage: jest.fn(),
+}));
 
 const send = jest.mocked(sendEmail);
+const sendQuickMessageMock = jest.mocked(sendQuickMessage);
 
-beforeEach(() => send.mockReset());
+beforeEach(() => {
+  send.mockReset();
+  sendQuickMessageMock.mockReset();
+});
 afterEach(() => {
   jest.useRealTimers();
   jest.restoreAllMocks();
@@ -103,7 +110,7 @@ test("guards against duplicate submissions and reports a rejected request", asyn
   );
 });
 
-test("opens WhatsApp and handles quick contact actions", async () => {
+test("opens WhatsApp and handles the call shortcut", async () => {
   const user = userEvent.setup();
   const open = jest.spyOn(window, "open").mockImplementation(() => null);
   jest.spyOn(console, "error").mockImplementation(() => {});
@@ -116,14 +123,85 @@ test("opens WhatsApp and handles quick contact actions", async () => {
     "_blank",
   );
   await user.click(screen.getByRole("button", { name: "Call me" }));
+});
+
+test("validates and sends a quick message without opening a mail app", async () => {
+  const user = userEvent.setup();
+  let resolve!: (value: { success: true }) => void;
+  sendQuickMessageMock.mockImplementation(
+    () =>
+      new Promise((done) => {
+        resolve = done;
+      }),
+  );
+  render(<Contact />);
   const quick = screen.getByRole("textbox", { name: "Quick project message" });
   const sendQuick = screen.getByRole("button", {
-    name: "Send quick message by email",
+    name: "Send message to Krishna",
   });
-  await user.type(quick, "  ");
+  await user.type(quick, "short");
   await user.click(sendQuick);
-  expect(quick).toHaveValue("  ");
-  await user.type(quick, "Project idea");
+  expect(screen.getByRole("alert")).toHaveTextContent(/at least 10/);
+  expect(sendQuickMessageMock).not.toHaveBeenCalled();
+  await user.click(
+    screen.getByRole("button", { name: "Dismiss message alert" }),
+  );
+  expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  expect(quick).toHaveValue("short");
+  await user.clear(quick);
+  await user.type(quick, "A project idea to discuss.");
   await user.click(sendQuick);
+  expect(sendQuickMessageMock).toHaveBeenCalledWith(
+    "A project idea to discuss.",
+    "quick-form",
+  );
+  expect(quick).toBeDisabled();
+  fireEvent.submit(sendQuick.closest("form")!);
+  expect(sendQuickMessageMock).toHaveBeenCalledTimes(1);
+  await act(async () => resolve({ success: true }));
+  expect(await screen.findByRole("status")).toHaveTextContent("Message sent.");
   expect(quick).toHaveValue("");
 });
+
+test("automatically hides the quick-message length warning and keeps the draft", () => {
+  jest.useFakeTimers();
+  render(<Contact />);
+  const quick = screen.getByRole("textbox", { name: "Quick project message" });
+  const message = "a".repeat(501);
+  fireEvent.change(quick, { target: { value: message } });
+  fireEvent.click(
+    screen.getByRole("button", { name: "Send message to Krishna" }),
+  );
+  expect(screen.getByRole("alert")).toHaveTextContent(
+    /500 characters or fewer/,
+  );
+  expect(sendQuickMessageMock).not.toHaveBeenCalled();
+  act(() => jest.advanceTimersByTime(5000));
+  expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  expect(quick).toHaveValue(message);
+});
+
+test.each([false, true])(
+  "preserves a quick-message draft after failure (rejected=%s)",
+  async (rejected) => {
+    const user = userEvent.setup();
+    if (rejected) sendQuickMessageMock.mockRejectedValue(new Error("Offline"));
+    else
+      sendQuickMessageMock.mockResolvedValue({
+        success: false,
+        error: "Provider configuration error.",
+      });
+    render(<Contact />);
+    const quick = screen.getByRole("textbox", {
+      name: "Quick project message",
+    });
+    await user.type(quick, "A project idea to discuss.");
+    await user.click(
+      screen.getByRole("button", { name: "Send message to Krishna" }),
+    );
+    expect(await screen.findByRole("alert")).toHaveTextContent(
+      "Could not send your message. Please try again.",
+    );
+    expect(quick).toHaveValue("A project idea to discuss.");
+  },
+);

@@ -57,6 +57,48 @@ export async function sendEmail(
     return { success: false, error: messageError };
   }
 
+  return deliverContactEmail({
+    subject: `[Portfolio] ${subject}: from ${name}`,
+    react: (
+      <EmailTemplate
+        name={name}
+        email={email}
+        subject={subject}
+        message={message}
+      />
+    ),
+    replyTo: email,
+  });
+}
+
+export async function sendQuickMessage(
+  message: string,
+  source: "quick-form" | "chat",
+): Promise<ContactResult> {
+  if (
+    typeof message !== "string" ||
+    (source !== "quick-form" && source !== "chat")
+  ) {
+    return { success: false, error: "Please enter a valid message." };
+  }
+
+  const messageError = getContactMessageError(message);
+  if (messageError) return { success: false, error: messageError };
+
+  return deliverContactEmail({
+    subject:
+      source === "chat"
+        ? "[Portfolio] Message from chat"
+        : "[Portfolio] Quick project message",
+    text: message.trim(),
+  });
+}
+
+async function deliverContactEmail(
+  content: { subject: string } & (
+    { text: string } | { react: React.ReactElement; replyTo: string }
+  ),
+): Promise<ContactResult> {
   const apiKey = process.env.RESEND_API_KEY;
   const fromEmail = process.env.RESEND_FROM_EMAIL?.trim();
   const toEmail = process.env.CONTACT_TO_EMAIL?.trim() || contactInfo.email;
@@ -96,16 +138,7 @@ export async function sendEmail(
     const { error } = await resend.emails.send({
       from: `Portfolio <${fromEmail}>`,
       to: [toEmail],
-      subject: `[Portfolio] ${subject}: from ${name}`,
-      react: (
-        <EmailTemplate
-          name={name}
-          email={email}
-          subject={subject}
-          message={message}
-        />
-      ),
-      replyTo: email,
+      ...content,
     });
 
     if (error) {
